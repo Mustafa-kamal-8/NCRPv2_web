@@ -8,8 +8,10 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
-import ApplyCourse from "../apply-course";
-import AddCourseToBasket from "../add-course-to-basket";
+import { LoadingButton } from "@mui/lab";
+import BasicModal from "../modal/Modal";
+import { useState } from "react";
+import EditCoursePreferences from "./edit-course-preference";
 
 type Props = {
   course: Course;
@@ -21,17 +23,24 @@ type Props = {
 export default function CourseCard({
   qualificationBool,
   course,
-  highestQualification,
-  highestQualificationId,
   noAction = false,
 }: Props) {
+
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const handleModalOpen = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
+
+  const candidateId = localStorage.getItem("candidateId");
+
   return (
     <Card
       variant="outlined"
-      sx={{
+      sx={ {
         height: "100%",
         width: "100%",
         display: "flex",
+        borderRadius: 4,
         flexDirection: "column",
         boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
         transition: "transform 0.3s ease-in-out, border 0.3s ease-in-out", // Add border to the transition
@@ -39,102 +48,64 @@ export default function CourseCard({
           transform: "translateY(-4px)",
           borderColor: "#64B5F6", // Add a slight blueish border color on hover
         },
-      }}
+      } }
     >
-      <CardContent sx={{ flex: 1 }}>
+      <CardContent sx={ { flex: 1 } }>
         <Stack
           direction="row"
           justifyItems="flex-start"
           alignItems="flex-start"
-          gap={2}
-          mb={2}
+          gap={ 2 }
+          mb={ 2 }
         >
           <Avatar
-            sx={{
+            sx={ {
               width: 30,
               height: 30,
               bgcolor: (theme) => theme.palette.primary.dark,
-            }}
+            } }
           >
             <SchoolIcon fontSize="small" />
           </Avatar>
 
           <Stack>
-            <Typography variant="h6">{course.courseName}</Typography>
+            <Typography variant="h6">{ course.courseName }</Typography>
           </Stack>
         </Stack>
-        {/* <Typography color="text.secondary" gutterBottom>
-          {course.courseDescription}
-        </Typography> */}
         <Typography
           variant="body2"
           color="text.secondary"
           fontStyle="italic"
-          sx={{ display: "flex", alignItems: "center", gap: 1, marginTop: 2 }}
+          sx={ { display: "flex", alignItems: "center", gap: 1, marginTop: 2 } }
         >
           <AccessTimeIcon fontSize="small" />
-          {course.totalHours} hours
+          { course.totalHours } hours
         </Typography>
         <Typography
           variant="body2"
           color="text.secondary"
           fontStyle="italic"
-          sx={{ display: "flex", alignItems: "center", gap: 1, marginTop: 2 }}
+          sx={ { display: "flex", alignItems: "center", gap: 1, marginTop: 2 } }
         >
           <LocationOnIcon fontSize="small" />
-          {course.districtName}
+          { course.districtName }
         </Typography>
         <Typography
           variant="body2"
           color="text.secondary"
           fontStyle="italic"
-          sx={{ display: "flex", alignItems: "center", gap: 1, marginTop: 2 }}
+          sx={ { display: "flex", alignItems: "center", gap: 1, marginTop: 2 } }
         >
           <SchoolIcon fontSize="small" />
-          {course.qualification ?? "No Qualification"}
+          { course.qualification ?? "No Qualification" }
         </Typography>
-
-        {/* <Typography
-          variant="body2"
-          color="text.secondary"
-          fontStyle="italic"
-          sx={{ display: "flex", alignItems: "center", gap: 1, marginTop: 2 }}
-        >
-          <ApartmentIcon fontSize="small" />
-          {course.residential ? "Residential" : "Non Residential"}
-        </Typography> */}
-
-        {/* {!noAction && (
-          <>
-            <Typography
-              variant="body2"
-              color={
-                course.seatsAvailable < 0 ? "warning.main" : "success.main"
-              }
-              pt={2}
-            >
-              {course.seatsAvailable < 0
-                ? "Waiting List Candidates"
-                : " Seats Available"}
-              :{" "}
-              <Typography
-                component="span"
-                variant="body2"
-                fontWeight={500}
-                // color="black"
-              >
-                {Math.abs(course.seatsAvailable)}
-              </Typography>
-            </Typography>
-          </>
-        )} */}
       </CardContent>
-      {!noAction && (
-        <CardActions sx={{ px: 2, pb: 1, justifyContent: "space-between" }}>
+      { !noAction && (
+        <CardActions sx={ { px: 2, pb: 1, justifyContent: "space-between" } }>
           <Button
             size="small"
-            component={Link}
-            to={`/courses/${course.courseId}/${course.districtId}/${course.courseName}/${course.districtName}/${qualificationBool}`}
+            component={ Link }
+            to={ `/courses/${course.courseId}/${course.districtId}/${course.courseName}/${course.districtName}/${qualificationBool}` }
           >
             Learn More
           </Button>
@@ -142,8 +113,23 @@ export default function CourseCard({
             courseId={course.courseId}
             districtId={course.districtId}
           /> */}
+          <LoadingButton
+            color="primary"
+            variant="contained"
+            size="small"
+            sx={ {
+              padding: 1,
+              borderRadius: 4,
+            } }
+            onClick={ handleModalOpen }
+          >
+            Add to Basket
+          </LoadingButton>
 
-          <AddCourseToBasket
+
+
+
+          {/* <AddCourseToBasket
             qualificationSelectedOrNot={qualificationBool}
             courseId={course.courseId}
             districtId={course.districtId}
@@ -151,9 +137,13 @@ export default function CourseCard({
             districtName={course.districtName}
             highestQualificationName={highestQualification}
             highestQualificationId={highestQualificationId}
-          />
+          /> */}
         </CardActions>
-      )}
+      ) }
+      {/* edit preference */ }
+      <BasicModal open={ isModalOpen } onClose={ handleModalClose }>
+        <EditCoursePreferences onClose={ handleModalClose } courseDetails={ course } />
+      </BasicModal>
     </Card>
   );
 }

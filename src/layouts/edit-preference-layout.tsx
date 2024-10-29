@@ -16,19 +16,20 @@ export default function EditPreferencesLayout({
   subTitle,
   title,
 }: Props) {
+
   return (
-    <Container maxWidth="lg" sx={{ my: 6 }}>
-      <Stack direction="row" justifyContent={"center"} spacing={2}>
-        <Typography align="center" variant="h4" fontWeight={500}>
-          {title}
+    <Container maxWidth="lg" sx={ { my: 6 } }>
+      <Stack direction="row" justifyContent={ "center" } spacing={ 2 }>
+        <Typography align="center" variant="h4" fontWeight={ 500 }>
+          { title }
         </Typography>
-        <Stack direction="row" spacing={2} pt={0.7}>
+        <Stack direction="row" spacing={ 2 } pt={ 0.7 }>
           <Avatar
-            sx={{
+            sx={ {
               width: 30,
               height: 30,
               bgcolor: (theme) => theme.palette.primary.dark,
-            }}
+            } }
           >
             <SchoolIcon fontSize="small" />
           </Avatar>
@@ -36,9 +37,9 @@ export default function EditPreferencesLayout({
             align="center"
             variant="h6"
             color="primary"
-            fontWeight={500}
+            fontWeight={ 500 }
           >
-            {courseName}
+            { courseName }
           </Typography>
         </Stack>
       </Stack>
@@ -69,16 +70,16 @@ export default function EditPreferencesLayout({
         align="center"
         variant="body1"
         color="text.secondary"
-        pb={2}
-        pt={1}
+        pb={ 2 }
+        pt={ 1 }
       >
-        {description}
+        { description }
       </Typography>
-      <Typography align="center" color="primary.dark" variant="body2" pb={1}>
-        {subTitle}
+      <Typography align="center" color="primary.dark" variant="body2" pb={ 1 }>
+        { subTitle }
       </Typography>
 
-      {children}
+      { children }
     </Container>
   );
 }

@@ -88,6 +88,16 @@ export async function deleteCourse(data: any) {
   return res.data;
 }
 
+
+
+export const checkExistPriority = async (candidateId: string) => {
+  const response = await API.post(`/basket/existPriority`, {
+    candidateId,
+  });
+
+  return response.data;
+};
+
 interface CourseLoad {
   district: District[];
   state: State[];

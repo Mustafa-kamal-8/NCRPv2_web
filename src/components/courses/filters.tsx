@@ -30,8 +30,8 @@ type Props = {
 export default function CourseFilters({
   setFilters,
 }: // isDistrictSelected,
-// sendMessageToParent,
-Props) {
+  // sendMessageToParent,
+  Props) {
   const [selectedDistrict, setSelectedDistrict] = useRecoilState(districtState);
 
   const [value, setValue] = useState<string>("");
@@ -50,7 +50,7 @@ Props) {
       console.log("District not selected", booleanValue);
     }
   };
-console.log("dt",data);
+  console.log("dt", data);
 
   if (selectedDistrict != null) {
     districtSelctedFunction();
@@ -81,66 +81,66 @@ console.log("dt",data);
 
   return (
     <>
-      <Typography fontWeight={700} pt={3} px={3}>
+      <Typography fontWeight={ 700 } pt={ 3 } px={ 3 }>
         Filter Courses
       </Typography>
 
-      {/* Search District */}
-      <Box p={2} px={3}>
-        {isLoading ? (
+      {/* Search District */ }
+      <Box p={ 2 } px={ 3 }>
+        { isLoading ? (
           <p>loading</p>
         ) : (
           <Autocomplete
-            value={selectedDistrict}
-            isOptionEqualToValue={(option, value) =>
+            value={ selectedDistrict }
+            isOptionEqualToValue={ (option, value) =>
               option.districtID === value.districtID
             }
-            onChange={(_, newValue) => {
+            onChange={ (_, newValue) => {
               setSelectedDistrict(newValue!);
               districtSelctedFunction();
-            }}
+            } }
             disablePortal
             id="combo-box-demo"
-            options={data?.district!}
-            sx={{ width: 300 }}
-            getOptionLabel={(option) => option?.districtName}
-            renderInput={(params) => (
-              <TextField {...params} label="Select District" size="small" />
-            )}
+            options={ data?.district! }
+            sx={ { width: 300 } }
+            getOptionLabel={ (option) => option?.districtName }
+            renderInput={ (params) => (
+              <TextField { ...params } label="Select District" size="small" />
+            ) }
           />
-        )}
+        ) }
       </Box>
 
-      {/* Selelct Qualification */}
-      <Box p={2} px={3}>
-        {isLoading ? (
+      {/* Selelct Qualification */ }
+      <Box p={ 2 } px={ 3 }>
+        { isLoading ? (
           <p>loading..</p>
         ) : (
           <Autocomplete
-            value={selectedQUalification}
-            onChange={(_event, newValue) => {
+            value={ selectedQUalification }
+            onChange={ (_event, newValue) => {
               setSelectedQualification(newValue!);
-            }}
+            } }
             disablePortal
             id="combo-box-demo"
-            options={data?.qualification!}
-            sx={{ width: 300 }}
-            getOptionLabel={(option) => option.qualificationName}
-            renderInput={(params) => (
+            options={ data?.qualification! }
+            sx={ { width: 300 } }
+            getOptionLabel={ (option) => option.qualificationName }
+            renderInput={ (params) => (
               <TextField
-                {...params}
+                { ...params }
                 label="Select Qualification"
                 size="small"
               />
-            )}
+            ) }
           />
-        )}
+        ) }
       </Box>
 
-      {/* Search Course */}
-      <Box px={3} py={2}>
+      {/* Search Course */ }
+      <Box px={ 3 } py={ 2 }>
         <Typography
-          fontWeight={500}
+          fontWeight={ 500 }
           color="primary.main"
           gutterBottom
           variant="body2"
@@ -153,9 +153,9 @@ console.log("dt",data);
           size="small"
           helperText="Search by course name only"
           type="search"
-          value={value}
-          onChange={handleChange}
-          InputProps={{
+          value={ value }
+          onChange={ handleChange }
+          InputProps={ {
             startAdornment: (
               <InputAdornment position="start">
                 <IconButton edge="start">
@@ -163,7 +163,7 @@ console.log("dt",data);
                 </IconButton>
               </InputAdornment>
             ),
-          }}
+          } }
         />
       </Box>
     </>

@@ -12,7 +12,7 @@ import BasketCourseCard from "../../components/cards/basket-course-card";
 import { useEffect, useState } from "react";
 import { addCourse } from "../../api/courses-api";
 import { enqueueSnackbar } from "notistack";
-import { useMutation, useQuery ,  useQueryClient} from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ViewCarousel } from "@mui/icons-material";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
@@ -40,7 +40,7 @@ export default function MyCourses() {
   const [cookieData, setCookieData] = useState<CookieData[]>([]);
   const [cookiesLength, setCookiesLength] = useState();
 
-  const { enqueueSnackbar } = useSnackbar(); 
+  const { enqueueSnackbar } = useSnackbar();
   const queryClient = useQueryClient();
 
   function clearAllCookies() {
@@ -84,14 +84,14 @@ export default function MyCourses() {
     "These are the candidate Courses from basket",
     candidateCoursesData?.basket[0]
   );
-  
+
 
   const handleSubmitCourses = async () => {
     const dataToSend = {
-      candidateId :candidateId ,
+      candidateId: candidateId,
       coursePreference: candidateCoursesData.basket.map((item) => {
         const districts = [];
-  
+
         // Add district 1 if available
         if (item.preferred_district1) {
           districts.push({
@@ -99,7 +99,7 @@ export default function MyCourses() {
             priorityLevel: item.priorityLevel || null,
           });
         }
-  
+
         // Add district 2 if available
         if (item.preferred_district2) {
           districts.push({
@@ -107,7 +107,7 @@ export default function MyCourses() {
             priorityLevel: item.priorityLevel || null,
           });
         }
-  
+
         // Add district 3 if available
         if (item.preferred_district3) {
           districts.push({
@@ -115,23 +115,23 @@ export default function MyCourses() {
             priorityLevel: item.priorityLevel || null,
           });
         }
-  
+
         return {
           course: item.courseId.toString(),
           districts: districts,
         };
       }),
     };
-  
+
     console.log("Data to send:", dataToSend);
-  
+
     // Send the transformed data to the backend API
     try {
       const response = await axios.post('https://ncrpv2.skillmissionassam.org/nw/cousre/add', dataToSend);
       console.log('Courses submitted successfully:', response.data);
       if (response.data.status === "success") {
         toast.success('Courses submitted successfully!');
-        
+
         // Set a timeout for 5 seconds (5000 milliseconds) before reloading the page
         // setTimeout(() => {
         //   window.location.reload();
@@ -140,19 +140,19 @@ export default function MyCourses() {
           queryKey: ["candidate_courses", candidateId!],
         });
 
-       
-      
+
+
       } else {
 
         toast.error('Failed to submit courses. Please try again.');
       }
-      
-    
-    
+
+
+
     } catch (error) {
       console.error('Error submitting courses:', error);
       toast.error(error);
-      
+
     }
   };
 
@@ -280,24 +280,23 @@ export default function MyCourses() {
 
   return (
     <>
-      <ToastContainer   position="top-center"
-  autoClose={5000}
-  hideProgressBar={false}
-  newestOnTop={false}
-  closeOnClick
-  rtl={false}
-  pauseOnFocusLoss
-  draggable
-  pauseOnHover/>
+      <ToastContainer position="top-center"
+        autoClose={ 5000 }
+        hideProgressBar={ false }
+        newestOnTop={ false }
+        closeOnClick
+        rtl={ false }
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover />
       <Container maxWidth="xl">
-        <Stack pt={3} justifyContent="center" alignItems="center">
-          <Stack position="relative" sx={{ display: "inline-block" }}>
+        <Stack pt={ 3 } justifyContent="center" alignItems="center">
+          <Stack position="relative" sx={ { display: "inline-block" } }>
             <AddShoppingCartOutlinedIcon color="primary" fontSize="large" />
-
-            {totalCoursesInBasket > 0 && (
+            { totalCoursesInBasket && (
               <Typography
                 variant="body2"
-                sx={{
+                sx={ {
                   position: "absolute",
                   top: 0,
                   right: 1,
@@ -305,17 +304,16 @@ export default function MyCourses() {
                   color: "white",
                   borderRadius: "50%",
                   padding: "2px 6px",
-                }}
+                } }
               >
-                {totalCoursesInBasket}
+                { totalCoursesInBasket }
               </Typography>
-            )}
-            {/* )} */}
+            ) }
 
-            {candidateCoursesData?.basket?.length > 0 && (
+            { candidateCoursesData?.basket?.length > 0 && (
               <Typography
                 variant="body2"
-                sx={{
+                sx={ {
                   position: "absolute",
                   top: 0,
                   right: 1,
@@ -323,113 +321,113 @@ export default function MyCourses() {
                   color: "white",
                   borderRadius: "50%",
                   padding: "2px 6px",
-                }}
+                } }
               >
-                {candidateCoursesData?.basket?.length}
+                { candidateCoursesData?.basket?.length }
               </Typography>
-            )}
-            {/* )} */}
+            ) }
+            {/* )} */ }
           </Stack>
-          {/* )} */}
+          {/* )} */ }
           <Typography
-            fontSize={18}
+            fontSize={ 18 }
             fontWeight="600"
             color="primary"
             variant="h6"
           >
             My Courses Basket
           </Typography>
-          {candidateCoursesData?.basket?.length !== 0 && candidateId ? (
+          { candidateCoursesData?.basket?.length !== 0 && candidateId ? (
             <Typography fontWeight="400" color="primary" variant="subtitle2">
-              Total Number Courses Added to Basket:{" "}
-              {candidateCoursesData?.basket?.length}
+              Total Number Courses Added to Basket:{ " " }
+              { candidateCoursesData?.basket?.length }
             </Typography>
           ) : (
             ""
-          )}
-          {totalCoursesInBasket > 0 ? (
+          ) }
+          { !candidateCoursesData && totalCoursesInBasket > 0 ? (
             <Typography fontWeight="400" color="primary" variant="subtitle2">
-              Total Number Courses Added to Basket: {totalCoursesInBasket}
+              Total Number Courses Added to Basket: { totalCoursesInBasket }
             </Typography>
           ) : (
             ""
-          )}
+          ) }
           {/* {totalCoursesInBasket && (
             <Typography fontWeight="400" color="primary" variant="subtitle2">
               Total Number Courses Added to Basket: {totalCoursesInBasket}
             </Typography>
           )} */}
         </Stack>
-        <Stack pt={2} spacing={1}>
-          {candidateId && (
+        <Stack pt={ 2 } spacing={ 1 }>
+          { candidateId && (
             <Typography align="center" color="GrayText" variant="body2">
               Want to Apply Now? Go to My Profile and Apply for the Selected
-              Courses{" "}
+              Courses{ " " }
               <Button
-                component={Link}
+                component={ Link }
                 to="/auth/candidate-profile"
                 size="small"
                 variant="outlined"
-                sx={{ fontWeight: 500 }}
+                sx={ { fontWeight: 500 } }
               >
                 Go to My Profile
               </Button>
             </Typography>
-          )}
+          ) }
         </Stack>
-        <Stack pt={2} spacing={1}>
+        <Stack pt={ 2 } spacing={ 1 }>
           <Typography align="center" color="GrayText" variant="body2">
-            <Box display="inline-flex" gap={1} alignItems="center">
+            <Box display="inline-flex" gap={ 1 } alignItems="center">
               <Button
-                component={Link}
+                component={ Link }
                 to="/courses"
                 size="small"
                 variant="contained"
-                sx={{ fontWeight: 500 }}
+                sx={ { fontWeight: 500 } }
               >
-                Add Course{" "}
+                Add Course{ " " }
               </Button>
-              {document.cookie && (
+              { document.cookie && (
                 <Button
-                  sx={{ width: "100px" }}
+                  sx={ { width: "100px" } }
                   variant="contained"
-                  component={Link}
-                  to={`/auth/candidate-register`}
+                  component={ Link }
+                  to={ `/auth/candidate-register` }
                   size="small"
                   color="success"
                 >
                   Register
                 </Button>
-              )}
+              ) }
             </Box>
           </Typography>
         </Stack>
-        <Stack pb={7} justifyContent="center" alignItems="center"></Stack>
-        {candidateId ? (
+        <Stack pb={ 7 } justifyContent="center" alignItems="center"></Stack>
+        { candidateId ? (
           candidateCoursesData?.basket[0] ? (
-            <Grid container spacing={3} paddingY={3}>
-              {sortedCourses?.map((course: any, index: number) => (
-                <Grid item xs={12} md={12} key={course?.courseId}>
+            <Grid container spacing={ 3 } paddingY={ 3 }>
+              { sortedCourses?.map((course: any, index: number) => (
+                <Grid item xs={ 12 } md={ 12 } key={ course?.courseId }>
                   <MyProfileCourseCard
                     noAction
-                    courses={course}
-                    // districts={districts}
-                    // cookieData={cookieData}
+                    courses={ course }
+                  // districts={districts}
+                  // cookieData={cookieData}
                   />
                 </Grid>
-              ))}
+              )) }
             </Grid>
           ) : (
             <Grid
               container
-              spacing={2}
+              spacing={ 2 }
               direction="row"
               justifyContent="center"
               alignItems="stretch"
-              pb={10}
+              pb={ 10 }
             >
               <Stack direction="row">
-                <CloseOutlinedIcon sx={{ fontSize: 20 }} />
+                <CloseOutlinedIcon sx={ { fontSize: 20 } } />
                 <Typography variant="body2" color="error">
                   No courses added to basket yet
                 </Typography>
@@ -437,58 +435,58 @@ export default function MyCourses() {
             </Grid>
           )
         ) : document.cookie !== "" ? (
-          <Grid container spacing={3} paddingY={3}>
-            {cookieData?.map((course) => (
-              <Grid item xs={12} md={12} key={course.id}>
+          <Grid container spacing={ 3 } paddingY={ 3 }>
+            { cookieData?.map((course) => (
+              <Grid item xs={ 12 } md={ 12 } key={ course.id }>
                 <BasketCourseCard
                   noAction
-                  cookieCourses={course}
+                  cookieCourses={ course }
                   // districts={districts}
-                  cookieData={cookieData}
+                  cookieData={ cookieData }
                 />
               </Grid>
-            ))}
+            )) }
           </Grid>
         ) : (
           <Grid
             container
-            spacing={2}
+            spacing={ 2 }
             direction="row"
             justifyContent="center"
             alignItems="stretch"
-            pb={10}
+            pb={ 10 }
           >
             <Stack direction="row">
-              <CloseOutlinedIcon sx={{ fontSize: 20 }} />
+              <CloseOutlinedIcon sx={ { fontSize: 20 } } />
               <Typography variant="body2" color="error">
                 No courses added to basket yet
               </Typography>
             </Stack>
           </Grid>
-      
-          
-        )}
-  <Stack pt={2} spacing={1}>
-          {candidateId && candidateCoursesData?.basket?.length > 0 && (
+
+
+        ) }
+        <Stack pt={ 2 } spacing={ 1 }>
+          { candidateId && candidateCoursesData?.basket?.length > 0 && (
             <Typography align="center" color="GrayText" variant="body2">
-            
-          
+
+
               <Button
-              color="success"
-              size="large"
-              variant="contained"
-              onClick={handleSubmitCourses}
-              sx={{ fontWeight: 1000 }}
-          
+                color="success"
+                size="large"
+                variant="contained"
+                onClick={ handleSubmitCourses }
+                sx={ { fontWeight: 1000 } }
+
               >
-               Submit Courses
+                Submit Courses
               </Button>
             </Typography>
-          )}
+          ) }
         </Stack>
-        
+
       </Container>
-    
+
 
     </>
   );

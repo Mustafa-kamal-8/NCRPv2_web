@@ -28,6 +28,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCandidateCourses } from "../../api/candidate-api";
 import { useQuery } from "@tanstack/react-query";
+import { getCoursesCountFromCookies } from "../../utils";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -68,6 +69,11 @@ export default function Navbar() {
     }
   }, []);
 
+  useEffect(() => {
+    const count = getCoursesCountFromCookies();
+    setTotalCoursesInBasket(count);
+  }, []);
+
   // useEffect(() => {
   //   console.log("Candidate ID:", candidateId);
   //   console.log("Candidate Courses Data:", candidateCoursesData);
@@ -83,8 +89,8 @@ export default function Navbar() {
     onSuccess(data) {
       console.log("Query Success Data:", data);
       if (data?.isAccess === "denied edit") {
-        console.log("showwwwwww",show);
-      
+        console.log("showwwwwww", show);
+
         setShow(false);
       } else {
         setShow(true);
@@ -96,57 +102,57 @@ export default function Navbar() {
     <>
       <AppBar
         component="header"
-        elevation={1}
+        elevation={ 1 }
         position="sticky"
-        sx={{
+        sx={ {
           backgroundColor: "background.paper",
           zIndex: (theme) => theme.zIndex.drawer + 1,
-        }}
+        } }
       >
         <Toolbar component="nav">
           <IconButton
-            sx={{
+            sx={ {
               display: { sm: "none" },
-            }}
+            } }
             size="small"
             color="primary"
             aria-label="open drawer"
             edge="start"
-            onClick={handleDrawerToggle}
+            onClick={ handleDrawerToggle }
           >
             <MenuIcon />
           </IconButton>
-          <Stack direction="row" flex={1}>
+          <Stack direction="row" flex={ 1 }>
             <Logo />
           </Stack>
-          {candidateId ? (
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              {CANDIDATE_NAVITEMS.map(
+          { candidateId ? (
+            <Box sx={ { display: { xs: "none", sm: "block" } } }>
+              { CANDIDATE_NAVITEMS.map(
                 (item) =>
                   (item.label !== "My Courses" || show) && (
                     <Button
-                      key={item.id}
-                      component={Link}
-                      to={item.path}
-                      sx={{ mr: 1, color: theme.palette.text.secondary }}
+                      key={ item.id }
+                      component={ Link }
+                      to={ item.path }
+                      sx={ { mr: 1, color: theme.palette.text.secondary } }
                       onClick={
                         item.label === "Logout" ? handleLogoutClick : undefined
                       }
                     >
-                      {item.label}
-                      {item.label === "My Courses" && show && (
+                      { item.label }
+                      { item.label === "My Courses" && show && (
                         <Stack
                           position="relative"
-                          sx={{ display: "inline-block" }}
+                          sx={ { display: "inline-block" } }
                         >
                           <AddShoppingCartOutlinedIcon
                             color="primary"
                             fontSize="large"
                           />
-                          {totalCoursesInBasket > 0 && (
+                          { totalCoursesInBasket > 0 && (
                             <Typography
                               variant="body2"
-                              sx={{
+                              sx={ {
                                 position: "absolute",
                                 top: 0,
                                 right: 1,
@@ -154,15 +160,15 @@ export default function Navbar() {
                                 color: "white",
                                 borderRadius: "50%",
                                 padding: "2px 6px",
-                              }}
+                              } }
                             >
-                              {totalCoursesInBasket}
+                              { totalCoursesInBasket }
                             </Typography>
-                          )}
-                          {candidateCoursesData?.basket?.length > 0 && (
+                          ) }
+                          { candidateCoursesData?.basket?.length > 0 && (
                             <Typography
                               variant="body2"
-                              sx={{
+                              sx={ {
                                 position: "absolute",
                                 top: 0,
                                 right: 1,
@@ -170,46 +176,46 @@ export default function Navbar() {
                                 color: "white",
                                 borderRadius: "50%",
                                 padding: "2px 6px",
-                              }}
+                              } }
                             >
-                              {candidateCoursesData?.basket?.length}
+                              { candidateCoursesData?.basket?.length }
                             </Typography>
-                          )}
+                          ) }
                         </Stack>
-                      )}
-                      {item.label === "Login" && (
+                      ) }
+                      { item.label === "Login" && (
                         <LoginOutlinedIcon color="primary" />
-                      )}
-                      {item.label === "Register" && (
+                      ) }
+                      { item.label === "Register" && (
                         <PersonAddAltOutlinedIcon color="action" />
-                      )}
-                      {item.label === "Logout" && (
+                      ) }
+                      { item.label === "Logout" && (
                         <LogoutOutlinedIcon color="action" />
-                      )}
+                      ) }
                     </Button>
                   )
-              )}
+              ) }
             </Box>
           ) : (
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              {NAVITEMS.map((item) => (
+            <Box sx={ { display: { xs: "none", sm: "block" } } }>
+              { NAVITEMS.map((item) => (
                 <Button
-                  key={item.id}
-                  component={Link}
-                  to={item.path}
-                  sx={{ mr: 1, color: theme.palette.text.secondary }}
+                  key={ item.id }
+                  component={ Link }
+                  to={ item.path }
+                  sx={ { mr: 1, color: theme.palette.text.secondary } }
                 >
-                  {item.label}
-                  {item.label === "My Courses" && (
-                    <Stack position="relative" sx={{ display: "inline-block" }}>
+                  { item.label }
+                  { item.label === "My Courses" && (
+                    <Stack position="relative" sx={ { display: "inline-block" } }>
                       <AddShoppingCartOutlinedIcon
                         color="primary"
                         fontSize="large"
                       />
-                      {candidateCoursesData?.basket?.length > 0 && (
+                      { candidateCoursesData?.basket?.length > 0 && (
                         <Typography
                           variant="body2"
-                          sx={{
+                          sx={ {
                             position: "absolute",
                             top: 0,
                             right: 1,
@@ -217,23 +223,23 @@ export default function Navbar() {
                             color: "white",
                             borderRadius: "50%",
                             padding: "2px 6px",
-                          }}
+                          } }
                         >
-                          {candidateCoursesData?.basket?.length}
+                          { candidateCoursesData?.basket?.length }
                         </Typography>
-                      )}
+                      ) }
                     </Stack>
-                  )}
-                  {item.label === "Login" && (
+                  ) }
+                  { item.label === "Login" && (
                     <LoginOutlinedIcon color="primary" />
-                  )}
-                  {item.label === "Register" && (
+                  ) }
+                  { item.label === "Register" && (
                     <PersonAddAltOutlinedIcon color="action" />
-                  )}
+                  ) }
                 </Button>
-              ))}
+              )) }
             </Box>
-          )}
+          ) }
         </Toolbar>
       </AppBar>
       <Box component="header">
@@ -241,12 +247,12 @@ export default function Navbar() {
           component="nav"
           anchor="top"
           variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
+          open={ mobileOpen }
+          onClose={ handleDrawerToggle }
+          ModalProps={ {
             keepMounted: true,
-          }}
-          sx={{
+          } }
+          sx={ {
             display: { xs: "block", sm: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
@@ -254,52 +260,52 @@ export default function Navbar() {
               position: "static",
               zIndex: (theme) => theme.zIndex.drawer + 2,
             },
-          }}
+          } }
         >
-          <Stack pt={18} pb={4} margin={1} height="100vh">
-            {candidateId ? (
+          <Stack pt={ 18 } pb={ 4 } margin={ 1 } height="100vh">
+            { candidateId ? (
               <List>
-                {CANDIDATE_NAVITEMS.map((item) => (
-                  <ListItem key={item.id} disablePadding>
+                { CANDIDATE_NAVITEMS.map((item) => (
+                  <ListItem key={ item.id } disablePadding>
                     <ListItemButton
-                      sx={{ textAlign: "center" }}
+                      sx={ { textAlign: "center" } }
                       color="primary.main"
-                      component={Link}
-                      to={item.path}
-                      onClick={closeDrawer}
+                      component={ Link }
+                      to={ item.path }
+                      onClick={ closeDrawer }
                     >
                       <ListItemText
-                        primary={item.label}
-                        primaryTypographyProps={{
+                        primary={ item.label }
+                        primaryTypographyProps={ {
                           fontWeight: 500,
-                        }}
+                        } }
                       />
                     </ListItemButton>
                   </ListItem>
-                ))}
+                )) }
               </List>
             ) : (
               <List>
-                {NAVITEMS.map((item) => (
-                  <ListItem key={item.id} disablePadding>
+                { NAVITEMS.map((item) => (
+                  <ListItem key={ item.id } disablePadding>
                     <ListItemButton
-                      sx={{ textAlign: "center" }}
+                      sx={ { textAlign: "center" } }
                       color="primary.main"
-                      component={Link}
-                      to={item.path}
-                      onClick={closeDrawer}
+                      component={ Link }
+                      to={ item.path }
+                      onClick={ closeDrawer }
                     >
                       <ListItemText
-                        primary={item.label}
-                        primaryTypographyProps={{
+                        primary={ item.label }
+                        primaryTypographyProps={ {
                           fontWeight: 500,
-                        }}
+                        } }
                       />
                     </ListItemButton>
                   </ListItem>
-                ))}
+                )) }
               </List>
-            )}
+            ) }
           </Stack>
         </Drawer>
       </Box>

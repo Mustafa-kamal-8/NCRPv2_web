@@ -1,13 +1,9 @@
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import SchoolIcon from "@mui/icons-material/School";
 import {
   Avatar,
   Stack,
   Container,
-  Box,
   Divider,
-  DialogTitle,
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -15,24 +11,9 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
-import ApplyCourse from "../apply-course";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import { useState, useEffect } from "react";
-import DistrictDropdown from "../ui/districtDropdown";
-import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import Dialog from "@mui/material/Dialog";
+import { useState } from "react";
 import { enqueueSnackbar } from "notistack";
 
-import {
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormControl,
-  FormLabel,
-} from "@mui/material";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Checkbox from "@mui/material/Checkbox";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
@@ -57,9 +38,9 @@ export default function BasketCourseCard({
   cookieData,
   cookieCourses,
 }: // onDistrict1Change,
-// onDistrict2Change,
-// onDistrict3Change,
-Props) {
+  // onDistrict2Change,
+  // onDistrict3Change,
+  Props) {
   let cookies = document.cookie.split(";");
   let values = cookies.map((cookie) => cookie.trim().split("=")[1]);
   const numberOptions = Array.from(
@@ -121,7 +102,7 @@ Props) {
       <Container maxWidth="xl">
         <Card
           variant="outlined"
-          sx={{
+          sx={ {
             height: "100%",
             // width: { xs: "100%", sm: "200%", md: "400%" },
             width: "100%",
@@ -136,51 +117,51 @@ Props) {
               backgroundColor: "ghostwhite",
             },
             boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-          }}
+          } }
         >
-          <CardContent sx={{ flex: 1 }}>
+          <CardContent sx={ { flex: 1 } }>
             <Stack
               direction="row"
               justifyItems="center"
               alignItems="center"
               justifyContent="center"
               alignContent="center"
-              gap={2}
-              mb={2}
+              gap={ 2 }
+              mb={ 2 }
             >
               <Stack
                 direction="column"
-                alignContent={"space-evenly"}
-                spacing={1}
+                alignContent={ "space-evenly" }
+                spacing={ 1 }
               >
-                {cookieCourses.priorityLevel != "null" &&
-                cookieCourses.priorityLevel != null ? (
+                { cookieCourses.priorityLevel != "null" &&
+                  cookieCourses.priorityLevel != null ? (
                   <Avatar
-                    sx={{
+                    sx={ {
                       width: 23,
                       height: 23,
                       bgcolor: (theme) => theme.palette.primary.light,
-                    }}
+                    } }
                   >
-                    {cookieCourses.priorityLevel}
+                    { cookieCourses.priorityLevel }
                   </Avatar>
                 ) : (
                   ""
-                )}
-                {/* <Divider color="primary"></Divider> */}
-                <Stack direction="row" spacing={1}>
+                ) }
+                {/* <Divider color="primary"></Divider> */ }
+                <Stack direction="row" spacing={ 1 }>
                   <Avatar
-                    sx={{
+                    sx={ {
                       width: 30,
                       height: 30,
                       bgcolor: (theme) => theme.palette.primary.dark,
-                    }}
+                    } }
                   >
                     <SchoolIcon fontSize="small" />
                   </Avatar>
 
                   <Typography variant="h6">
-                    {cookieCourses?.courseName}
+                    { cookieCourses?.courseName }
                   </Typography>
                 </Stack>
               </Stack>
@@ -193,19 +174,19 @@ Props) {
                 alignItems="center"
                 justifyContent="center"
                 alignContent="center"
-                gap={3}
-                mb={2}
+                gap={ 3 }
+                mb={ 2 }
               >
-                {" "}
+                { " " }
                 <Typography variant="subtitle2">
                   Preferred District 1: <br />
                   {/* <Typography variant="caption" color="primary">
                     {cookieCourses?.preferred_district1}
                   </Typography> */}
                   <Typography variant="caption" color="primary">
-                    {cookieCourses?.preferred_district1 != "null"
+                    { cookieCourses?.preferred_district1 != "null"
                       ? cookieCourses?.preferred_district1
-                      : "not selected"}
+                      : "not selected" }
                   </Typography>
                 </Typography>
                 <Typography variant="subtitle2">
@@ -214,9 +195,9 @@ Props) {
                     {cookieCourses?.preferred_district2}
                   </Typography> */}
                   <Typography variant="caption" color="primary">
-                    {cookieCourses?.preferred_district2 != "null"
+                    { cookieCourses?.preferred_district2 != "null"
                       ? cookieCourses?.preferred_district2
-                      : "not selected"}
+                      : "not selected" }
                   </Typography>
                 </Typography>
                 <Typography variant="subtitle2">
@@ -225,9 +206,9 @@ Props) {
                     {cookieCourses?.preferred_district3}
                   </Typography> */}
                   <Typography variant="caption" color="primary">
-                    {cookieCourses?.preferred_district2 != "null"
+                    { cookieCourses?.preferred_district2 != "null"
                       ? cookieCourses?.preferred_district3
-                      : "not selected"}
+                      : "not selected" }
                   </Typography>
                 </Typography>
               </Stack>
@@ -235,33 +216,33 @@ Props) {
             <CardContent>
               <Stack
                 direction="column"
-                spacing={2}
+                spacing={ 2 }
                 justifyItems="center"
                 alignItems="center"
                 justifyContent="center"
                 alignContent="center"
               >
-                {" "}
-                {cookieCourses.hostelPreference == 1 ? (
+                { " " }
+                { cookieCourses.hostelPreference == 1 ? (
                   <>
-                    <Stack direction="row" spacing={0.3}>
-                      {" "}
+                    <Stack direction="row" spacing={ 0.3 }>
+                      { " " }
                       <Checkbox
-                        checked={cookieCourses.hostelPreference === 1}
-                        icon={<CheckCircleOutlineIcon />}
-                        checkedIcon={<CheckCircleIcon />}
+                        checked={ cookieCourses.hostelPreference === 1 }
+                        icon={ <CheckCircleOutlineIcon /> }
+                        checkedIcon={ <CheckCircleIcon /> }
                         color="primary"
                       />
                       <Typography
                         variant="body2"
                         color="text.secondary"
                         fontStyle="italic"
-                        sx={{
+                        sx={ {
                           display: "flex",
                           alignItems: "center",
                           gap: 1,
                           marginTop: 2,
-                        }}
+                        } }
                       >
                         I prefer Hostel Accommodations
                       </Typography>
@@ -269,49 +250,49 @@ Props) {
                   </>
                 ) : (
                   <>
-                    <Stack direction="row" spacing={0.3}>
+                    <Stack direction="row" spacing={ 0.3 }>
                       <Checkbox
-                        checked={cookieCourses.hostelPreference === 1}
-                        icon={<CheckBoxOutlineBlankIcon />}
-                        checkedIcon={<CheckCircleIcon />}
+                        checked={ cookieCourses.hostelPreference === 1 }
+                        icon={ <CheckBoxOutlineBlankIcon /> }
+                        checkedIcon={ <CheckCircleIcon /> }
                         color="primary"
                       />
                       <Typography
                         variant="body1"
                         color="text.secondary"
                         fontStyle="oblique"
-                        sx={{
+                        sx={ {
                           display: "flex",
                           alignItems: "center",
                           gap: 1,
                           marginTop: 2,
-                        }}
+                        } }
                       >
                         I prefer Hostel Accommodations
                       </Typography>
                     </Stack>
                   </>
-                )}
-                {cookieCourses.employementPreference == 1 ? (
+                ) }
+                { cookieCourses.employementPreference == 1 ? (
                   <>
-                    <Stack direction="row" spacing={0.3}>
-                      {" "}
+                    <Stack direction="row" spacing={ 0.3 }>
+                      { " " }
                       <Checkbox
-                        checked={cookieCourses.employementPreference === 1}
-                        icon={<CheckCircleOutlineIcon />}
-                        checkedIcon={<CheckCircleIcon />}
+                        checked={ cookieCourses.employementPreference === 1 }
+                        icon={ <CheckCircleOutlineIcon /> }
+                        checkedIcon={ <CheckCircleIcon /> }
                         color="primary"
                       />
                       <Typography
                         variant="body2"
                         color="text.secondary"
                         fontStyle="italic"
-                        sx={{
+                        sx={ {
                           display: "flex",
                           alignItems: "center",
                           gap: 1,
                           marginTop: 2,
-                        }}
+                        } }
                       >
                         I prefer Self Employment
                       </Typography>
@@ -319,49 +300,49 @@ Props) {
                   </>
                 ) : (
                   <>
-                    <Stack direction="row" spacing={0.3}>
+                    <Stack direction="row" spacing={ 0.3 }>
                       <Checkbox
-                        checked={cookieCourses.employementPreference === 1}
-                        icon={<CheckBoxOutlineBlankIcon />}
-                        checkedIcon={<CheckCircleIcon />}
+                        checked={ cookieCourses.employementPreference === 1 }
+                        icon={ <CheckBoxOutlineBlankIcon /> }
+                        checkedIcon={ <CheckCircleIcon /> }
                         color="primary"
                       />
                       <Typography
                         variant="body1"
                         color="text.secondary"
                         fontStyle="oblique"
-                        sx={{
+                        sx={ {
                           display: "flex",
                           alignItems: "center",
                           gap: 1,
                           marginTop: 2,
-                        }}
+                        } }
                       >
                         I prefer Self Employment
                       </Typography>
                     </Stack>
                   </>
-                )}
-                {cookieCourses.employementPreference == 0 ? (
+                ) }
+                { cookieCourses.employementPreference == 0 ? (
                   <>
-                    <Stack direction="row" spacing={0.3}>
-                      {" "}
+                    <Stack direction="row" spacing={ 0.3 }>
+                      { " " }
                       <Checkbox
-                        checked={cookieCourses.employementPreference === 0}
-                        icon={<CheckCircleOutlineIcon />}
-                        checkedIcon={<CheckCircleIcon />}
+                        checked={ cookieCourses.employementPreference === 0 }
+                        icon={ <CheckCircleOutlineIcon /> }
+                        checkedIcon={ <CheckCircleIcon /> }
                         color="primary"
                       />
                       <Typography
                         variant="body2"
                         color="text.secondary"
                         fontStyle="italic"
-                        sx={{
+                        sx={ {
                           display: "flex",
                           alignItems: "center",
                           gap: 1,
                           marginTop: 2,
-                        }}
+                        } }
                       >
                         I prefer Placement
                       </Typography>
@@ -369,59 +350,57 @@ Props) {
                   </>
                 ) : (
                   <>
-                    <Stack direction="row" spacing={0.3}>
+                    <Stack direction="row" spacing={ 0.3 }>
                       <Checkbox
-                        checked={cookieCourses.employementPreference === 0}
-                        icon={<CheckBoxOutlineBlankIcon />}
-                        checkedIcon={<CheckCircleIcon />}
+                        checked={ cookieCourses.employementPreference === 0 }
+                        icon={ <CheckBoxOutlineBlankIcon /> }
+                        checkedIcon={ <CheckCircleIcon /> }
                         color="primary"
                       />
                       <Typography
                         variant="body1"
                         color="text.secondary"
                         fontStyle="oblique"
-                        sx={{
+                        sx={ {
                           display: "flex",
                           alignItems: "center",
                           gap: 1,
                           marginTop: 2,
-                        }}
+                        } }
                       >
                         I prefer Placement
                       </Typography>
                     </Stack>
                   </>
-                )}
+                ) }
               </Stack>
             </CardContent>
 
             <Divider></Divider>
-            <Stack py={1}></Stack>
+            <Stack py={ 1 }></Stack>
             <CardActions
-              style={{
+              style={ {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-              }}
+              } }
             >
-              {" "}
-              <Typography variant="inherit">
+              { " " }
+              {/* <Typography variant="inherit">
                 <Button
-                  style={{ marginRight: "10px" }}
-                  component={Link}
-                  to={`/edit-preferences/${cookieCourses?.courseId}/${cookieCourses?.courseName}/${cookieCourses.priorityLevel}/${cookieCourses.preferred_district1}/${cookieCourses.preferred_district2}/${cookieCourses.preferred_district3}/${cookieCourses.hostelPreference}/${cookieCourses.employementPreference}`}
+                  style={ { marginRight: "10px" } }
+                  component={ Link }
+                  to={ `/edit-preferences/${cookieCourses?.courseId}/${cookieCourses?.courseName}/${cookieCourses.priorityLevel}/${cookieCourses.preferred_district1}/${cookieCourses.preferred_district2}/${cookieCourses.preferred_district3}/${cookieCourses.hostelPreference}/${cookieCourses.employementPreference}` }
                   size="small"
                 >
                   Edit your Preferences
                 </Button>
-              </Typography>
+              </Typography> */}
               <Typography variant="inherit">
                 <Button
-                  component={Link}
-                  to={`/my-courses`}
                   variant="text"
                   size="small"
-                  onClick={() => {
+                  onClick={ () => {
                     const dataString =
                       "48,Quality Seed Grower,Kamrup Metropolitan,Nalbari,null,1124,380,null,1,1,0";
 
@@ -489,7 +468,7 @@ Props) {
                       );
 
                       enqueueSnackbar(
-                        "Cookie Removed from basket successfully",
+                        "Course Removed from basket successfully",
                         {
                           variant: "success",
                           anchorOrigin: {
@@ -507,8 +486,8 @@ Props) {
                         },
                       });
                     }
-                  }}
-                  style={{ marginRight: "20px" }}
+                  } }
+                  style={ { marginRight: "20px" } }
                 >
                   Remove Course
                 </Button>

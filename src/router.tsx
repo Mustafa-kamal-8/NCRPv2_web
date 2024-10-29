@@ -12,22 +12,15 @@ import { CircularProgress, Stack } from "@mui/material";
 import PreferenceAuth from "./pages/preference/auth";
 import Preference from "./pages/preference";
 import MyCourses from "./pages/candidate/my-courses";
-import CandidateRegister from "./pages/candidate/candidate-register";
 import CandidateLogin from "./pages/candidate/candidate-login";
 import RegisterCandidate from "./pages/candidate/register-candidate";
 import EditPreferences from "./components/cards/edit-preferences";
 import SubmitOTP from "./pages/candidate/submit-otp";
 import CandidateProfile from "./pages/candidate/candidate-profile";
-import AuthLayout from "./layouts/auth-layout";
-import RootDemoLayout from "./layouts/rootDemo-layout";
 import TrainingCenters from "./pages/tc/training-centers";
 import TrainingCenter from "./pages/tc/training-center";
 import Register from "./pages/Register";
 import EditPreferencesFromDatabase from "./components/cards/edit-preferences-from-database";
-import AddressDetails from "./components/AddressDetails";
-import BasicDetails from "./components/BasicDetails";
-import OtherDetails from "./components/OtherDetails";
-import PersonalDetails from "./components/PersonalDetails";
 import ChangePassword from "./pages/candidate/change-password";
 
 
@@ -35,8 +28,6 @@ const Courses = lazy(() => import("./pages/courses"));
 const Course = lazy(() => import("./pages/course"));
 
 // const candidateId = localStorage.getItem("candidateId");
-
-const candidate = " ";
 
 export const router = createBrowserRouter([
   {
@@ -93,7 +84,7 @@ export const router = createBrowserRouter([
           {
             index: true,
             element: (
-              <Suspense fallback={<Loader />}>
+              <Suspense fallback={ <Loader /> }>
                 <Courses />
               </Suspense>
             ),
@@ -101,7 +92,7 @@ export const router = createBrowserRouter([
           {
             path: ":courseId/:districtId/:courseName/:districtName/:qualificationBool",
             element: (
-              <Suspense fallback={<Loader />}>
+              <Suspense fallback={ <Loader /> }>
                 <Course />
               </Suspense>
             ),

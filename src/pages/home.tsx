@@ -33,6 +33,7 @@ import { QUERYKEY, STEPS_TO_FOLLOW } from "../data/constants";
 import useFilters from "../hooks/useFilters";
 import { districtState, qualificationState } from "../states/atoms";
 import HighlightedTCCard from "../components/cards/highlighted-tc-card";
+import Modal from "../components/pop-up/Pop-up";
 
 export default function Home() {
   const theme = useTheme();
@@ -100,28 +101,28 @@ export default function Home() {
 
   return (
     <div>
-      <Container maxWidth="xl" component="section" sx={{ paddingY: 4 }}>
+      <Container maxWidth="xl" component="section" sx={ { paddingY: 4 } }>
         <Grid
           container
-          spacing={{
+          spacing={ {
             xs: 2,
             sm: 3,
             md: 4,
-          }}
+          } }
         >
-          <Grid item xs={12} sm={5}>
+          <Grid item xs={ 12 } sm={ 5 }>
             <Stack justifyContent="center" height="100%">
               <Typography variant="h5" gutterBottom>
                 Skills for Life.
               </Typography>
               <Typography
                 variant="h1"
-                sx={{
+                sx={ {
                   fontSize: "3rem",
                   fontWeight: 700,
                   lineHeight: 1,
                   mb: 2,
-                }}
+                } }
               >
                 Nurturing Growth, Inspiring Success
               </Typography>
@@ -144,16 +145,16 @@ export default function Home() {
               </Stack> */}
 
               <Stack
-                gap={2}
-                mt={3}
-                direction={{
+                gap={ 2 }
+                mt={ 3 }
+                direction={ {
                   xs: "column",
                   sm: "row",
-                }}
+                } }
               >
                 <Button
                   variant="contained"
-                  onClick={handleClickOpen}
+                  onClick={ handleClickOpen }
                   size="large"
                   color="warning"
                 >
@@ -163,38 +164,38 @@ export default function Home() {
             </Stack>
           </Grid>
 
-          <Grid item xs={12} sm={7}>
+          <Grid item xs={ 12 } sm={ 7 }>
             <Nurture />
           </Grid>
         </Grid>
       </Container>
 
-      {/* About US */}
+      {/* About US */ }
       <Container maxWidth="xl" component="section">
         <Grid
           container
-          py={4}
-          spacing={{
+          py={ 4 }
+          spacing={ {
             xs: 2,
             sm: 4,
             md: 8,
-          }}
+          } }
         >
-          <Grid item xs={12} sm={5}>
+          <Grid item xs={ 12 } sm={ 5 }>
             <About />
           </Grid>
-          <Grid item xs={12} sm={7}>
+          <Grid item xs={ 12 } sm={ 7 }>
             <Stack justifyContent="center" height="100%" maxWidth="40rem">
               <Typography
                 variant="h6"
                 textTransform="uppercase"
                 color="primary"
-                fontWeight={400}
+                fontWeight={ 400 }
               >
                 ABOUT US
               </Typography>
 
-              <Typography variant="h4" fontWeight={700} gutterBottom>
+              <Typography variant="h4" fontWeight={ 700 } gutterBottom>
                 Who we are
               </Typography>
               <Typography paragraph color="text.secondary">
@@ -208,29 +209,29 @@ export default function Home() {
         </Grid>
       </Container>
 
-      {/* Steps to follow*/}
+      {/* Steps to follow*/ }
       <Container
         maxWidth="xl"
         component="section"
-        sx={{
+        sx={ {
           py: 8,
-        }}
+        } }
       >
         <Typography
           align="center"
           textTransform="uppercase"
           variant="h6"
           color="primary"
-          fontWeight={400}
+          fontWeight={ 400 }
         >
           STEPS TO FOLLOW
         </Typography>
         <Typography
           align="center"
           variant="h4"
-          fontWeight={700}
+          fontWeight={ 700 }
           gutterBottom
-          maxWidth={1200}
+          maxWidth={ 1200 }
           mx="auto"
         >
           Propel your professional growth with our specialized learning programs
@@ -239,167 +240,167 @@ export default function Home() {
 
         <Grid
           container
-          gap={0}
+          gap={ 0 }
           direction="row"
           justifyContent="center"
           alignItems="stretch"
         >
-          {STEPS_TO_FOLLOW.map((step) => (
-            <Grid item key={step.id} pt={6} xs={6} sm={4} md={2}>
+          { STEPS_TO_FOLLOW.map((step) => (
+            <Grid item key={ step.id } pt={ 6 } xs={ 6 } sm={ 4 } md={ 2 }>
               <Paper
-                elevation={1}
-                sx={{
+                elevation={ 1 }
+                sx={ {
                   paddingX: 2,
                   paddingTop: 3,
                   margin: 1,
                   height: "100%",
-                }}
-                key={step.id}
+                } }
+                key={ step.id }
               >
                 <Avatar
                   variant="square"
-                  sx={{
+                  sx={ {
                     borderRadius: 2,
                     bgcolor: theme.palette.primary.main,
                     width: 35,
                     height: 35,
-                  }}
+                  } }
                 >
                   <step.icon fontSize="small" />
                 </Avatar>
 
-                <Typography variant="body1" pt={2} pb={1} fontWeight={500}>
-                  {step.title}
+                <Typography variant="body1" pt={ 2 } pb={ 1 } fontWeight={ 500 }>
+                  { step.title }
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {step.description}
+                  { step.description }
                 </Typography>
               </Paper>
             </Grid>
-          ))}
+          )) }
         </Grid>
       </Container>
 
-      {/* Courses */}
+      {/* Courses */ }
 
       <Container
         maxWidth="xl"
         component="section"
-        sx={{
+        sx={ {
           paddingY: 8,
-        }}
+        } }
       >
-        <Stack direction="row" pb={1} justifyContent="center">
+        <Stack direction="row" pb={ 1 } justifyContent="center">
           <Typography
             align="center"
             textTransform="uppercase"
             variant="h6"
             color="primary"
-            fontWeight={400}
+            fontWeight={ 400 }
           >
             COURSES
           </Typography>
         </Stack>
-        <Stack direction="row" pb={1} justifyContent="center">
-          <Typography variant="h4" fontWeight={700}>
+        <Stack direction="row" pb={ 1 } justifyContent="center">
+          <Typography variant="h4" fontWeight={ 700 }>
             Unlock Your Potential,
           </Typography>
-          <Typography variant="h4" fontWeight={700} gutterBottom>
+          <Typography variant="h4" fontWeight={ 700 } gutterBottom>
             Expand Your Knowledge
           </Typography>
         </Stack>
 
-        <Stack direction="row" pb={1} justifyContent="flex-end">
-          <Button size="small" component={Link} to="/courses">
+        <Stack direction="row" pb={ 1 } justifyContent="flex-end">
+          <Button size="small" component={ Link } to="/courses">
             See All
           </Button>
         </Stack>
 
         <Grid
-          spacing={2}
+          spacing={ 2 }
           container
-          gap={0}
+          gap={ 0 }
           direction="row"
           justifyContent="center"
           alignItems="stretch"
         >
-          {isLoading ? (
-            <CoursesSkeleton numberOfCourses={8} />
+          { isLoading ? (
+            <CoursesSkeleton numberOfCourses={ 8 } />
           ) : (
             data?.data?.highlightedCourses.map((course) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={course.id}>
-                <CourseCard noAction course={course} />
+              <Grid item xs={ 12 } sm={ 6 } md={ 4 } lg={ 3 } key={ course.id }>
+                <CourseCard noAction course={ course } />
               </Grid>
             ))
-          )}
+          ) }
         </Grid>
       </Container>
 
-      {/* Training centers */}
+      {/* Training centers */ }
       <Container
         maxWidth="xl"
         component="section"
-        sx={{
+        sx={ {
           paddingY: 8,
-        }}
+        } }
       >
-        {" "}
-        <Stack direction="row" pb={1} justifyContent="center">
+        { " " }
+        <Stack direction="row" pb={ 1 } justifyContent="center">
           <Typography
             align="center"
             textTransform="uppercase"
             variant="h6"
             color="primary"
-            fontWeight={400}
+            fontWeight={ 400 }
           >
             Training Centers
           </Typography>
         </Stack>
-        <Stack direction="row" pb={1} justifyContent="center">
-          <Typography variant="h4" fontWeight={700}>
-            Foster Growth, Ignite Wisdom:{" "}
+        <Stack direction="row" pb={ 1 } justifyContent="center">
+          <Typography variant="h4" fontWeight={ 700 }>
+            Foster Growth, Ignite Wisdom:{ " " }
           </Typography>
-          <Typography variant="h4" fontWeight={700} gutterBottom>
+          <Typography variant="h4" fontWeight={ 700 } gutterBottom>
             Training Centers, a Hub for Skill Expansion.
           </Typography>
         </Stack>
-        <Stack direction="row" pb={1} justifyContent="flex-end">
-          <Button size="small" component={Link} to="/training-centers">
+        <Stack direction="row" pb={ 1 } justifyContent="flex-end">
+          <Button size="small" component={ Link } to="/training-centers">
             See All
           </Button>
         </Stack>
         <Grid
-          spacing={2}
+          spacing={ 2 }
           container
-          gap={0}
+          gap={ 0 }
           direction="row"
           justifyContent="center"
           alignItems="stretch"
         >
-          {isLoading ? (
-            <CoursesSkeleton numberOfCourses={8} />
+          { isLoading ? (
+            <CoursesSkeleton numberOfCourses={ 8 } />
           ) : (
             data?.data?.highlightedTC.map((training_center) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={training_center.id}>
-                <HighlightedTCCard noAction tc={training_center} />
+              <Grid item xs={ 12 } sm={ 6 } md={ 4 } lg={ 3 } key={ training_center.id }>
+                <HighlightedTCCard noAction tc={ training_center } />
               </Grid>
             ))
-          )}
+          ) }
         </Grid>
       </Container>
 
-      {/* Join &  Learn */}
+      {/* Join &  Learn */ }
       <Container
         maxWidth="xl"
         component="section"
-        sx={{
+        sx={ {
           py: 8,
-        }}
+        } }
       >
         <Grid container>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={ 12 } sm={ 6 }>
             <Stack
-              p={2}
+              p={ 2 }
               justifyContent="center"
               alignItems="center"
               height="100%"
@@ -410,69 +411,69 @@ export default function Home() {
               <Typography
                 variant="h1"
                 align="center"
-                sx={{
+                sx={ {
                   fontSize: "3rem",
                   fontWeight: 700,
                   lineHeight: 1,
                   maxWidth: 400,
                   // mb: 2,
-                }}
+                } }
               >
                 From the best in the business
               </Typography>
             </Stack>
           </Grid>
-          <Grid item xs={12} sm={5} sx={{ maxWidth: 500 }}>
+          <Grid item xs={ 12 } sm={ 5 } sx={ { maxWidth: 500 } }>
             <Banner />
           </Grid>
         </Grid>
       </Container>
 
-      {/* Testimonials */}
+      {/* Testimonials */ }
       <Container
         maxWidth="xl"
         component="section"
-        sx={{
+        sx={ {
           paddingY: 12,
-        }}
+        } }
       >
         <Typography
           align="center"
           textTransform="uppercase"
           variant="h6"
           color="primary"
-          fontWeight={400}
+          fontWeight={ 400 }
         >
           TESTIMONIALS
         </Typography>
         <Typography
           variant="h4"
-          fontWeight={700}
+          fontWeight={ 700 }
           align="center"
-          maxWidth={500}
+          maxWidth={ 500 }
           mx="auto"
         >
           Don't believe us? Check what our students say
         </Typography>
 
         <Stack
-          direction={{ sm: "row", md: "row" }}
-          gap={2}
+          direction={ { sm: "row", md: "row" } }
+          gap={ 2 }
           justifyContent="center"
           alignItems="center"
-          pt={6}
+          pt={ 6 }
         >
-          {isLoading ? (
+          { isLoading ? (
             <TestimonialsSkeleton />
           ) : (
             data?.data?.testimonials?.map((testimonial) => (
-              <TestimonialCard key={testimonial.id} testimonial={testimonial} />
+              <TestimonialCard key={ testimonial.id } testimonial={ testimonial } />
             ))
-          )}
+          ) }
         </Stack>
       </Container>
 
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+      <Dialog open={ open } onClose={ handleClose } fullWidth maxWidth="sm">
         <DialogTitle>Preferences</DialogTitle>
         <DialogContent>
           <DialogContentText gutterBottom>
@@ -480,44 +481,44 @@ export default function Home() {
               Please Select your District and Highest Educational Qualification.
             </Typography>
           </DialogContentText>
-          {!filterLoading && (
-            <Stack gap={3} pt={2}>
+          { !filterLoading && (
+            <Stack gap={ 3 } pt={ 2 }>
               <Autocomplete
-                value={district}
-                onChange={(_, newValue) => {
+                value={ district }
+                onChange={ (_, newValue) => {
                   setDistrict(newValue!);
-                }}
+                } }
                 id="combo-box-demo"
-                options={filterData?.district!}
-                getOptionLabel={(option) => option.districtName}
-                renderInput={(params) => (
-                  <TextField {...params} label="Select District" size="small" />
-                )}
+                options={ filterData?.district! }
+                getOptionLabel={ (option) => option.districtName }
+                renderInput={ (params) => (
+                  <TextField { ...params } label="Select District" size="small" />
+                ) }
                 fullWidth
               />
 
               <Autocomplete
                 fullWidth
-                value={qualification}
-                onChange={(_, newValue) => {
+                value={ qualification }
+                onChange={ (_, newValue) => {
                   setQualification(newValue!);
-                }}
+                } }
                 id="combo-box-demo"
-                options={filterData?.qualification!}
-                getOptionLabel={(option) => option.qualificationName}
-                renderInput={(params) => (
+                options={ filterData?.qualification! }
+                getOptionLabel={ (option) => option.qualificationName }
+                renderInput={ (params) => (
                   <TextField
-                    {...params}
+                    { ...params }
                     label="Select Qualification"
                     size="small"
                   />
-                )}
+                ) }
               />
             </Stack>
-          )}
+          ) }
         </DialogContent>
         <DialogActions>
-          <Button onClick={submitCourseParam}>Submit</Button>
+          <Button onClick={ submitCourseParam }>Submit</Button>
         </DialogActions>
       </Dialog>
     </div>

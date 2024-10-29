@@ -127,7 +127,7 @@ export default function Courses() {
 
   const candidateId = localStorage.getItem("candidateId");
 
-  console.log("FD",filtersData)
+  console.log("FD", filtersData)
 
   if (candidateId) {
     const { data: coursesData } = useQuery({
@@ -219,7 +219,7 @@ export default function Courses() {
     formatResultObject();
   }, [debouncedValue]);
 
-  const {} = useCourses(filters);
+  const { } = useCourses(filters);
 
   const {
     isLoading,
@@ -305,11 +305,11 @@ export default function Courses() {
   // );
 
   const noCoursesFound = (
-    <Stack mt={2} height="70vh" justifyContent="center" alignItems="center">
+    <Stack mt={ 2 } height="70vh" justifyContent="center" alignItems="center">
       <SearchOffRoundedIcon
-        sx={{ fontSize: 100, color: theme.palette.text.secondary }}
+        sx={ { fontSize: 100, color: theme.palette.text.secondary } }
       />
-      <Typography variant="h6" fontWeight={700}>
+      <Typography variant="h6" fontWeight={ 700 }>
         Sorry, no results found!
       </Typography>
       <Typography align="center" paragraph>
@@ -319,7 +319,7 @@ export default function Courses() {
   );
 
   const coursesLoading = (
-    <Stack mt={2} height="70vh" justifyContent="center" alignItems="center">
+    <Stack mt={ 2 } height="70vh" justifyContent="center" alignItems="center">
       <CircularProgress />
     </Stack>
   );
@@ -373,85 +373,96 @@ export default function Courses() {
   return (
     <>
       <Stack direction="row" component="section">
-        {/* Filter Section */}
+        {/* Filter Section */ }
         <Stack
           component="aside"
-          flexBasis={300}
-          borderRight={1}
-          borderColor={theme.palette.grey[300]}
-          display={{ xs: "none", sm: "none", md: "flex" }}
-          pb={3}
+          flexBasis={ 300 }
+          borderRight={ 1 }
+          borderColor={ theme.palette.grey[300] }
+          display={ { xs: "none", sm: "none", md: "flex" } }
+          pb={ 3 }
         >
-          <Typography fontWeight={700} pt={3} px={3}>
+          <Typography fontWeight={ 700 } pt={ 3 } px={ 3 }>
             Filter Courses
           </Typography>
 
-          <Box p={2} px={3}>
-            {filtersIsLoading ? (
+          <Box p={ 2 } px={ 3 }>
+            { filtersIsLoading ? (
               <p>loading</p>
             ) : (
               <Autocomplete
-                value={isDistrictReset ? null : selectedDistrict}
-                isOptionEqualToValue={(option, value) =>
+                value={ isDistrictReset ? null : selectedDistrict }
+                isOptionEqualToValue={ (option, value) =>
                   option.districtID === value?.districtID
                 }
-                onChange={handleAutocompleteChange}
+                onChange={ handleAutocompleteChange }
                 disablePortal
                 id="combo-box-demo"
-                options={filtersData?.district!}
-                sx={{ width: 300 }}
-                getOptionLabel={(option) => option.districtName}
-                renderInput={(params) => (
-                  <TextField {...params} label="Select District" size="small" />
-                )}
+                options={ filtersData?.district! }
+                sx={ { width: 300 } }
+                getOptionLabel={ (option) => option.districtName }
+                renderInput={ (params) => (
+                  <TextField { ...params } label="Select District" size="small" sx={ {
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 3,
+                    },
+                  } } />
+                ) }
               />
-            )}
-            <Stack direction="column" pt={1}>
-              <Button variant="outlined" onClick={handleDistrictReset}>
+            ) }
+            <Stack direction="column" pt={ 1 }>
+              <Button variant="outlined" onClick={ handleDistrictReset } sx={ {
+                borderRadius: 3,
+              } }>
                 Reset District Filter
               </Button>
             </Stack>
           </Box>
 
-          {candidateId ? (
+          { candidateId ? (
             ""
           ) : (
-            <Box p={2} px={3}>
-              {filtersIsLoading ? (
+            <Box p={ 2 } px={ 3 }>
+              { filtersIsLoading ? (
                 <p>loading..</p>
               ) : (
                 <>
                   <Autocomplete
-                    value={selectedQUalification}
-                    onChange={(_event, newValue) => {
+                    value={ selectedQUalification }
+                    onChange={ (_event, newValue) => {
                       setSelectedQualification(newValue!);
                       qualificationSelectedFunction();
-                    }}
+                    } }
                     disablePortal
                     id="combo-box-demo"
-                    options={filtersData?.qualification!}
-                    sx={{ width: 300 }}
-                    getOptionLabel={(option) => option.qualificationName}
-                    renderInput={(params) => (
+                    options={ filtersData?.qualification! }
+                    sx={ { width: 300 } }
+                    getOptionLabel={ (option) => option.qualificationName }
+                    renderInput={ (params) => (
                       <TextField
-                        {...params}
+                        { ...params }
                         label="Select Qualification"
                         size="small"
+                        sx={ {
+                          "& .MuiOutlinedInput-root": {
+                            borderRadius: 3,
+                          },
+                        } }
                       />
-                    )}
+                    ) }
                   />
                   <Typography variant="caption" color="error">
                     *Please select your Highest Qualification only
                   </Typography>
                 </>
-              )}
+              ) }
             </Box>
-          )}
+          ) }
 
-          {/* Search Course */}
-          <Box px={3} py={2}>
+          {/* Search Course */ }
+          <Box px={ 3 } py={ 2 }>
             <Typography
-              fontWeight={500}
+              fontWeight={ 500 }
               color="primary.main"
               gutterBottom
               variant="body2"
@@ -464,9 +475,14 @@ export default function Courses() {
               size="small"
               helperText="Search by course name only"
               type="search"
-              value={value}
-              onChange={handleChange}
-              InputProps={{
+              value={ value }
+              sx={ {
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: 3,
+                },
+              } }
+              onChange={ handleChange }
+              InputProps={ {
                 startAdornment: (
                   <InputAdornment position="start">
                     <IconButton edge="start">
@@ -474,108 +490,108 @@ export default function Courses() {
                     </IconButton>
                   </InputAdornment>
                 ),
-              }}
+              } }
             />
           </Box>
         </Stack>
 
-        {/* Courses Section */}
-        <Stack flex={1} px={3} py={2} component="section">
+        {/* Courses Section */ }
+        <Stack flex={ 1 } px={ 3 } py={ 2 } component="section">
           <Stack
             direction="row"
             alignItems="center"
             justifyContent="space-between"
-            spacing={1}
+            spacing={ 1 }
             component="section"
           >
             <Stack>
               <Typography
                 variant="h4"
-                sx={{ pb: 3 }}
+                sx={ { pb: 3 } }
                 color="primary.main"
                 align="center"
               >
                 Courses
               </Typography>
             </Stack>
-            {candidateId ? (
+            { candidateId ? (
               <Typography variant="subtitle2" color="Highlight">
                 These are Courses based on your Highest Qualification
               </Typography>
             ) : (
               ""
-            )}
-            {candidateId ? (
+            ) }
+            { candidateId ? (
               ""
             ) : (
               <Box
-                mt={2} // Add margin to separate the button and the highlighted box
-                p={2}
+                mt={ 2 } // Add margin to separate the button and the highlighted box
+                p={ 2 }
                 bgcolor={
                   qualificationSelectedbool == true ? "#21EB52" : "#F72331"
                 }
-                borderRadius={4}
+                borderRadius={ 4 }
               >
                 <Typography variant="body2" color="white">
-                  {qualificationSelectedbool == true
+                  { qualificationSelectedbool == true
                     ? "Qualification is selected."
-                    : "Please Select your Highest Qualification from the Filter to proceed to Add Courses to Basket."}
+                    : "Please Select your Highest Qualification from the Filter to proceed to Add Courses to Basket." }
                 </Typography>
               </Box>
-            )}
+            ) }
 
             <Button
-              sx={{
+              sx={ {
                 [theme.breakpoints.up("md")]: {
                   display: "none",
                 },
-              }}
-              startIcon={<FilterAltIcon />}
-              onClick={openDrawer}
+              } }
+              startIcon={ <FilterAltIcon /> }
+              onClick={ openDrawer }
             >
               Filter
             </Button>
           </Stack>
-          {(isLoading || isRefetching) && coursesLoading}
-          {!isLoading && !data?.pages && noCoursesFound}{" "}
-          {candidateId ? (
+          { (isLoading || isRefetching) && coursesLoading }
+          { !isLoading && !data?.pages && noCoursesFound }{ " " }
+          { candidateId ? (
             <Grid
               container
-              spacing={2}
+              spacing={ 2 }
               direction="row"
               justifyContent="flex-start"
               alignItems="stretch"
             >
-              {coursesBasedOnHighesQualification?.data?.map(
+              { coursesBasedOnHighesQualification?.data?.map(
                 (course: any, index: number) => (
-                  <Grid item xs={12} sm={6} md={6} lg={4} key={course.id}>
+                  <Grid item xs={ 12 } sm={ 6 } md={ 6 } lg={ 4 } key={ course.id }>
                     <CourseCard
                       // noAction
-                      course={course}
-                      // districts={districts}
-                      // cookieData={cookieData}
+                      course={ course }
+                    // districts={districts}
+                    // cookieData={cookieData}
                     />
                   </Grid>
                 )
-              )}
+              ) }
             </Grid>
           ) : (
             <>
               <Grid
                 container
-                spacing={2}
+                spacing={ 2 }
                 direction="row"
                 justifyContent="flex-start"
                 alignItems="stretch"
               >
-                {data?.pages?.map((pages) => {
+                { data?.pages?.map((pages) => {
                   if (pages.length === 0)
-                    return <Stack width="100%">{noCoursesFound}</Stack>;
+                    return <Stack width="100%">{ noCoursesFound }</Stack>;
                   return pages.data?.map((course: any) => (
-                    <Grid item xs={12} sm={6} md={6} lg={4} key={course.id}>
+                    <Grid item xs={ 12 } sm={ 6 } md={ 6 } lg={ 4 } key={ course.id }>
                       <CourseCard
-                        qualificationBool={qualificationSelectedbool}
-                        course={course}
+                        qualificationBool={ qualificationSelectedbool }
+                        course={ course }
                         highestQualification={
                           selectedQUalification?.qualificationName
                         }
@@ -585,23 +601,23 @@ export default function Courses() {
                       />
                     </Grid>
                   ));
-                })}
+                }) }
               </Grid>
 
-              <Stack py={2} justifyContent="center" alignItems="center">
+              <Stack py={ 2 } justifyContent="center" alignItems="center">
                 <Button
-                  onClick={() => fetchNextPage()}
-                  disabled={!hasNextPage || isFetchingNextPage}
+                  onClick={ () => fetchNextPage() }
+                  disabled={ !hasNextPage || isFetchingNextPage }
                 >
-                  {isFetchingNextPage
+                  { isFetchingNextPage
                     ? "Loading more..."
                     : hasNextPage
-                    ? "Load More"
-                    : "Nothing more to load"}
+                      ? "Load More"
+                      : "Nothing more to load" }
                 </Button>
               </Stack>
             </>
-          )}
+          ) }
           {/* {candidateId ? (
             <Stack>
               <Button
@@ -632,93 +648,93 @@ export default function Courses() {
         </Stack>
       </Stack>
 
-      <Dialog open={openDialog} onClose={handleClose} sx={{ minWidth: 300 }}>
+      <Dialog open={ openDialog } onClose={ handleClose } sx={ { minWidth: 300 } }>
         <DialogTitle>Select Qualification</DialogTitle>
         <DialogContent>
-          <DialogContentText sx={{ fontSize: "1.1rem", textAlign: "center" }}>
+          <DialogContentText sx={ { fontSize: "1.1rem", textAlign: "center" } }>
             Please select your Highest Qualification from the Filters Section
           </DialogContentText>
         </DialogContent>
-        <DialogActions sx={{ borderTop: "1px solid #ccc", padding: 2 }}>
-          <Button onClick={handleClose} color="primary" variant="contained">
+        <DialogActions sx={ { borderTop: "1px solid #ccc", padding: 2 } }>
+          <Button onClick={ handleClose } color="primary" variant="contained">
             Close
           </Button>
         </DialogActions>
       </Dialog>
 
-      {/* Course Filter Drawer Section */}
+      {/* Course Filter Drawer Section */ }
       <SwipeableDrawer
-        onOpen={openDrawer}
+        onOpen={ openDrawer }
         anchor="left"
-        open={open}
-        onClose={closeDrawer}
-        sx={{ zIndex: theme.zIndex.drawer + 2 }}
+        open={ open }
+        onClose={ closeDrawer }
+        sx={ { zIndex: theme.zIndex.drawer + 2 } }
       >
-        <Typography fontWeight={700} pt={3} px={3}>
+        <Typography fontWeight={ 700 } pt={ 3 } px={ 3 }>
           Filter Courses
         </Typography>
 
-        <Box p={2} px={3}>
-          {filtersIsLoading ? (
+        <Box p={ 2 } px={ 3 }>
+          { filtersIsLoading ? (
             <p>loading..</p>
           ) : (
             <Autocomplete
-              value={isDistrictReset ? null : selectedDistrict}
-              isOptionEqualToValue={(option, value) =>
+              value={ isDistrictReset ? null : selectedDistrict }
+              isOptionEqualToValue={ (option, value) =>
                 option.districtID === value?.districtID
               }
-              onChange={handleAutocompleteChange}
+              onChange={ handleAutocompleteChange }
               disablePortal
               id="combo-box-demo"
-              options={filtersData?.district!}
-              sx={{ width: 300 }}
-              getOptionLabel={(option) => option.districtName}
-              renderInput={(params) => (
-                <TextField {...params} label="Select District" size="small" />
-              )}
+              options={ filtersData?.district! }
+              sx={ { width: 300 } }
+              getOptionLabel={ (option) => option.districtName }
+              renderInput={ (params) => (
+                <TextField { ...params } label="Select District" size="small" />
+              ) }
             />
-          )}
-          <Stack direction="column" pt={1}>
-            <Button variant="outlined" onClick={handleDistrictReset}>
+          ) }
+          <Stack direction="column" pt={ 1 }>
+            <Button variant="outlined" onClick={ handleDistrictReset }>
               Reset District Filter
             </Button>
           </Stack>
         </Box>
 
-        {candidateId ? (
+        { candidateId ? (
           ""
         ) : (
-          <Box p={2} px={3}>
-            {filtersIsLoading ? (
+          <Box p={ 2 } px={ 3 }>
+            { filtersIsLoading ? (
               <p>loading..</p>
             ) : (
               <Autocomplete
-                value={selectedQUalification}
-                onChange={(_event, newValue) => {
+                value={ selectedQUalification }
+                onChange={ (_event, newValue) => {
                   setSelectedQualification(newValue!);
                   qualificationSelectedFunction();
-                }}
+                } }
                 disablePortal
                 id="combo-box-demo"
-                options={filtersData?.qualification!}
-                sx={{ width: 300 }}
-                getOptionLabel={(option) => option.qualificationName}
-                renderInput={(params) => (
+                options={ filtersData?.qualification! }
+                sx={ { width: 300 } }
+                getOptionLabel={ (option) => option.qualificationName }
+                renderInput={ (params) => (
                   <TextField
-                    {...params}
+                    { ...params }
                     label="Select Qualification"
                     size="small"
                   />
-                )}
+                ) }
               />
-            )}
+            ) }
           </Box>
-        )}
+        ) }
 
-        {/* Search Course */}
-        <Box px={3} py={2}>
+        {/* Search Course */ }
+        <Box px={ 3 } py={ 2 }>
           <Typography
-            fontWeight={500}
+            fontWeight={ 500 }
             color="primary.main"
             gutterBottom
             variant="body2"
@@ -731,9 +747,9 @@ export default function Courses() {
             size="small"
             helperText="Search by course name only"
             type="search"
-            value={value}
-            onChange={handleChange}
-            InputProps={{
+            value={ value }
+            onChange={ handleChange }
+            InputProps={ {
               startAdornment: (
                 <InputAdornment position="start">
                   <IconButton edge="start">
@@ -741,14 +757,14 @@ export default function Courses() {
                   </IconButton>
                 </InputAdornment>
               ),
-            }}
+            } }
           />
         </Box>
         <Button
-          startIcon={<Close />}
+          startIcon={ <Close /> }
           variant="contained"
-          sx={{ mx: 2, mt: 1 }}
-          onClick={closeDrawer}
+          sx={ { mx: 2, mt: 1 } }
+          onClick={ closeDrawer }
         >
           Close Drawer
         </Button>

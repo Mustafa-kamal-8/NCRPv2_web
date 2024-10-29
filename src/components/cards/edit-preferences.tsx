@@ -78,7 +78,6 @@ export default function EditPreferences() {
   // console.log("these is the hostelAccomodations", params.hostelAccomodations);
   // console.log("these is the employment", params.employment);
 
-  const [defaultCheckedValue, setDefaultCheckedValue] = useState(true);
   const [radioButtonValue, setRadiobuttonValue] = useState(params.employment);
 
   console.log("This is the radioButton value", radioButtonValue);
@@ -161,7 +160,7 @@ export default function EditPreferences() {
   const [selectedDistrict2Id, setSelectedDistrict2Id] = useState(null);
   const [selectedDistrict3Id, setSelectedDistrict3Id] = useState(null);
 
-  console.log("preferred district1----------------------->",params.district1)
+  console.log("preferred district1----------------------->", params.district1)
 
   const [selectDistrict1Name, setSelectedDistrict1Name] = useState("");
   const [selectDistrict2Name, setSelectedDistrict2Name] = useState("");
@@ -280,23 +279,23 @@ export default function EditPreferences() {
   const { data: priorityLevelData } = useQuery({
     queryFn: () => getCandidateCourses(candidateId!),
     queryKey: ["priority_level_data"],
-    onSuccess(data: any) {},
+    onSuccess(data: any) { },
   });
 
   const handleRadioButtonChange = (event) => {
     setSelectedRadioButtonValue(event.target.value);
   };
-  const handleDistrict1Change = (event:any) => {
+  const handleDistrict1Change = (event: any) => {
     const selectedDist1 = event.target.value;
     console.log("This is the selected district 1:", selectedDist1);
   };
 
-  const handleDistrict2Change = (event:any) => {
+  const handleDistrict2Change = (event: any) => {
     const selectedDist2 = event.target.value;
     console.log("This is the selected district 2:", selectedDist2);
   };
 
-  const handleDistrict3Change = (event:any) => {
+  const handleDistrict3Change = (event: any) => {
     const selectedDist3 = event.target.value;
     console.log("This is the selected district 3:", selectedDist3);
   };
@@ -393,12 +392,12 @@ export default function EditPreferences() {
     document.cookie = `${name}=${value}; ${expires}; SameSite=None; Secure; path=/`;
   }
 
-  
-  
-  
-   
-  
-   
+
+
+
+
+
+
 
   const districts = [{ districtId: 1, districtName: "Dibrugarh" }];
 
@@ -414,37 +413,37 @@ export default function EditPreferences() {
   const getCourseDataFromCookies = (): string[] => {
     const cookies = document.cookie; // Get all cookies as a string
     console.log("Cookies:", cookies); // Log cookies for debugging
-  
+
     const courseRegex = /#\d+Course=([^;]*)/g; // Regular expression to capture everything after `=` and before `;`
     let courseDataArray: string[] = [];
     let match;
-  
+
     // Extract each course's data
     while ((match = courseRegex.exec(cookies)) !== null) {
       courseDataArray.push(match[1]); // Add the matched course data (1st group after `=`)
     }
-  
+
     console.log("Extracted course data array:", courseDataArray); // Log the extracted data array for debugging
     return courseDataArray;
   };
-  
+
   // Function to check missing values from the first 3 rows
   const getMissingPriorityLevels = (): number[] => {
     const courseDataArray = getCourseDataFromCookies(); // Fetch all course data from cookies
     const firstThreeRows = courseDataArray.slice(0, 3); // Get the first 3 rows (if present)
     const storedLevels: number[] = [];
-  
+
     // Loop through the first 3 rows and check the value at index 8
     firstThreeRows.forEach((courseData, index) => {
       const courseArray = courseData.split(","); // Split the course data by commas
-  
+
       console.log(`Course ${index + 1} data:`, courseArray); // Log course data to check the parsed result
-  
+
       if (courseArray.length > 8) {
         const level = parseInt(courseArray[8], 10); // Get the value at index 8 and convert to a number
-  
+
         console.log(`Level found at index 8 for Course ${index + 1}:`, level); // Log the value found at index 8
-  
+
         if (!isNaN(level) && level >= 1 && level <= 3 && !storedLevels.includes(level)) {
           storedLevels.push(level); // If valid and not already added, store the level (1, 2, or 3)
         }
@@ -452,29 +451,29 @@ export default function EditPreferences() {
         console.log(`Course ${index + 1} does not have enough data or no valid value at index 8.`);
       }
     });
-  
+
     console.log("Stored levels from cookies:", storedLevels); // Log stored levels to verify
-  
+
     // Now compare the stored levels with [1, 2, 3] and find the missing ones
     const possiblePriorityLevels = [1, 2, 3]; // All possible levels to check
     const missingLevels = possiblePriorityLevels.filter((level) => !storedLevels.includes(level)); // Find missing levels
-  
+
     return missingLevels;
   };
-  
+
   // Store the missing priority levels in a variable
   const priorityLevels = getMissingPriorityLevels();
-  
+
   // Example: Logging the missing priority levels
   console.log("Missing Priority Levels:", priorityLevels);
-  
-  
+
+
 
 
 
   // Generate an array of numbers from 1 to 5 excluding the priorityLevels
   const numbersNotInPriorityLevels = Array.from(
-    { length: 3},
+    { length: 3 },
     (_, index) => index + 1
   ).filter((number) => priorityLevels?.includes(number));
 
@@ -569,27 +568,27 @@ export default function EditPreferences() {
   return (
     <>
       <EditPreferencesLayout
-        description={`Select your Preferred Districts where ${params?.courseName} Course is Available`}
+        description={ `Select your Preferred Districts where ${params?.courseName} Course is Available` }
         subTitle=""
         title="Select Your Preferences for"
-        courseName={params?.courseName}
+        courseName={ params?.courseName }
       >
-        <Stack pb={3} alignItems={"flex-start"}>
+        <Stack pb={ 3 } alignItems={ "flex-start" }>
           <Button
-            onClick={() => {
+            onClick={ () => {
               navigate(ROUTE_PATHS.MYCOURSES);
-            }}
-            startIcon={<ArrowBackIcon />}
+            } }
+            startIcon={ <ArrowBackIcon /> }
             size="small"
           >
             Back to My Courses
           </Button>
         </Stack>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
+        <Grid container spacing={ 2 }>
+          <Grid item xs={ 12 }>
             <Card
               variant="outlined"
-              sx={{
+              sx={ {
                 height: "100%",
                 width: "100%",
                 display: "flex",
@@ -600,7 +599,7 @@ export default function EditPreferences() {
                   boxShadow: "1px 6px 10px rgba(0, 0, 0, 0.1)",
                 },
                 boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-              }}
+              } }
             >
               <CardContent>
                 <Stack
@@ -608,7 +607,7 @@ export default function EditPreferences() {
                   justifyContent="center"
                   alignContent="center"
                 ></Stack>
-                 <Typography
+                <Typography
                   variant="body2"
                   // color="text.secondary"
                   color="primary"
@@ -617,162 +616,162 @@ export default function EditPreferences() {
                   Course Priority Level:
                 </Typography>
                 <Select
-                  value={selectedPriorityValue}
-                  onChange={handleSelectPriorityChange}
+                  value={ selectedPriorityValue }
+                  onChange={ handleSelectPriorityChange }
                   variant="outlined"
-                  sx={{ width: "20%", marginTop: 1, marginLeft: 2 }}
-                  // defaultValue={params.priority}
+                  sx={ { width: "20%", marginTop: 1, marginLeft: 2 } }
+                // defaultValue={params.priority}
                 >
-                  {numbersNotInPriorityLevels.map((number) => (
-                    <MenuItem key={number} value={number}>
-                      {number}
+                  { numbersNotInPriorityLevels.map((number) => (
+                    <MenuItem key={ number } value={ number }>
+                      { number }
                     </MenuItem>
-                  ))}
-                </Select> 
-                <Stack direction="row" spacing={3}>
-                  {" "}
-                  <Grid container spacing={2}>
-                    <Grid item xs={4}>
+                  )) }
+                </Select>
+                <Stack direction="row" spacing={ 3 }>
+                  { " " }
+                  <Grid container spacing={ 2 }>
+                    <Grid item xs={ 4 }>
                       <Typography
                         variant="body2"
                         color="text.secondary"
                         fontStyle="italic"
-                        sx={{
+                        sx={ {
                           display: "flex",
                           alignItems: "center",
                           gap: 1,
                           marginTop: 2,
-                        }}
+                        } }
                       >
                         <LocationOnIcon fontSize="small" />
                         Preferred District 1:
                       </Typography>
                       <Select
                         displayEmpty
-                        value={selectedDistrict1}
-                        onChange={handleDistrict1Change}
+                        value={ selectedDistrict1 }
+                        onChange={ handleDistrict1Change }
                         variant="outlined"
-                        sx={{ width: "100%", marginTop: 1, height: "50%" }}
+                        sx={ { width: "100%", marginTop: 1, height: "50%" } }
                       >
                         <MenuItem value="not selected">
                           <em>None</em>
                         </MenuItem>
-                        {data?.data[0].districts.map((district: any) => (
+                        { data?.data[0].districts.map((district: any) => (
                           <MenuItem
-                            key={district.districtId}
-                            value={district.districtName}
-                            onClick={() => {
+                            key={ district.districtId }
+                            value={ district.districtName }
+                            onClick={ () => {
                               setSelectedDistrict1Id(district.districtId);
-                            }}
+                            } }
                           >
-                            {district.districtName}
+                            { district.districtName }
                           </MenuItem>
-                        ))}
+                        )) }
                       </Select>
                     </Grid>
-                    <Grid item xs={4}>
-  <Typography
-    variant="body2"
-    color="text.secondary"
-    fontStyle="italic"
-    sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 1,
-      marginTop: 2,
-    }}
-  >
-    <LocationOnIcon fontSize="small" />
-    Preferred District 2:
-  </Typography>
-  <Select
-    displayEmpty
-    value={selectedDistrict2}
-    onChange={(event) => {
-      const selectedDistrictName = event.target.value;
-      setSelectedDistrict2(selectedDistrictName);
+                    <Grid item xs={ 4 }>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        fontStyle="italic"
+                        sx={ {
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1,
+                          marginTop: 2,
+                        } }
+                      >
+                        <LocationOnIcon fontSize="small" />
+                        Preferred District 2:
+                      </Typography>
+                      <Select
+                        displayEmpty
+                        value={ selectedDistrict2 }
+                        onChange={ (event) => {
+                          const selectedDistrictName = event.target.value;
+                          setSelectedDistrict2(selectedDistrictName);
 
-      // Find the selected district ID based on the district name
-      const selectedDistrict = data?.data[0].districts.find(
-        (district: any) => district.districtName === selectedDistrictName
-      );
-      if (selectedDistrict) {
-        setSelectedDistrict2Id(selectedDistrict.districtId);
-      }
-    }}
-    variant="outlined"
-    sx={{ width: "100%", marginTop: 1, height: "50%" }}
-  >
-    <MenuItem value="">
-      <em>None</em>
-    </MenuItem>
-    {data?.data[0].districts.map((district: any) => (
-      <MenuItem
-        key={district.districtId}
-        value={district.districtName}
-      >
-        {district.districtName}
-      </MenuItem>
-    ))}
-  </Select>
-</Grid>
+                          // Find the selected district ID based on the district name
+                          const selectedDistrict = data?.data[0].districts.find(
+                            (district: any) => district.districtName === selectedDistrictName
+                          );
+                          if (selectedDistrict) {
+                            setSelectedDistrict2Id(selectedDistrict.districtId);
+                          }
+                        } }
+                        variant="outlined"
+                        sx={ { width: "100%", marginTop: 1, height: "50%" } }
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        { data?.data[0].districts.map((district: any) => (
+                          <MenuItem
+                            key={ district.districtId }
+                            value={ district.districtName }
+                          >
+                            { district.districtName }
+                          </MenuItem>
+                        )) }
+                      </Select>
+                    </Grid>
 
-                    <Grid item xs={4}>
-  <Typography
-    variant="body2"
-    color="text.secondary"
-    fontStyle="italic"
-    sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 1,
-      marginTop: 2,
-    }}
-  >
-    <LocationOnIcon fontSize="small" />
-    Preferred District 3:
-  </Typography>
-  <Select
-    displayEmpty
-    value={selectedDistrict3}
-    onChange={(event) => {
-      const selectedDistrictName = event.target.value;
-      setSelectedDistrict3(selectedDistrictName);
+                    <Grid item xs={ 4 }>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        fontStyle="italic"
+                        sx={ {
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1,
+                          marginTop: 2,
+                        } }
+                      >
+                        <LocationOnIcon fontSize="small" />
+                        Preferred District 3:
+                      </Typography>
+                      <Select
+                        displayEmpty
+                        value={ selectedDistrict3 }
+                        onChange={ (event) => {
+                          const selectedDistrictName = event.target.value;
+                          setSelectedDistrict3(selectedDistrictName);
 
-      // Find the selected district ID based on the district name
-      const selectedDistrict = data?.data[0].districts.find(
-        (district: any) => district.districtName === selectedDistrictName
-      );
-      if (selectedDistrict) {
-        setSelectedDistrict3Id(selectedDistrict.districtId);
-      }
-    }}
-    variant="outlined"
-    sx={{ width: "100%", marginTop: 1, height: "50%" }}
-  >
-    <MenuItem value="">
-      <em>None</em>
-    </MenuItem>
-    {data?.data[0].districts.map((district: any) => (
-      <MenuItem
-        key={district.districtId}
-        value={district.districtName}
-      >
-        {district.districtName}
-      </MenuItem>
-    ))}
-  </Select>
-</Grid>
+                          // Find the selected district ID based on the district name
+                          const selectedDistrict = data?.data[0].districts.find(
+                            (district: any) => district.districtName === selectedDistrictName
+                          );
+                          if (selectedDistrict) {
+                            setSelectedDistrict3Id(selectedDistrict.districtId);
+                          }
+                        } }
+                        variant="outlined"
+                        sx={ { width: "100%", marginTop: 1, height: "50%" } }
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        { data?.data[0].districts.map((district: any) => (
+                          <MenuItem
+                            key={ district.districtId }
+                            value={ district.districtName }
+                          >
+                            { district.districtName }
+                          </MenuItem>
+                        )) }
+                      </Select>
+                    </Grid>
 
                   </Grid>
                 </Stack>
-                <Stack pb={3}></Stack>
+                <Stack pb={ 3 }></Stack>
                 <Box
-                  sx={{
+                  sx={ {
                     border: "1px solid #ddd",
                     padding: "16px",
                     borderRadius: "8px",
-                  }}
+                  } }
                 >
                   <Typography
                     variant="subtitle2"
@@ -793,8 +792,8 @@ export default function EditPreferences() {
                             // defaultChecked={
                             //   params.hostelAccomodations == 1 ? true : false
                             // }
-                            checked={isHostelAccommodationChecked}
-                            onChange={handleHostelCheckboxChange}
+                            checked={ isHostelAccommodationChecked }
+                            onChange={ handleHostelCheckboxChange }
                             value="1"
                           />
                         }
@@ -803,13 +802,13 @@ export default function EditPreferences() {
                     </FormGroup>
                   </FormControl>
                 </Box>
-                <Stack pb={3}></Stack>
+                <Stack pb={ 3 }></Stack>
                 <Box
-                  sx={{
+                  sx={ {
                     border: "1px solid #ddd",
                     padding: "16px",
                     borderRadius: "8px",
-                  }}
+                  } }
                 >
                   <Typography
                     variant="subtitle2"
@@ -823,18 +822,18 @@ export default function EditPreferences() {
                     <RadioGroup
                       aria-labelledby="demo-controlled-radio-buttons-group"
                       name="controlled-radio-buttons-group"
-                      value={radioButtonValue}
-                      onChange={handleRadiobuttonValueChange}
+                      value={ radioButtonValue }
+                      onChange={ handleRadiobuttonValueChange }
                     >
                       <Stack direction="row">
                         <FormControlLabel
                           value="1"
-                          control={<Radio />}
+                          control={ <Radio /> }
                           label="I prefer Self Employement"
                         />
                         <FormControlLabel
                           value="0"
-                          control={<Radio />}
+                          control={ <Radio /> }
                           label="I prefer Placement"
                         />
                       </Stack>
@@ -842,12 +841,12 @@ export default function EditPreferences() {
                   </FormControl>
                 </Box>
               </CardContent>
-              <CardActions sx={{ px: 2, pb: 1 }}>
-                {candidateId ? (
+              <CardActions sx={ { px: 2, pb: 1 } }>
+                { candidateId ? (
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => {
+                    onClick={ () => {
                       //   mutate({
                       //     courseId: courseId.toString(),
                       //     districtId: districtId.toString(),
@@ -1008,7 +1007,7 @@ export default function EditPreferences() {
                       navigate("/my-courses");
 
                       getAllCookies();
-                    }}
+                    } }
                   >
                     Save Changes
                   </Button>
@@ -1016,7 +1015,7 @@ export default function EditPreferences() {
                   <Button
                     color="success"
                     variant="contained"
-                    onClick={() => {
+                    onClick={ () => {
                       //   mutate({
                       //     courseId: courseId.toString(),
                       //     districtId: districtId.toString(),
@@ -1153,7 +1152,7 @@ export default function EditPreferences() {
                         candidateId: candidateId,
                         courseId: data?.data[0].courseId,
                         preferred_district1Id:
-                        (selectedDistrict1Id),
+                          (selectedDistrict1Id),
                         preferred_district2Id:
                           (selectedDistrict2Id),
                         preferred_district3Id:
@@ -1171,11 +1170,11 @@ export default function EditPreferences() {
                       navigate("/my-courses");
 
                       getAllCookies();
-                    }}
+                    } }
                   >
                     Save Changes
                   </Button>
-                )}
+                ) }
 
                 {/* <Button
                   onClick={() => {

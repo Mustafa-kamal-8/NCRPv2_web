@@ -54,6 +54,11 @@ const ReviewAndSubmit: React.FC<ReviewAndSubmitProps> = ({
           Other Details
         </Typography>
       </Box>
+      <Box border={1} borderColor="black" p={2} borderRadius={2} mt={4}>
+        <Typography variant="h6" color="primary" gutterBottom>
+          Placement Preference
+        </Typography>
+      </Box>
 
       <Box mt={2} textAlign="center" style={{ marginTop: "100px" }}>
         <Typography variant="body1" color="textPrimary">

@@ -160,6 +160,9 @@ const AddressDetails = ({ formData, setFormData }) => {
             >
               Address Details
             </Typography>
+
+            <Grid container spacing={2}>
+            <Grid item xs={6}>
             <TextField
               label="Address"
               name="address"
@@ -170,7 +173,8 @@ const AddressDetails = ({ formData, setFormData }) => {
               InputProps={{ style: { borderColor: "black" } }}
               required
             />
-
+              </Grid>
+  <Grid item xs={6}>
             <TextField
               select
               label="District"
@@ -188,95 +192,104 @@ const AddressDetails = ({ formData, setFormData }) => {
                 </MenuItem>
               ))}
             </TextField>
+            </Grid>
+            </Grid>
             <FormControl component="fieldset" margin="normal" fullWidth>
-              <FormLabel component="legend">Is City/Village?</FormLabel>
-              <RadioGroup
-                row
-                name="areaType"
-                value={formData.areaType}
-                onChange={handleChange}
-                required
-              >
-                <FormControlLabel
-                  value="URBAN"
-                  control={<Radio style={{ color: "black" }} />}
-                  label="City"
-                />
-                <FormControlLabel
-                  value="RURAL"
-                  control={<Radio style={{ color: "black" }} />}
-                  label="Village"
-                />
-              </RadioGroup>
-            </FormControl>
+  <FormLabel component="legend">Is City/Village?</FormLabel>
+  <RadioGroup
+    row
+    name="areaType"
+    value={formData.areaType}
+    onChange={handleChange}
+    required
+  >
+    <FormControlLabel
+      value="URBAN"
+      control={<Radio style={{ color: "black" }} />}
+      label="City"
+    />
+    <FormControlLabel
+      value="RURAL"
+      control={<Radio style={{ color: "black" }} />}
+      label="Village"
+    />
+  </RadioGroup>
+</FormControl>
 
-            {formData.areaType === "URBAN" && (
-              <>
-                <TextField
-                  select
-                  label="ULB"
-                  name="ulb"
-                  value={formData.ulb}
-                  onChange={handleChange}
-                  fullWidth
-                  margin="normal"
-                  InputProps={{ style: { borderColor: "black" } }}
-                  required
-                >
-                  {filteredUlbs.map((option) => (
-                    <MenuItem key={option.pklUlbId} value={option.pklUlbId}>
-                      {option.vsUlbName}
-                    </MenuItem>
-                  ))}
-                </TextField>
-                <TextField
-                  label="City Name"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleChange}
-                  fullWidth
-                  margin="normal"
-                  InputProps={{ style: { borderColor: "black" } }}
-                  required
-                />
-              </>
-            )}
+{formData.areaType === "URBAN" && (
+  <Grid container spacing={2}>
+    <Grid item xs={6}>
+      <TextField
+        select
+        label="ULB"
+        name="ulb"
+        value={formData.ulb}
+        onChange={handleChange}
+        fullWidth
+        margin="normal"
+        InputProps={{ style: { borderColor: "black" } }}
+        required
+      >
+        {filteredUlbs.map((option) => (
+          <MenuItem key={option.pklUlbId} value={option.pklUlbId}>
+            {option.vsUlbName}
+          </MenuItem>
+        ))}
+      </TextField>
+    </Grid>
+    <Grid item xs={6}>
+      <TextField
+        label="City Name"
+        name="city"
+        value={formData.city}
+        onChange={handleChange}
+        fullWidth
+        margin="normal"
+        InputProps={{ style: { borderColor: "black" } }}
+        required
+      />
+    </Grid>
+  </Grid>
+)}
 
-            {formData.areaType === "RURAL" && (
-              <>
-                <TextField
-                  select
-                  label="Block"
-                  name="block"
-                  value={formData.block}
-                  onChange={handleChange}
-                  fullWidth
-                  margin="normal"
-                  InputProps={{ style: { borderColor: "black" } }}
-                  required
-                >
-                  {filteredblocks.map((option) => (
-                    <MenuItem
-                      key={option.pklTalukaId}
-                      value={option.pklTalukaId}
-                    >
-                      {option.vsTalukaName}
-                    </MenuItem>
-                  ))}
-                </TextField>
-                <TextField
-                  label="Village Name"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleChange}
-                  fullWidth
-                  margin="normal"
-                  InputProps={{ style: { borderColor: "black" } }}
-                  required
-                />
-              </>
-            )}
+{formData.areaType === "RURAL" && (
+  <Grid container spacing={2}>
+    <Grid item xs={6}>
+      <TextField
+        select
+        label="Block"
+        name="block"
+        value={formData.block}
+        onChange={handleChange}
+        fullWidth
+        margin="normal"
+        InputProps={{ style: { borderColor: "black" } }}
+        required
+      >
+        {filteredblocks.map((option) => (
+          <MenuItem key={option.pklTalukaId} value={option.pklTalukaId}>
+            {option.vsTalukaName}
+          </MenuItem>
+        ))}
+      </TextField>
+    </Grid>
+    <Grid item xs={6}>
+      <TextField
+        label="Village Name"
+        name="city"
+        value={formData.city}
+        onChange={handleChange}
+        fullWidth
+        margin="normal"
+        InputProps={{ style: { borderColor: "black" } }}
+        required
+      />
+    </Grid>
+  </Grid>
+)}
 
+<Grid container spacing={2}>
+<Grid item xs={4}>
             <TextField
               label="Pin Code"
               name="PIN"
@@ -288,7 +301,8 @@ const AddressDetails = ({ formData, setFormData }) => {
               inputProps={{ maxLength: 6 }}
               required
             />
-
+ </Grid>
+ <Grid item xs={4}>
             <TextField
               label="Post Office"
               name="postoffice"
@@ -299,7 +313,8 @@ const AddressDetails = ({ formData, setFormData }) => {
               InputProps={{ style: { borderColor: "black" } }}
               required
             />
-
+             </Grid>
+             <Grid item xs={4}>
             <TextField
               label="Police Station"
               name="policeStation"
@@ -310,7 +325,11 @@ const AddressDetails = ({ formData, setFormData }) => {
               InputProps={{ style: { borderColor: "black" } }}
               required
             />
+</Grid>
+</Grid>
 
+<Grid container spacing={2}>
+<Grid item xs={6}>
             <TextField
               select
               label="Assembly Constituency"
@@ -331,6 +350,8 @@ const AddressDetails = ({ formData, setFormData }) => {
                 </MenuItem>
               ))}
             </TextField>
+            </Grid>
+            <Grid item xs={6}>
             <TextField
               select
               label="Council Constituency"
@@ -352,8 +373,10 @@ const AddressDetails = ({ formData, setFormData }) => {
                 </MenuItem>
               ))}
             </TextField>
+            </Grid>
+          </Grid>
           </Box>
-
+          
           <FormControl component="fieldset" margin="normal" fullWidth>
               <FormLabel component="legend">Is Permanent Address Same As Current Address?</FormLabel>
               <RadioGroup
@@ -386,34 +409,41 @@ const AddressDetails = ({ formData, setFormData }) => {
             >
               Permanent Address Details
             </Typography>
-            <TextField
-              label="Address"
-              name="paddress"
-              value={formData.paddress}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-              InputProps={{ style: { borderColor: "black" } }}
-              required
-            />
 
-            <TextField
-              select
-              label="District"
-              name="pdistrict"
-              value={formData.pdistrict}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-              InputProps={{ style: { borderColor: "black" } }}
-              required
-            >
-              {pdistricts.map((option) => (
-                <MenuItem key={option.districtID} value={option.districtID}>
-                  {option.districtName}
-                </MenuItem>
-              ))}
-            </TextField>
+            <Grid container spacing={2}>
+  <Grid item xs={6}>
+    <TextField
+      label="Address"
+      name="paddress"
+      value={formData.paddress}
+      onChange={handleChange}
+      fullWidth
+      margin="normal"
+      InputProps={{ style: { borderColor: "black" } }}
+      required
+    />
+  </Grid>
+  <Grid item xs={6}>
+    <TextField
+      select
+      label="District"
+      name="pdistrict"
+      value={formData.pdistrict}
+      onChange={handleChange}
+      fullWidth
+      margin="normal"
+      InputProps={{ style: { borderColor: "black" } }}
+      required
+    >
+      {pdistricts.map((option) => (
+        <MenuItem key={option.districtID} value={option.districtID}>
+          {option.districtName}
+        </MenuItem>
+      ))}
+    </TextField>
+  </Grid>
+</Grid>
+
             <FormControl component="fieldset" margin="normal" fullWidth>
               <FormLabel component="legend">Is City/Village?</FormLabel>
               <RadioGroup
@@ -437,7 +467,8 @@ const AddressDetails = ({ formData, setFormData }) => {
             </FormControl>
 
             {formData.pareaType === "URBAN" && (
-              <>
+               <Grid container spacing={2}>
+    <Grid item xs={6}>
                 <TextField
                   select
                   label="ULB"
@@ -455,6 +486,8 @@ const AddressDetails = ({ formData, setFormData }) => {
                     </MenuItem>
                   ))}
                 </TextField>
+                </Grid>
+                <Grid item xs={6}>
                 <TextField
                   label="City Name"
                   name="pcity"
@@ -465,11 +498,13 @@ const AddressDetails = ({ formData, setFormData }) => {
                   InputProps={{ style: { borderColor: "black" } }}
                   required
                 />
-              </>
+                </Grid>
+                </Grid>
             )}
 
             {formData.pareaType === "RURAL" && (
-              <>
+                 <Grid container spacing={2}>
+    <Grid item xs={6}>
                 <TextField
                   select
                   label="Block"
@@ -490,6 +525,8 @@ const AddressDetails = ({ formData, setFormData }) => {
                     </MenuItem>
                   ))}
                 </TextField>
+                </Grid>
+                <Grid item xs={6}>
                 <TextField
                   label="Village Name"
                   name="pcity"
@@ -500,9 +537,13 @@ const AddressDetails = ({ formData, setFormData }) => {
                   InputProps={{ style: { borderColor: "black" } }}
                   required
                 />
-              </>
+                </Grid>
+                </Grid>
             )}
 
+
+   <Grid container spacing={2}>
+    <Grid item xs={4}>
             <TextField
               label="Pin Code"
               name="pPIN"
@@ -514,7 +555,8 @@ const AddressDetails = ({ formData, setFormData }) => {
               inputProps={{ maxLength: 6 }}
               required
             />
-
+ </Grid>
+ <Grid item xs={4}>
             <TextField
               label="Post Office"
               name="ppostoffice"
@@ -525,7 +567,8 @@ const AddressDetails = ({ formData, setFormData }) => {
               InputProps={{ style: { borderColor: "black" } }}
               required
             />
-
+</Grid>
+<Grid item xs={4}>
             <TextField
               label="Police Station"
               name="ppoliceStation"
@@ -536,7 +579,11 @@ const AddressDetails = ({ formData, setFormData }) => {
               InputProps={{ style: { borderColor: "black" } }}
               required
             />
+</Grid>
+</Grid>
 
+<Grid container spacing={2}>
+    <Grid item xs={6}>
             <TextField
               select
               label="Assembly Constituency"
@@ -557,6 +604,9 @@ const AddressDetails = ({ formData, setFormData }) => {
                 </MenuItem>
               ))}
             </TextField>
+            </Grid>
+
+            <Grid item xs={6}>
             <TextField
               select
               label="Council Constituency"
@@ -578,6 +628,8 @@ const AddressDetails = ({ formData, setFormData }) => {
                 </MenuItem>
               ))}
             </TextField>
+            </Grid>
+            </Grid>
           </Box>
   )}
 

@@ -1,15 +1,26 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import BasicDetails from "../components/BasicDetails";
 import PersonalDetails from "../components/PersonalDetails";
 import AddressDetails from "../components/AddressDetails";
 import OtherDetails from "../components/OtherDetails";
 import ReviewAndSubmit from "../components/ReviewAndSubmit";
-import { Stepper, Step, StepLabel, Button , TextField , Grid , Typography,IconButton, InputAdornment} from "@mui/material";
+import {
+  Stepper,
+  Step,
+  StepLabel,
+  Button,
+  TextField,
+  Grid,
+  Typography,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
 import { toast, Toaster } from "react-hot-toast"; // Import react-hot-toast
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import PlacementPreference from "../components/PlacementPreference";
 
 const Register = () => {
   const [activeStep, setActiveStep] = useState(0); // State to manage current step
@@ -73,13 +84,20 @@ const Register = () => {
     pulb: "",
     pcity: "",
     pblock: "",
-  
+
     pPIN: "",
     ppostoffice: "",
     passemblyConstituency: "",
-    ploksabhaConstituency: ""
-
-  
+    ploksabhaConstituency: "",
+    placementPreference: {
+      state1: "",
+      state2: "",
+      state3: "",
+      district1: "",
+      district2: "",
+      district3: "",
+      country: "",
+    },
   };
 
   const districts = [
@@ -124,7 +142,7 @@ const Register = () => {
   const [courses, setCourses] = useState([]);
   const [agreed, setAgreed] = useState(false);
 
-  console.log("coursssssss------------------------------>",courses)
+  console.log("coursssssss------------------------------>", courses);
 
   const getAllCookies = () => {
     function isCookieStorageEmpty() {
@@ -205,7 +223,10 @@ const Register = () => {
   useEffect(() => {
     console.log("Current district IDs:");
     courses.forEach((course) => {
-      console.log("d1----------------------------------------->",course.preferred_district1Id);
+      console.log(
+        "d1----------------------------------------->",
+        course.preferred_district1Id
+      );
     });
   }, [courses]);
 
@@ -226,9 +247,8 @@ const Register = () => {
 
   const [formData, setFormData] = useState(initialFormData);
 
-
   const handleNext = async () => {
-console.log("FormData-------------->",formData.religion)
+    console.log("FormData-------------->", formData.religion);
     if (formData.password !== formData.confirmPassword) {
       setPasswordError("Passwords do not match");
       return;
@@ -275,7 +295,7 @@ console.log("FormData-------------->",formData.religion)
           }, 1000);
         } else {
           toast.error(response.data.message || "All fields are required");
-         }
+        }
       } catch (error) {
         console.error("Error submitting form:", error);
         toast.error("Error submitting form");
@@ -319,17 +339,22 @@ console.log("FormData-------------->",formData.religion)
     },
     {
       component: (
+        <PlacementPreference formData={formData} setFormData={setFormData} />
+      ),
+    },
+    {
+      component: (
         <ReviewAndSubmit
           formData={formData}
           setFormData={setFormData}
           handleBack={handleBack}
-          agreed={agreed}           // Passing agreed state
-          setAgreed={setAgreed}   
+          agreed={agreed} // Passing agreed state
+          setAgreed={setAgreed}
         />
       ),
     },
   ];
-  console.log("agreed---------->",agreed);
+  console.log("agreed---------->", agreed);
 
   return (
     <div>
@@ -349,107 +374,153 @@ console.log("FormData-------------->",formData.religion)
         {/* Render current step component */}
         {steps[activeStep].component}
 
-         {/* Password fields only visible on the first step */}
-         
-         {activeStep === 0 && (
-          <>
-        <div style={{ padding: '20px',marginLeft:'10.5%' ,boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', borderRadius: '8px', width:'79%',  justifyContent:'center', }}>
-  <Typography variant="subtitle1" style={{ color: 'red', marginBottom: '10px' }}>
-  *Please create a password for future logins and reference
-  </Typography>
-  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-    <div style={{ width: "48%", display: "flex", flexDirection: "column" }}>
-    <TextField
-            label="Password"
-            name="password"
-            type={showPassword ? 'text' : 'password'}
-            value={formData.password}
-            onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={togglePasswordVisibility} edge="end">
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-    </div>
-    <div style={{ width: "48%", display: "flex", flexDirection: "column" }}>
-    <TextField
-            label="Confirm Password"
-            name="confirmPassword"
-            type={showConfirmPassword ? 'text' : 'password'}
-            value={formData.confirmPassword}
-            onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={toggleConfirmPasswordVisibility} edge="end">
-                    {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-       
-      />
-      
-    </div>
-   
-  </div>
-  {passwordError && (
-          <p style={{ color: "red", marginTop: "1rem" }}>{passwordError}</p>
-        )}
-</div>
+        {/* Password fields only visible on the first step */}
 
+        {activeStep === 0 && (
+          <>
+            <div
+              style={{
+                padding: "20px",
+                marginLeft: "10.5%",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                borderRadius: "8px",
+                width: "79%",
+                justifyContent: "center",
+              }}
+            >
+              <Typography
+                variant="subtitle1"
+                style={{ color: "red", marginBottom: "10px" }}
+              >
+                *Please create a password for future logins and reference
+              </Typography>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <div
+                  style={{
+                    width: "48%",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <TextField
+                    label="Password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    value={formData.password}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        [e.target.name]: e.target.value,
+                      })
+                    }
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={togglePasswordVisibility}
+                            edge="end"
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </div>
+                <div
+                  style={{
+                    width: "48%",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <TextField
+                    label="Confirm Password"
+                    name="confirmPassword"
+                    type={showConfirmPassword ? "text" : "password"}
+                    value={formData.confirmPassword}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        [e.target.name]: e.target.value,
+                      })
+                    }
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={toggleConfirmPasswordVisibility}
+                            edge="end"
+                          >
+                            {showConfirmPassword ? (
+                              <VisibilityOff />
+                            ) : (
+                              <Visibility />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </div>
+              </div>
+              {passwordError && (
+                <p style={{ color: "red", marginTop: "1rem" }}>
+                  {passwordError}
+                </p>
+              )}
+            </div>
           </>
         )}
-        
 
         {/* Button container */}
         <div style={{ marginTop: "2rem" }}>
-  {/* Render back button if not on first step */}
-  {activeStep !== 0 && (
-    <Button onClick={handleBack} variant="outlined" size="large">
-      Back
-    </Button>
-  )}
+          {/* Render back button if not on first step */}
+          {activeStep !== 0 && (
+            <Button onClick={handleBack} variant="outlined" size="large">
+              Back
+            </Button>
+          )}
 
-  {/* Render the "Next" button for steps other than the last step */}
-  {activeStep !== steps.length - 1 && (
-    <Button
-      variant="contained"
-      color="primary"
-      onClick={handleNext}
-      style={{ marginLeft: "1rem" }}
-      size="large"
-      // disabled={!allFieldsFilled()}  // Uncomment if you have a function to check if all fields are filled
-    >
-      Next
-    </Button>
-  )}
+          {/* Render the "Next" button for steps other than the last step */}
+          {activeStep !== steps.length - 1 && (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleNext}
+              style={{ marginLeft: "1rem" }}
+              size="large"
+              // disabled={!allFieldsFilled()}  // Uncomment if you have a function to check if all fields are filled
+            >
+              Next
+            </Button>
+          )}
 
-  {/* Render the "Submit" button only on the last step and when agreed is true */}
-  {activeStep === steps.length - 1 && agreed && (
-    <Button
-      variant="contained"
-      color="primary"
-      onClick={handleNext}
-      style={{ marginLeft: "1rem" }}
-      size="large"
-    >
-      Submit
-    </Button>
-  )}
-</div>
-
+          {/* Render the "Submit" button only on the last step and when agreed is true */}
+          {activeStep === steps.length - 1 && agreed && (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleNext}
+              style={{ marginLeft: "1rem" }}
+              size="large"
+            >
+              Submit
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -47,8 +47,8 @@ const PersonalDetails = ({ handleNext, handleBack, formData, setFormData }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const qualificationId = localStorage.getItem('qualificationId');
-  const qualificationName = localStorage.getItem('qualificationName');
+  const qualificationId = localStorage.getItem("qualificationId");
+  const qualificationName = localStorage.getItem("qualificationName");
 
   useEffect(() => {
     if (qualificationId) {
@@ -80,30 +80,50 @@ const PersonalDetails = ({ handleNext, handleBack, formData, setFormData }) => {
       <Grid container spacing={3} justifyContent="center">
         <Grid item xs={12}>
           <Box border={1} borderColor="black" p={2} borderRadius={2}>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <TextField
+                  label="Aadhar Card Number"
+                  name="adharNumber"
+                  value={formData.adharNumber}
+                  fullWidth
+                  margin="normal"
+                  inputProps={{ maxLength: 12 }}
+                  InputProps={{
+                    readOnly: true,
+                    style: { pointerEvents: "none" },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  label="Phone Number"
+                  name="mobile"
+                  value={formData.mobile}
+                  fullWidth
+                  margin="normal"
+                  inputProps={{ maxLength: 10 }}
+                  InputProps={{
+                    readOnly: true,
+                    style: { pointerEvents: "none" },
+                  }}
+                />
+              </Grid>
+            </Grid>
+
+  <Grid container spacing={2}>
+  
+               <Grid item xs={6}>
             <TextField
-              label="Adhar Card Number"
-              name="adharNumber"
-              value={formData.adharNumber}
+              label="Email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
               fullWidth
               margin="normal"
-              inputProps={{ maxLength: 12 }}
-              InputProps={{
-                readOnly: true,
-                style: { pointerEvents: "none" },
-              }}
             />
-            <TextField
-              label="Phone Number"
-              name="mobile"
-              value={formData.mobile}
-              fullWidth
-              margin="normal"
-              inputProps={{ maxLength: 10 }}
-              InputProps={{
-                readOnly: true,
-                style: { pointerEvents: "none" },
-              }}
-            />
+            </Grid>
+            <Grid item xs={6}>
             <TextField
               label="Alternative Phone Number"
               name="altMobile"
@@ -113,15 +133,11 @@ const PersonalDetails = ({ handleNext, handleBack, formData, setFormData }) => {
               margin="normal"
               inputProps={{ maxLength: 10 }}
             />
-            <TextField
-              label="Email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-        
-            />
+               </Grid>
+             </Grid>
+
+             <Grid container spacing={2}>
+             <Grid item xs={6}>
             <TextField
               select
               label="Religion"
@@ -138,6 +154,9 @@ const PersonalDetails = ({ handleNext, handleBack, formData, setFormData }) => {
                 </MenuItem>
               ))}
             </TextField>
+            </Grid>
+
+            <Grid item xs={6}>
             <TextField
               select
               label="Category"
@@ -154,22 +173,26 @@ const PersonalDetails = ({ handleNext, handleBack, formData, setFormData }) => {
                 </MenuItem>
               ))}
             </TextField>
+            </Grid>
+            </Grid>
+            <Grid item xs={6}>
             <TextField
-      select
-      label="Qualification"
-      name="qualification"
-      value={formData.qualification} // Set qualificationId as value from localStorage
-      onChange={handleChangee}
-      fullWidth
-      margin="normal"
-      required
-      disabled={Boolean(qualificationId)} // Disable if qualificationId is in localStorage
-    >
-      {/* Display the qualificationName from localStorage */}
-      <MenuItem value={qualificationId}>
-        {qualificationName}
-      </MenuItem>
-    </TextField>
+              select
+              label="Qualification"
+              name="qualification"
+              value={formData.qualification} // Set qualificationId as value from localStorage
+              onChange={handleChangee}
+              fullWidth
+              margin="normal"
+              required
+              disabled={Boolean(qualificationId)} // Disable if qualificationId is in localStorage
+            >
+             
+              {/* Display the qualificationName from localStorage */}
+              <MenuItem value={qualificationId}>{qualificationName}</MenuItem>
+             
+            </TextField>
+            </Grid> 
             <FormControl component="fieldset" margin="normal" fullWidth>
               <FormLabel component="legend">
                 Are You Person with Disability?

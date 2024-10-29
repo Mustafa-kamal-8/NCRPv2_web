@@ -54,7 +54,7 @@ const BasicDetails = ({ handleNext, formData, setFormData }) => {
               Basic Candidate Details
             </Typography>
             <Grid container spacing={3}>
-              <Grid item xs={12}>
+              <Grid item xs={4}>
                 <TextField
                   label="First Name"
                   name="firstName"
@@ -66,7 +66,7 @@ const BasicDetails = ({ handleNext, formData, setFormData }) => {
                   required
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={4}>
                 <TextField
                   label="Middle Name"
                   name="middleName"
@@ -77,7 +77,7 @@ const BasicDetails = ({ handleNext, formData, setFormData }) => {
                   InputProps={{ style: { borderColor: "black" } }}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={4}>
                 <TextField
                   label="Last Name"
                   name="lastName"
@@ -89,7 +89,7 @@ const BasicDetails = ({ handleNext, formData, setFormData }) => {
                 />
               </Grid>
 
-              <Grid item xs={12}>
+              <Grid item xs={6}>
                 <TextField
                   label="Date Of Birth"
                   name="dob"
@@ -102,7 +102,7 @@ const BasicDetails = ({ handleNext, formData, setFormData }) => {
                   }}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={6}>
                 <TextField
                   select
                   label="Gender"
@@ -122,7 +122,7 @@ const BasicDetails = ({ handleNext, formData, setFormData }) => {
                 </TextField>
               </Grid>
 
-              <Grid item xs={12}>
+              <Grid item xs={6}>
                 <TextField
                   label="Father's Name"
                   name="fatherName"
@@ -134,7 +134,7 @@ const BasicDetails = ({ handleNext, formData, setFormData }) => {
                   required
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={6}>
                 <TextField
                   label="Mother's Name"
                   name="motherName"

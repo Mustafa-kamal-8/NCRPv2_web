@@ -22,11 +22,11 @@ const PlacementPreference = ({ handleNext, formData, setFormData }) => {
 
   console.log("filder data----->", filterData)
 
-  const handleDistrictChange = (event) => {
+  const handleDistrictChange = (event: any) => {
     setShowDistrictForm(event.target.value === "1");
   };
 
-  const handleStateChange = (event) => {
+  const handleStateChange = (event: any) => {
     setShowStateForm(event.target.value === "1");
   };
 

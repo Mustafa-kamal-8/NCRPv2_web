@@ -61,9 +61,9 @@ export default function MyProfileCourseCard({
   cookieData,
   courses,
 }: // onDistrict1Change,
-// onDistrict2Change,
-// onDistrict3Change,
-Props) {
+  // onDistrict2Change,
+  // onDistrict3Change,
+  Props) {
   const candidateId = localStorage.getItem("candidateId");
   let cookies = document.cookie.split(";");
   let values = cookies.map((cookie) => cookie.trim().split("=")[1]);
@@ -158,15 +158,15 @@ Props) {
     courses?.selfEmploye === "Yes"
       ? 1
       : courses?.selfEmploye === "No"
-      ? 0
-      : null;
+        ? 0
+        : null;
 
   return (
     <>
       <Container maxWidth="xl">
         <Card
           variant="outlined"
-          sx={{
+          sx={ {
             height: "100%",
             // width: { xs: "100%", sm: "200%", md: "400%" },
             width: "100%",
@@ -181,17 +181,17 @@ Props) {
               backgroundColor: "ghostwhite",
             },
             boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-          }}
+          } }
         >
-          <CardContent sx={{ flex: 1 }}>
+          <CardContent sx={ { flex: 1 } }>
             <Stack
               direction="row"
               justifyItems="center"
               alignItems="center"
               justifyContent="center"
               alignContent="center"
-              gap={2}
-              mb={2}
+              gap={ 2 }
+              mb={ 2 }
             >
               <Stack
                 direction="column"
@@ -200,35 +200,35 @@ Props) {
                 alignItems="center"
                 justifyContent="center"
                 alignContent="center"
-                spacing={1}
+                spacing={ 1 }
               >
-                {courses.priorityLevel !== "null" &&
-                courses.priorityLevel !== null ? (
+                { courses.priorityLevel !== "null" &&
+                  courses.priorityLevel !== null ? (
                   <Avatar
-                    sx={{
+                    sx={ {
                       width: 23,
                       height: 23,
                       bgcolor: (theme) => theme.palette.primary.light,
-                    }}
+                    } }
                   >
-                    {courses.priorityLevel}
+                    { courses.priorityLevel }
                   </Avatar>
                 ) : (
                   ""
-                )}
+                ) }
                 <Divider color="primary"></Divider>
-                <Stack direction="row" spacing={1}>
+                <Stack direction="row" spacing={ 1 }>
                   <Avatar
-                    sx={{
+                    sx={ {
                       width: 30,
                       height: 30,
                       bgcolor: (theme) => theme.palette.primary.dark,
-                    }}
+                    } }
                   >
                     <SchoolIcon fontSize="small" />
                   </Avatar>
 
-                  <Typography variant="h6">{courses?.courseName}</Typography>
+                  <Typography variant="h6">{ courses?.courseName }</Typography>
                 </Stack>
               </Stack>
             </Stack>
@@ -247,7 +247,7 @@ Props) {
               </Stack> */}
               <Stack
                 direction="row"
-                spacing={3}
+                spacing={ 3 }
                 justifyItems="center"
                 alignItems="center"
                 justifyContent="center"
@@ -256,25 +256,25 @@ Props) {
                 <Typography variant="subtitle2">
                   Preferred District 1: <br />
                   <Typography variant="caption" color="primary">
-                    {courses?.districtName1 != null
+                    { courses?.districtName1 != null
                       ? courses?.districtName1
-                      : "not selected"}
+                      : "not selected" }
                   </Typography>
                 </Typography>
                 <Typography variant="subtitle2">
                   Preferred District 2: <br />
                   <Typography variant="caption" color="primary">
-                    {courses?.districtName2 != null
+                    { courses?.districtName2 != null
                       ? courses?.districtName2
-                      : "not selected"}{" "}
+                      : "not selected" }{ " " }
                   </Typography>
                 </Typography>
                 <Typography variant="subtitle2">
                   Preferred District 3: <br />
                   <Typography variant="caption" color="primary">
-                    {courses?.districtName3 != null
+                    { courses?.districtName3 != null
                       ? courses?.districtName3
-                      : "not selected"}{" "}
+                      : "not selected" }{ " " }
                   </Typography>
                 </Typography>
               </Stack>
@@ -282,32 +282,32 @@ Props) {
             <CardContent>
               <Stack
                 direction="column"
-                spacing={2}
+                spacing={ 2 }
                 justifyItems="center"
                 alignItems="center"
                 justifyContent="center"
                 alignContent="center"
               >
-                {courses?.hostelPreference == "Yes" ? (
+                { courses?.hostelPreference == "Yes" ? (
                   <>
-                    <Stack direction="row" spacing={0.3}>
-                      {" "}
+                    <Stack direction="row" spacing={ 0.3 }>
+                      { " " }
                       <Checkbox
-                        checked={courses?.hostelPreference === "Yes"}
-                        icon={<CheckCircleOutlineIcon />}
-                        checkedIcon={<CheckCircleIcon />}
+                        checked={ courses?.hostelPreference === "Yes" }
+                        icon={ <CheckCircleOutlineIcon /> }
+                        checkedIcon={ <CheckCircleIcon /> }
                         color="primary"
                       />
                       <Typography
                         variant="body2"
                         color="text.secondary"
                         fontStyle="italic"
-                        sx={{
+                        sx={ {
                           display: "flex",
                           alignItems: "center",
                           gap: 1,
                           marginTop: 2,
-                        }}
+                        } }
                       >
                         I prefer Hostel Accommodations
                       </Typography>
@@ -315,29 +315,29 @@ Props) {
                   </>
                 ) : (
                   <>
-                    <Stack direction="row" spacing={0.3}>
+                    <Stack direction="row" spacing={ 0.3 }>
                       <Checkbox
-                        checked={courses?.hostelPreference === "Yes"}
-                        icon={<CheckBoxOutlineBlankIcon />}
-                        checkedIcon={<CheckCircleIcon />}
+                        checked={ courses?.hostelPreference === "Yes" }
+                        icon={ <CheckBoxOutlineBlankIcon /> }
+                        checkedIcon={ <CheckCircleIcon /> }
                         color="primary"
                       />
                       <Typography
                         variant="body1"
                         color="text.secondary"
                         fontStyle="oblique"
-                        sx={{
+                        sx={ {
                           display: "flex",
                           alignItems: "center",
                           gap: 1,
                           marginTop: 2,
-                        }}
+                        } }
                       >
                         I prefer Hostel Accommodations
                       </Typography>
                     </Stack>
                   </>
-                )}
+                ) }
                 {/* {courses?.selfEmploye == "Yes" ? (
                   <>
                     <Stack direction="row" spacing={0.3}>
@@ -389,26 +389,26 @@ Props) {
                   </>
                 )} */}
 
-                {courses.selfEmploye === "Yes" ? (
+                { courses.selfEmploye === "Yes" ? (
                   <>
-                    <Stack direction="row" spacing={0.3}>
-                      {" "}
+                    <Stack direction="row" spacing={ 0.3 }>
+                      { " " }
                       <Checkbox
-                        checked={courses.selfEmploye === "Yes"}
-                        icon={<CheckCircleOutlineIcon />}
-                        checkedIcon={<CheckCircleIcon />}
+                        checked={ courses.selfEmploye === "Yes" }
+                        icon={ <CheckCircleOutlineIcon /> }
+                        checkedIcon={ <CheckCircleIcon /> }
                         color="primary"
                       />
                       <Typography
                         variant="body2"
                         color="text.secondary"
                         fontStyle="italic"
-                        sx={{
+                        sx={ {
                           display: "flex",
                           alignItems: "center",
                           gap: 1,
                           marginTop: 2,
-                        }}
+                        } }
                       >
                         I prefer Self Employment
                       </Typography>
@@ -416,50 +416,50 @@ Props) {
                   </>
                 ) : (
                   <>
-                    <Stack direction="row" spacing={0.3}>
+                    <Stack direction="row" spacing={ 0.3 }>
                       <Checkbox
-                        checked={courses.selfEmploye === "Yes"}
-                        icon={<CheckBoxOutlineBlankIcon />}
-                        checkedIcon={<CheckCircleIcon />}
+                        checked={ courses.selfEmploye === "Yes" }
+                        icon={ <CheckBoxOutlineBlankIcon /> }
+                        checkedIcon={ <CheckCircleIcon /> }
                         color="primary"
                       />
                       <Typography
                         variant="body1"
                         color="text.secondary"
                         fontStyle="oblique"
-                        sx={{
+                        sx={ {
                           display: "flex",
                           alignItems: "center",
                           gap: 1,
                           marginTop: 2,
-                        }}
+                        } }
                       >
                         I prefer Self Employment
                       </Typography>
                     </Stack>
                   </>
-                )}
+                ) }
 
-                {courses.selfEmploye === "No" ? (
+                { courses.selfEmploye === "No" ? (
                   <>
-                    <Stack direction="row" spacing={0.3}>
-                      {" "}
+                    <Stack direction="row" spacing={ 0.3 }>
+                      { " " }
                       <Checkbox
-                        checked={courses.selfEmploye === "No"}
-                        icon={<CheckCircleOutlineIcon />}
-                        checkedIcon={<CheckCircleIcon />}
+                        checked={ courses.selfEmploye === "No" }
+                        icon={ <CheckCircleOutlineIcon /> }
+                        checkedIcon={ <CheckCircleIcon /> }
                         color="primary"
                       />
                       <Typography
                         variant="body2"
                         color="text.secondary"
                         fontStyle="italic"
-                        sx={{
+                        sx={ {
                           display: "flex",
                           alignItems: "center",
                           gap: 1,
                           marginTop: 2,
-                        }}
+                        } }
                       >
                         I prefer Placement
                       </Typography>
@@ -467,58 +467,58 @@ Props) {
                   </>
                 ) : (
                   <>
-                    <Stack direction="row" spacing={0.3}>
+                    <Stack direction="row" spacing={ 0.3 }>
                       <Checkbox
-                        checked={courses.selfEmploye === "No"}
-                        icon={<CheckBoxOutlineBlankIcon />}
-                        checkedIcon={<CheckCircleIcon />}
+                        checked={ courses.selfEmploye === "No" }
+                        icon={ <CheckBoxOutlineBlankIcon /> }
+                        checkedIcon={ <CheckCircleIcon /> }
                         color="primary"
                       />
                       <Typography
                         variant="body1"
                         color="text.secondary"
                         fontStyle="oblique"
-                        sx={{
+                        sx={ {
                           display: "flex",
                           alignItems: "center",
                           gap: 1,
                           marginTop: 2,
-                        }}
+                        } }
                       >
                         I prefer Placement
                       </Typography>
                     </Stack>
                   </>
-                )}
+                ) }
               </Stack>
             </CardContent>
             <Divider></Divider>
-            <Stack py={1}></Stack>
+            <Stack py={ 1 }></Stack>
             <CardActions
-              style={{
+              style={ {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-              }}
+              } }
             >
-              <Typography variant="inherit">
+              {/* <Typography variant="inherit">
                 <Button
-                  component={Link}
-                  to={`/edit-preferences-from-database/${courses?.courseId}/${courses?.courseName}/${courses?.priorityLevel}/${courses?.districtName1}/${courses?.districtName2}/${courses?.districtName3}/${courses?.preferred_district1}/${courses?.preferred_district2}/${courses?.preferred_district3}/${hostelPreference}/${employmentPrefernce}`}
+                  component={ Link }
+                  to={ `/edit-preferences-from-database/${courses?.courseId}/${courses?.courseName}/${courses?.priorityLevel}/${courses?.districtName1}/${courses?.districtName2}/${courses?.districtName3}/${courses?.preferred_district1}/${courses?.preferred_district2}/${courses?.preferred_district3}/${hostelPreference}/${employmentPrefernce}` }
                   size="small"
                 >
                   Edit your Preferences
                 </Button>
-              </Typography>
+              </Typography> */}
               <Typography variant="inherit">
-                <Button variant="text" size="small" onClick={handleOpenDialog}>
+                <Button variant="text" size="small" onClick={ handleOpenDialog }>
                   Remove Course
                 </Button>
               </Typography>
             </CardActions>
           </CardContent>
         </Card>
-        <Dialog open={open} onClose={handleCloseDialog}>
+        <Dialog open={ open } onClose={ handleCloseDialog }>
           <DialogTitle>Confirm Removal</DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -526,8 +526,8 @@ Props) {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCloseDialog}>Cancel</Button>
-            <Button onClick={handleRemoveCourse} variant="contained" autoFocus>
+            <Button onClick={ handleCloseDialog }>Cancel</Button>
+            <Button onClick={ handleRemoveCourse } variant="contained" autoFocus>
               Remove
             </Button>
           </DialogActions>

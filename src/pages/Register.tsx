@@ -257,6 +257,9 @@ const Register = () => {
 
   const [formData, setFormData] = useState(initialFormData);
 
+  console.log("dattttttta", formData);
+
+
   const handleNext = async () => {
     console.log("FormData-------------->", formData.religion);
     if (formData.password !== formData.confirmPassword) {
@@ -332,34 +335,34 @@ const Register = () => {
   // Array of components to render each step
   const steps = [
     {
-      component: <BasicDetails formData={formData} setFormData={setFormData} />,
+      component: <BasicDetails formData={ formData } setFormData={ setFormData } />,
     },
     {
       component: (
-        <PersonalDetails formData={formData} setFormData={setFormData} />
+        <PersonalDetails formData={ formData } setFormData={ setFormData } />
       ),
     },
     {
       component: (
-        <AddressDetails formData={formData} setFormData={setFormData} />
+        <AddressDetails formData={ formData } setFormData={ setFormData } />
       ),
     },
     {
-      component: <OtherDetails formData={formData} setFormData={setFormData} />,
+      component: <OtherDetails formData={ formData } setFormData={ setFormData } />,
     },
     {
       component: (
-        <PlacementPreference formData={formData} setFormData={setFormData} />
+        <PlacementPreference formData={ formData } setFormData={ setFormData } />
       ),
     },
     {
       component: (
         <ReviewAndSubmit
-          formData={formData}
-          setFormData={setFormData}
-          handleBack={handleBack}
-          agreed={agreed} // Passing agreed state
-          setAgreed={setAgreed}
+          formData={ formData }
+          setFormData={ setFormData }
+          handleBack={ handleBack }
+          agreed={ agreed } // Passing agreed state
+          setAgreed={ setAgreed }
         />
       ),
     },
@@ -368,62 +371,62 @@ const Register = () => {
 
   return (
     <div>
-      <Toaster /> {/* Add Toaster component to display toast notifications */}
+      <Toaster /> {/* Add Toaster component to display toast notifications */ }
       <Stepper
-        activeStep={activeStep}
+        activeStep={ activeStep }
         alternativeLabel
-        style={{ marginTop: "2rem" }}
+        style={ { marginTop: "2rem" } }
       >
-        {steps.map((step, index) => (
-          <Step key={index}>
-            <StepLabel>{/* Customize step labels here if needed */}</StepLabel>
+        { steps.map((step, index) => (
+          <Step key={ index }>
+            <StepLabel>{/* Customize step labels here if needed */ }</StepLabel>
           </Step>
-        ))}
+        )) }
       </Stepper>
-      <div style={{ marginTop: "2rem", textAlign: "center" }}>
-        {/* Render current step component */}
-        {steps[activeStep].component}
+      <div style={ { marginTop: "2rem", textAlign: "center" } }>
+        {/* Render current step component */ }
+        { steps[activeStep].component }
 
-        {/* Password fields only visible on the first step */}
+        {/* Password fields only visible on the first step */ }
 
-        {activeStep === 0 && (
+        { activeStep === 0 && (
           <>
             <div
-              style={{
+              style={ {
                 padding: "20px",
                 marginLeft: "10.5%",
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                 borderRadius: "8px",
                 width: "79%",
                 justifyContent: "center",
-              }}
+              } }
             >
               <Typography
                 variant="subtitle1"
-                style={{ color: "red", marginBottom: "10px" }}
+                style={ { color: "red", marginBottom: "10px" } }
               >
                 *Please create a password for future logins and reference
               </Typography>
               <div
-                style={{
+                style={ {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                }}
+                } }
               >
                 <div
-                  style={{
+                  style={ {
                     width: "48%",
                     display: "flex",
                     flexDirection: "column",
-                  }}
+                  } }
                 >
                   <TextField
                     label="Password"
                     name="password"
-                    type={showPassword ? "text" : "password"}
-                    value={formData.password}
-                    onChange={(e) =>
+                    type={ showPassword ? "text" : "password" }
+                    value={ formData.password }
+                    onChange={ (e) =>
                       setFormData({
                         ...formData,
                         [e.target.name]: e.target.value,
@@ -432,33 +435,33 @@ const Register = () => {
                     fullWidth
                     margin="normal"
                     variant="outlined"
-                    InputProps={{
+                    InputProps={ {
                       endAdornment: (
                         <InputAdornment position="end">
                           <IconButton
-                            onClick={togglePasswordVisibility}
+                            onClick={ togglePasswordVisibility }
                             edge="end"
                           >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                            { showPassword ? <VisibilityOff /> : <Visibility /> }
                           </IconButton>
                         </InputAdornment>
                       ),
-                    }}
+                    } }
                   />
                 </div>
                 <div
-                  style={{
+                  style={ {
                     width: "48%",
                     display: "flex",
                     flexDirection: "column",
-                  }}
+                  } }
                 >
                   <TextField
                     label="Confirm Password"
                     name="confirmPassword"
-                    type={showConfirmPassword ? "text" : "password"}
-                    value={formData.confirmPassword}
-                    onChange={(e) =>
+                    type={ showConfirmPassword ? "text" : "password" }
+                    value={ formData.confirmPassword }
+                    onChange={ (e) =>
                       setFormData({
                         ...formData,
                         [e.target.name]: e.target.value,
@@ -467,69 +470,69 @@ const Register = () => {
                     fullWidth
                     margin="normal"
                     variant="outlined"
-                    InputProps={{
+                    InputProps={ {
                       endAdornment: (
                         <InputAdornment position="end">
                           <IconButton
-                            onClick={toggleConfirmPasswordVisibility}
+                            onClick={ toggleConfirmPasswordVisibility }
                             edge="end"
                           >
-                            {showConfirmPassword ? (
+                            { showConfirmPassword ? (
                               <VisibilityOff />
                             ) : (
                               <Visibility />
-                            )}
+                            ) }
                           </IconButton>
                         </InputAdornment>
                       ),
-                    }}
+                    } }
                   />
                 </div>
               </div>
-              {passwordError && (
-                <p style={{ color: "red", marginTop: "1rem" }}>
-                  {passwordError}
+              { passwordError && (
+                <p style={ { color: "red", marginTop: "1rem" } }>
+                  { passwordError }
                 </p>
-              )}
+              ) }
             </div>
           </>
-        )}
+        ) }
 
-        {/* Button container */}
-        <div style={{ marginTop: "2rem" }}>
-          {/* Render back button if not on first step */}
-          {activeStep !== 0 && (
-            <Button onClick={handleBack} variant="outlined" size="large">
+        {/* Button container */ }
+        <div style={ { marginTop: "2rem" } }>
+          {/* Render back button if not on first step */ }
+          { activeStep !== 0 && (
+            <Button onClick={ handleBack } variant="outlined" size="large">
               Back
             </Button>
-          )}
+          ) }
 
-          {/* Render the "Next" button for steps other than the last step */}
-          {activeStep !== steps.length - 1 && (
+          {/* Render the "Next" button for steps other than the last step */ }
+          { activeStep !== steps.length - 1 && (
             <Button
               variant="contained"
               color="primary"
-              onClick={handleNext}
-              style={{ marginLeft: "1rem" }}
+              onClick={ handleNext }
+              style={ { marginLeft: "1rem" } }
               size="large"
-              // disabled={!allFieldsFilled()}  // Uncomment if you have a function to check if all fields are filled
+            // disabled={!allFieldsFilled()}  // Uncomment if you have a function to check if all fields are filled
             >
               Next
             </Button>
-          )}
+          ) }
 
-          {/* Render the "Submit" button only on the last step and when agreed is true */}
-          {activeStep === steps.length - 1 && agreed && (
+          {/* Render the "Submit" button only on the last step and when agreed is true */ }
+          { activeStep === steps.length - 1 && agreed && (
             <Button
               variant="contained"
               color="primary"
-              onClick={handleNext}
-              style={{ marginLeft: "1rem" }}
+              onClick={ handleNext }
+              style={ { marginLeft: "1rem" } }
               size="large"
             >
               Submit
             </Button>
-          )}
+          ) }
         </div>
       </div>
     </div>

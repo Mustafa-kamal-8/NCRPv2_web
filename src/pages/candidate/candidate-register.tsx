@@ -91,7 +91,7 @@ export default function CandidateRegister() {
   };
 
 
-  
+
 
   return (
     <AuthLayout
@@ -99,32 +99,32 @@ export default function CandidateRegister() {
       subTitle="Register"
       description="Access to all features. No credit card required."
     >
-      
-      <Stack gap={2} pt={4} component="form" onSubmit={handleSubmit(onSubmit)}>
-        <Typography variant="h6" fontWeight={400} color="primary">
+
+      <Stack gap={ 2 } pt={ 4 } component="form" onSubmit={ handleSubmit(onSubmit) }>
+        <Typography variant="h6" fontWeight={ 400 } color="primary">
           Basic Details
         </Typography>
 
         <Input
-          control={control}
+          control={ control }
           name="phone"
           label="Phone Number *"
           placeholder="Please Enter Your Phone Number"
-          autoFocus={true}
+          autoFocus={ true }
           autoComplete="true"
           type="number"
         />
         <Input
-          control={control}
+          control={ control }
           name="firstName"
           label="First Name *"
           placeholder="Please Enter Your First Name"
-          autoFocus={true}
+          autoFocus={ true }
           autoComplete="true"
         />
 
-        
-        {/* <label>Date:</label> */}
+
+        {/* <label>Date:</label> */ }
 
         {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoContainer components={["DatePicker"]}>
@@ -132,52 +132,52 @@ export default function CandidateRegister() {
           </DemoContainer>
         </LocalizationProvider> */}
         <Input
-          control={control}
+          control={ control }
           name="lastName"
           label="Last Name *"
           placeholder="Please Enter Your Last Name"
-          autoFocus={true}
+          autoFocus={ true }
           autoComplete="true"
         />
         <Input
-          control={control}
+          control={ control }
           name="aadhar"
           label="Aadhar Number *"
           placeholder="Please Enter Your Aadhar Number"
-          autoFocus={true}
+          autoFocus={ true }
           autoComplete="true"
           type="text"
         />
 
         <Input
-          control={control}
+          control={ control }
           name="qualification"
           label="Qualification *"
           placeholder="Please Enter Your Qualification"
-          autoFocus={true}
+          autoFocus={ true }
           autoComplete="true"
           type="text"
         />
         <Input
-          control={control}
+          control={ control }
           name="gender"
           label="Gender *"
           placeholder="Please Enter your Gender"
-          autoFocus={true}
+          autoFocus={ true }
           autoComplete="true"
           type="text"
         />
         <Input
-          control={control}
+          control={ control }
           name="caste"
           label="Caste *"
           placeholder="Please Enter your Caste"
-          autoFocus={true}
+          autoFocus={ true }
           autoComplete="true"
           type="text"
         />
         <LoadingButton
-          loading={isLoading}
+          loading={ isLoading }
           fullWidth
           size="large"
           variant="contained"
@@ -187,25 +187,25 @@ export default function CandidateRegister() {
         </LoadingButton>
       </Stack>
 
-      <Stack gap={2} pt={4} component="form" onSubmit={handleSubmit(onSubmit)}>
-        <Typography variant="h6" fontWeight={400} color="primary">
+      <Stack gap={ 2 } pt={ 4 } component="form" onSubmit={ handleSubmit(onSubmit) }>
+        <Typography variant="h6" fontWeight={ 400 } color="primary">
           Course Details
         </Typography>
       </Stack>
 
-      <Stack gap={2} pt={4} component="form" onSubmit={handleSubmit(onSubmit)}>
-        <Typography variant="h6" fontWeight={400} color="primary">
+      <Stack gap={ 2 } pt={ 4 } component="form" onSubmit={ handleSubmit(onSubmit) }>
+        <Typography variant="h6" fontWeight={ 400 } color="primary">
           Placement Preference
         </Typography>
       </Stack>
 
-      <Typography align="center" py={2} color="GrayText" variant="body2">
-        Already have an Account?{" "}
+      <Typography align="center" py={ 2 } color="GrayText" variant="body2">
+        Already have an Account?{ " " }
         <Button
-          component={Link}
+          component={ Link }
           to="/auth/candidate-login"
           size="small"
-          sx={{ fontWeight: 500 }}
+          sx={ { fontWeight: 500 } }
         >
           Login
         </Button>

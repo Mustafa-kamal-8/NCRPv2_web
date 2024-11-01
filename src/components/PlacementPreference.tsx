@@ -20,7 +20,7 @@ const PlacementPreference = ({ handleNext, formData, setFormData }) => {
   const [showStateForm, setShowStateForm] = useState(false);
   const [showCountryForm, setShowCountryForm] = useState(false);
 
-  console.log("filder data----->",filterData)
+  console.log("filder data----->", filterData)
 
   const handleDistrictChange = (event) => {
     setShowDistrictForm(event.target.value === "1");
@@ -30,233 +30,282 @@ const PlacementPreference = ({ handleNext, formData, setFormData }) => {
     setShowStateForm(event.target.value === "1");
   };
 
-  const handleCountryChange = (event) => {
-    setFormData((prevData) => ({
+  const handleCountryChange = (event: any) => {
+    setFormData((prevData: any) => ({
       ...prevData,
-      country: event.target.value,
+      placementPreference: {
+        ...prevData.placementPreference,
+        country: event.target.value,
+      },
     }));
   };
   return (
     <Container>
-      <Stack pt={2}>
-        <Typography variant="h5" color="primary" sx={{ fontWeight: "bold" }}>
+      <Stack pt={ 2 }>
+        <Typography variant="h5" color="primary" sx={ { fontWeight: "bold" } }>
           Placement Preference
         </Typography>
 
-        {/* Willingness to go outside District */}
+        {/* Willingness to go outside District */ }
         <FormControl component="fieldset" margin="normal">
-          <RadioGroup row onChange={handleDistrictChange}>
-            <Typography variant="h6" sx={{ margin: "10px" }}>
+          <RadioGroup row onChange={ handleDistrictChange }>
+            <Typography variant="h6" sx={ { margin: "10px" } }>
               Are you willing to go outside District for employment?
             </Typography>
-            <FormControlLabel value="1" control={<Radio />} label="Yes" />
-            <FormControlLabel value="0" control={<Radio />} label="No" />
+            <FormControlLabel value="1" control={ <Radio /> } label="Yes" />
+            <FormControlLabel value="0" control={ <Radio /> } label="No" />
           </RadioGroup>
         </FormControl>
 
-        {showDistrictForm && (
+        { showDistrictForm && (
           <Box
-            sx={{
+            sx={ {
               margin: "16px 0",
               padding: "16px",
               border: "1px solid #ddd",
               borderRadius: "8px",
-            }}
+            } }
           >
-            <Stack direction="row" spacing={3} pt={3}>
-              {/* Preferred District 1 */}
+            <Stack direction="row" spacing={ 3 } pt={ 3 }>
+              {/* Preferred District 1 */ }
               <FormControl fullWidth margin="normal">
                 <Typography variant="body2" color="text.secondary" fontStyle="italic">
                   <LocationOnIcon fontSize="small" />
                   Preferred District 1:
                 </Typography>
                 <Select
-                  value={formData.district1 || ""}
-                  onChange={(e) => {
+                  value={ formData.placementPreference.district1 || "" }
+                  onChange={ (e) => {
                     const selectedDistrict = e.target.value;
-                    setFormData((prevData) => ({ ...prevData, district1: selectedDistrict }));
-                  }}
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      placementPreference: {
+                        ...prevData.placementPreference,
+                        district1: selectedDistrict,
+                      },
+                    }));
+                  } }
                   displayEmpty
                 >
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  {filterData?.district?.map((district) => (
-                    <MenuItem key={district.districtID} value={district.districtID}>
-                      {district.districtName}
+                  { filterData?.district?.map((district) => (
+                    <MenuItem key={ district.districtID } value={ district.districtID }>
+                      { district.districtName }
                     </MenuItem>
-                  ))}
+                  )) }
                 </Select>
+
               </FormControl>
 
-              {/* Preferred District 2 */}
+              {/* Preferred District 2 */ }
               <FormControl fullWidth margin="normal">
                 <Typography variant="body2" color="text.secondary" fontStyle="italic">
                   <LocationOnIcon fontSize="small" />
                   Preferred District 2:
                 </Typography>
                 <Select
-                  value={formData.district2 || ""}
-                  onChange={(e) => {
+                  value={ formData?.placementPreference?.district2 || "" }
+                  onChange={ (e) => {
                     const selectedDistrict = e.target.value;
-                    setFormData((prevData) => ({ ...prevData, district2: selectedDistrict }));
-                  }}
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      placementPreference: {
+                        ...prevData.placementPreference,
+                        district2: selectedDistrict,
+                      },
+                    }));
+                  } }
                   displayEmpty
                 >
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  {filterData?.district?.map((district) => (
-                    <MenuItem key={district.districtID} value={district.districtID}>
-                      {district.districtName}
-                    </MenuItem>
-                  ))}
+                  {
+                    filterData?.district?.map((district) => (
+                      <MenuItem key={ district.districtID } value={ district.districtID }>
+                        { district.districtName }
+                      </MenuItem>
+                    ))
+                  }
                 </Select>
               </FormControl>
 
-              {/* Preferred District 3 */}
+              {/* Preferred District 3 */ }
               <FormControl fullWidth margin="normal">
                 <Typography variant="body2" color="text.secondary" fontStyle="italic">
                   <LocationOnIcon fontSize="small" />
                   Preferred District 3:
                 </Typography>
                 <Select
-                  value={formData.district3 || ""}
-                  onChange={(e) => {
+                  value={ formData?.placementPreference?.district3 || "" }
+                  onChange={ (e) => {
                     const selectedDistrict = e.target.value;
-                    setFormData((prevData) => ({ ...prevData, district3: selectedDistrict }));
-                  }}
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      placementPreference: {
+                        ...prevData.placementPreference,
+                        district3: selectedDistrict,
+                      },
+                    }));
+                  } }
                   displayEmpty
                 >
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  {filterData?.district?.map((district) => (
-                    <MenuItem key={district.districtID} value={district.districtID}>
-                      {district.districtName}
+                  { filterData?.district?.map((district) => (
+                    <MenuItem key={ district.districtID } value={ district.districtID }>
+                      { district.districtName }
                     </MenuItem>
-                  ))}
+                  )) }
                 </Select>
               </FormControl>
             </Stack>
           </Box>
-        )}
+        )
+        }
 
-        {/* Willingness to go outside State */}
-        {showDistrictForm && (
-          <FormControl component="fieldset" margin="normal">
-            <RadioGroup row onChange={handleStateChange}>
-              <Typography variant="h6" sx={{ margin: "10px" }}>
-                Are you willing to go outside State for employment?
-              </Typography>
-              <FormControlLabel value="1" control={<Radio />} label="Yes" />
-              <FormControlLabel value="0" control={<Radio />} label="No" />
-            </RadioGroup>
-          </FormControl>
-        )}
-
-        {showStateForm && (
-          <Box
-            sx={{
-              margin: "16px 0",
-              padding: "16px",
-              border: "1px solid #ddd",
-              borderRadius: "8px",
-            }}
-          >
-            <Stack direction="row" spacing={3} pt={3}>
-              {/* Preferred State 1 */}
-              <FormControl fullWidth margin="normal">
-                <Typography variant="body2" color="text.secondary" fontStyle="italic">
-                  <LocationOnIcon fontSize="small" />
-                  Preferred State 1:
+        {/* Willingness to go outside State */ }
+        {
+          showDistrictForm && (
+            <FormControl component="fieldset" margin="normal">
+              <RadioGroup row onChange={ handleStateChange }>
+                <Typography variant="h6" sx={ { margin: "10px" } }>
+                  Are you willing to go outside State for employment?
                 </Typography>
-                <Select
-                  value={formData.state1 || ""}
-                  onChange={(e) => {
-                    const selectedState = e.target.value;
-                    setFormData((prevData) => ({ ...prevData, state1: selectedState }));
-                  }}
-                  displayEmpty
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  {filterData?.state?.map((state) => (
-                    <MenuItem key={state.stateId} value={state.stateId}>
-                      {state.stateName}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+                <FormControlLabel value="1" control={ <Radio /> } label="Yes" />
+                <FormControlLabel value="0" control={ <Radio /> } label="No" />
+              </RadioGroup>
+            </FormControl>
+          )
+        }
 
-              {/* Preferred State 2 */}
-              <FormControl fullWidth margin="normal">
-                <Typography variant="body2" color="text.secondary" fontStyle="italic">
-                  <LocationOnIcon fontSize="small" />
-                  Preferred State 2:
+        {
+          showStateForm && (
+            <Box
+              sx={ {
+                margin: "16px 0",
+                padding: "16px",
+                border: "1px solid #ddd",
+                borderRadius: "8px",
+              } }
+            >
+              <Stack direction="row" spacing={ 3 } pt={ 3 }>
+                {/* Preferred State 1 */ }
+                <FormControl fullWidth margin="normal">
+                  <Typography variant="body2" color="text.secondary" fontStyle="italic">
+                    <LocationOnIcon fontSize="small" />
+                    Preferred State 1:
+                  </Typography>
+                  <Select
+                    value={ formData?.placementPreference?.state1 || "" }
+                    onChange={ (e) => {
+                      const selectedState = e.target.value;
+                      setFormData((prevData: any) => ({
+                        ...prevData,
+                        placementPreference: {
+                          ...prevData.placementPreference,
+                          state1: selectedState,
+                        },
+                      }));
+                    } }
+                    displayEmpty
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    { filterData?.state?.map((state) => (
+                      <MenuItem key={ state.stateId } value={ state.stateId }>
+                        { state.stateName }
+                      </MenuItem>
+                    )) }
+                  </Select>
+                </FormControl>
+
+                {/* Preferred State 2 */ }
+                <FormControl fullWidth margin="normal">
+                  <Typography variant="body2" color="text.secondary" fontStyle="italic">
+                    <LocationOnIcon fontSize="small" />
+                    Preferred State 2:
+                  </Typography>
+                  <Select
+                    value={ formData?.placementPreference?.state2 || "" }
+                    onChange={ (e) => {
+                      const selectedState = e.target.value;
+                      setFormData((prevData: any) => ({
+                        ...prevData,
+                        placementPreference: {
+                          ...prevData.placementPreference,
+                          state2: selectedState,
+                        },
+                      }));
+                    } }
+                    displayEmpty
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    { filterData?.state?.map((state) => (
+                      <MenuItem key={ state.stateId } value={ state.stateId }>
+                        { state.stateName }
+                      </MenuItem>
+                    )) }
+                  </Select>
+                </FormControl>
+
+                {/* Preferred State 3 */ }
+                <FormControl fullWidth margin="normal">
+                  <Typography variant="body2" color="text.secondary" fontStyle="italic">
+                    <LocationOnIcon fontSize="small" />
+                    Preferred State 3:
+                  </Typography>
+                  <Select
+                    value={ formData?.placementPreference?.state3 || "" }
+                    onChange={ (e) => {
+                      const selectedState = e.target.value;
+                      setFormData((prevData: any) => ({
+                        ...prevData,
+                        placementPreference: {
+                          ...prevData.placementPreference,
+                          state3: selectedState,
+                        },
+                      }));
+                    } }
+                    displayEmpty
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    { filterData?.state?.map((state) => (
+                      <MenuItem key={ state.stateId } value={ state.stateId }>
+                        { state.stateName }
+                      </MenuItem>
+                    )) }
+                  </Select>
+                </FormControl>
+              </Stack>
+            </Box>
+          )
+        }
+
+        {/* Willingness to go outside Country */ }
+        {
+          showStateForm && (
+            <FormControl component="fieldset" margin="normal">
+              <RadioGroup row onChange={ handleCountryChange }>
+                <Typography variant="h6" sx={ { margin: "10px" } }>
+                  Are you willing to go outside Country for employment?
                 </Typography>
-                <Select
-                  value={formData.state2 || ""}
-                  onChange={(e) => {
-                    const selectedState = e.target.value;
-                    setFormData((prevData) => ({ ...prevData, state2: selectedState }));
-                  }}
-                  displayEmpty
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  {filterData?.state?.map((state) => (
-                    <MenuItem key={state.stateId} value={state.stateId}>
-                      {state.stateName}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-
-              {/* Preferred State 3 */}
-              <FormControl fullWidth margin="normal">
-                <Typography variant="body2" color="text.secondary" fontStyle="italic">
-                  <LocationOnIcon fontSize="small" />
-                  Preferred State 3:
-                </Typography>
-                <Select
-                  value={formData.state3 || ""}
-                  onChange={(e) => {
-                    const selectedState = e.target.value;
-                    setFormData((prevData) => ({ ...prevData, state3: selectedState }));
-                  }}
-                  displayEmpty
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  {filterData?.state?.map((state) => (
-                    <MenuItem key={state.stateId} value={state.stateId}>
-                      {state.stateName}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Stack>
-          </Box>
-        )}
-
-        {/* Willingness to go outside Country */}
-        {showStateForm && (
-          <FormControl component="fieldset" margin="normal">
-            <RadioGroup row onChange={handleCountryChange}>
-              <Typography variant="h6" sx={{ margin: "10px" }}>
-                Are you willing to go outside Country for employment?
-              </Typography>
-              <FormControlLabel value="1" control={<Radio />} label="Yes" />
-              <FormControlLabel value="0" control={<Radio />} label="No" />
-            </RadioGroup>
-          </FormControl>
-        )}
-      </Stack>
-    </Container>
+                <FormControlLabel value="1" control={ <Radio /> } label="Yes" />
+                <FormControlLabel value="0" control={ <Radio /> } label="No" />
+              </RadioGroup>
+            </FormControl>
+          )
+        }
+      </Stack >
+    </Container >
   );
 };
 

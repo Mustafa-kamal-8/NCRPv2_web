@@ -195,6 +195,16 @@ const Register = () => {
     }
   };
 
+  const handleState1Change = (value) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      placementPreference: {
+        ...prevFormData.placementPreference,
+        state1: value,
+      },
+    }));
+  };
+
   const allFieldsFilled = () => {
     const requiredFields = [
       "firstName",

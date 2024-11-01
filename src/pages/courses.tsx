@@ -113,12 +113,12 @@ export default function Courses() {
   const [value, setValue] = useState<string>("");
   const debouncedValue = useDebounce<string>(value, 500);
 
-  const [selectedQUalification, setSelectedQualification] =
+  const [selectedQualification, setSelectedQualification] =
     useRecoilState(qualificationState);
 
   console.log(
     "This is the selected Qualification",
-    selectedQUalification?.qualificationID
+    selectedQualification?.qualificationID
   );
 
   console.log("This is the selected District Id", selectedDistrict?.districtID);
@@ -153,7 +153,7 @@ export default function Courses() {
   }
 
   const qualificationSelectedFunction = () => {
-    if (selectedQUalification != null) {
+    if (selectedQualification != null) {
       const booleanValue = true;
       return booleanValue;
     } else {
@@ -190,7 +190,7 @@ export default function Courses() {
     districtSelctedFunction();
   }
 
-  if (selectedQUalification != null) {
+  if (selectedQualification != null) {
     qualificationSelectedFunction();
   } else {
     qualificationSelectedFunction();
@@ -428,7 +428,7 @@ export default function Courses() {
               ) : (
                 <>
                   <Autocomplete
-                    value={ selectedQUalification }
+                    value={ selectedQualification }
                     onChange={ (_event, newValue) => {
                       setSelectedQualification(newValue!);
                       qualificationSelectedFunction();
@@ -567,6 +567,7 @@ export default function Courses() {
                   <Grid item xs={ 12 } sm={ 6 } md={ 6 } lg={ 4 } key={ course.id }>
                     <CourseCard
                       // noAction
+                      qualificationBool={ qualificationSelectedbool }
                       course={ course }
                     // districts={districts}
                     // cookieData={cookieData}
@@ -593,10 +594,10 @@ export default function Courses() {
                         qualificationBool={ qualificationSelectedbool }
                         course={ course }
                         highestQualification={
-                          selectedQUalification?.qualificationName
+                          selectedQualification?.qualificationName
                         }
                         highestQualificationId={
-                          selectedQUalification?.qualificationID
+                          selectedQualification?.qualificationID
                         }
                       />
                     </Grid>
@@ -709,7 +710,7 @@ export default function Courses() {
               <p>loading..</p>
             ) : (
               <Autocomplete
-                value={ selectedQUalification }
+                value={ selectedQualification }
                 onChange={ (_event, newValue) => {
                   setSelectedQualification(newValue!);
                   qualificationSelectedFunction();

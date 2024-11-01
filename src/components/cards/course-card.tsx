@@ -116,6 +116,7 @@ export default function CourseCard({
           <LoadingButton
             color="primary"
             variant="contained"
+            disabled={ !qualificationBool }
             size="small"
             sx={ {
               padding: 1,

@@ -31,8 +31,6 @@ export default function CourseCard({
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 
-  const candidateId = localStorage.getItem("candidateId");
-
   return (
     <Card
       variant="outlined"

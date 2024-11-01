@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Container,
   Stack,
@@ -12,7 +12,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import useFilters from "../hooks/useFilters"; // Custom hook to fetch filters
+import useFilters from "../hooks/useFilters";
 
 const PlacementPreference = ({ handleNext, formData, setFormData }) => {
   const { isLoading: filterLoading, data: filterData } = useFilters();

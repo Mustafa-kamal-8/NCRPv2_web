@@ -31,10 +31,8 @@ export default function CourseCard({
   course,
   noAction = false,
 }: Props) {
-
   const [isModalOpen, setModalOpen] = useState(false);
   const candidateId = localStorage.getItem("candidateId");
-
 
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);

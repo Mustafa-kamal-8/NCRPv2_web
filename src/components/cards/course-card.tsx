@@ -42,7 +42,6 @@ export default function CourseCard({
 
   const courseIdsFromCookies = getCourseIdsFromCookies();
 
-
   const { data: available, mutate: priorityMutate } = useMutation({
     mutationFn: checkExistPriority,
     onSuccess(available) {

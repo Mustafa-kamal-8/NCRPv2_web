@@ -10,8 +10,14 @@ import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { LoadingButton } from "@mui/lab";
 import BasicModal from "../modal/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EditCoursePreferences from "./edit-course-preference";
+import { getCourseIdsFromCookies, getMissingPriorityLevels } from "../../utils";
+import { checkExistPriority } from "../../api/courses-api";
+import { useMutation } from "@tanstack/react-query";
+import { enqueueSnackbar } from "notistack";
+import { AxiosError } from "axios";
+
 
 type Props = {
   course: Course;
@@ -27,9 +33,31 @@ export default function CourseCard({
 }: Props) {
 
   const [isModalOpen, setModalOpen] = useState(false);
+  const candidateId = localStorage.getItem("candidateId");
+
 
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
+  const [availablePriority, setAvailablePriority] = useState([]);
+
+  const courseIdsFromCookies = getCourseIdsFromCookies();
+
+
+  const { data: available, mutate: priorityMutate } = useMutation({
+    mutationFn: checkExistPriority,
+    onSuccess(available) {
+      setAvailablePriority(available.availablePriority)
+    },
+    onError(error: AxiosError) {
+      enqueueSnackbar(`${error.message}`, {
+        variant: "error",
+      });
+    },
+  });
+
+  useEffect(() => {
+    priorityMutate(candidateId!)
+  }, [])
 
   return (
     <Card
@@ -114,7 +142,7 @@ export default function CourseCard({
           <LoadingButton
             color="primary"
             variant="contained"
-            disabled={ !qualificationBool }
+            disabled={ !qualificationBool || courseIdsFromCookies.includes(String(course.courseId)) || courseIdsFromCookies.length === 3 }
             size="small"
             sx={ {
               padding: 1,
@@ -122,7 +150,7 @@ export default function CourseCard({
             } }
             onClick={ handleModalOpen }
           >
-            Add to Basket
+            { courseIdsFromCookies.length === 3 ? "You have added 3 courses" : courseIdsFromCookies.includes(String(course.courseId)) ? "Already added" : "Add to Basket" }
           </LoadingButton>
 
 
@@ -138,11 +166,12 @@ export default function CourseCard({
             highestQualificationId={highestQualificationId}
           /> */}
         </CardActions>
-      ) }
+      )
+      }
       {/* edit preference */ }
       <BasicModal open={ isModalOpen } onClose={ handleModalClose }>
         <EditCoursePreferences onClose={ handleModalClose } courseDetails={ course } />
       </BasicModal>
-    </Card>
+    </Card >
   );
 }

@@ -20,7 +20,6 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import SearchOffRoundedIcon from "@mui/icons-material/SearchOffRounded";
-import CourseFilters from "../components/courses/filters";
 import { Close } from "@mui/icons-material";
 import useCourses from "../hooks/useCourses";
 import CourseCard from "../components/cards/course-card";
@@ -29,11 +28,10 @@ import { useDebounce } from "../components/courses/useDebounce";
 import useFilters from "../hooks/useFilters";
 import { useRecoilState } from "recoil";
 import { districtState, qualificationState } from "../states/atoms";
-import CourseCardForView from "../components/cards/course-card-for-view";
-import { getCandidate } from "../api/candidate-api";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { findCourse } from "../api/courses-api";
 import { fetchCoursesWithHighestQualification } from "../api/courses-api";
+import { getCourseDataFromCookies } from "../utils";
 
 export default function Courses() {
   // dummy data
@@ -118,7 +116,7 @@ export default function Courses() {
 
   console.log(
     "This is the selected Qualification",
-    selectedQualification?.qualificationID
+    selectedQualification
   );
 
   console.log("This is the selected District Id", selectedDistrict?.districtID);
@@ -298,6 +296,27 @@ export default function Courses() {
   const handlePrevPage = () => {
     setPage((prevPage) => Math.max(prevPage - 1, 1));
   };
+
+  const getCourseIdsFromCookies = () => {
+    const courseDataArray = getCourseDataFromCookies();
+
+    if (courseDataArray.length === 0) {
+      console.error("No course data found in cookies.");
+      return [];
+    }
+
+    return courseDataArray.map((courseData) => {
+      const courseDetails = courseData.split(',');
+      return courseDetails[0];
+    });
+  };
+
+  console.log(data);
+
+
+
+
+
 
   // console.log(
   //   "These are the courses available for this qualification",
@@ -534,7 +553,7 @@ export default function Courses() {
               >
                 <Typography variant="body2" color="white">
                   { qualificationSelectedbool == true
-                    ? "Qualification is selected."
+                    ? `You have selected the ${selectedQualification?.qualificationName} qualification.`
                     : "Please Select your Highest Qualification from the Filter to proceed to Add Courses to Basket." }
                 </Typography>
               </Box>
@@ -588,7 +607,7 @@ export default function Courses() {
                 { data?.pages?.map((pages) => {
                   if (pages.length === 0)
                     return <Stack width="100%">{ noCoursesFound }</Stack>;
-                  return pages.data?.map((course: any) => (
+                  return pages?.data?.map((course: any) => (
                     <Grid item xs={ 12 } sm={ 6 } md={ 6 } lg={ 4 } key={ course.id }>
                       <CourseCard
                         qualificationBool={ qualificationSelectedbool }

@@ -17,12 +17,15 @@ export default function Footer() {
         marginTop: "80px",
         position: "relative",
         // zIndex: zIndex.drawer + 1,
+        paddingY: 2, // Reduces vertical padding for a shorter height
+        paddingX: 3, // Optional: adjust horizontal padding if needed paddingY: 2, // Reduces vertical padding for a shorter height
+     
       }}
     >
       <Container maxWidth="xl">
-        <Grid container py={3} spacing={3}>
+        <Grid container >
           <Grid item xs={12} md={6}>
-            <Stack spacing={2}>
+            <Stack spacing={1}>
               {/* <Stack direction="row" spacing={2}>
                 <Asdm_logo />
                 <Typography sx={{ py: 1 }}>
@@ -33,14 +36,15 @@ export default function Footer() {
 
               <Stack>
                 <Typography
-                  variant="h6"
+                  variant="h7"
                   sx={{
-                    marginTop: 6,
-                    marginBottom: 2,
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    alignItems: "center",
-                    gap: 2,
+                    marginTop: 2, 
+              marginBottom: 1, 
+              display: "flex",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              gap: 1, 
+              fontSize: "0.875rem",
                   }}
                 >
                   Our Address
@@ -48,7 +52,7 @@ export default function Footer() {
                 <Divider
                   sx={{
                     backgroundColor: "white",
-                    height: "1px",
+              
                     width: "110px",
                     margin: "5px 0",
                   }}
@@ -61,7 +65,7 @@ export default function Footer() {
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 2,
+                    gap: 1,
                   }}
                 >
                   Mission Director
@@ -69,11 +73,11 @@ export default function Footer() {
                 <Typography
                   variant="body2"
                   sx={{
-                    marginBottom: 1,
+                  
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 2,
+                   
                   }}
                 >
                   Assam Skill Development Mission
@@ -85,7 +89,7 @@ export default function Footer() {
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 2,
+              
                   }}
                 >
                   Katabari, DPS Road, NH-37
@@ -97,7 +101,7 @@ export default function Footer() {
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 2,
+              
                   }}
                 >
                   Gorchuk, Guwahati
@@ -109,7 +113,7 @@ export default function Footer() {
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 2,
+            
                   }}
                 >
                   Assam 781035
@@ -121,7 +125,7 @@ export default function Footer() {
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 2,
+          
                   }}
                 >
                   Phone: +91 361 - 227 9745
@@ -133,7 +137,7 @@ export default function Footer() {
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 2,
+            
                   }}
                 >
                   Email: missiondirector.asdm@gmail.com
@@ -150,12 +154,12 @@ export default function Footer() {
                 <Typography
                   variant="h6"
                   sx={{
-                    marginTop: 6,
+                  
                     marginBottom: 2,
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 2,
+                    fontSize: "0.900rem",
                     marginLeft: "11px",
                   }}
                 >
@@ -164,10 +168,11 @@ export default function Footer() {
                 <Divider
                   sx={{
                     backgroundColor: "white",
-                    height: "1px",
+                  
                     width: "145px",
                     margin: "5px 0",
                     marginLeft: "11px",
+                  
                   }}
                 />
                 {/* <Typography
@@ -196,12 +201,12 @@ export default function Footer() {
                 <Typography
                   variant="body2"
                   sx={{
-                    mt: 2,
-                    marginBottom: 1,
+                  
+                  
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 1,
+                    fontSize: "0.700rem",
                   }}
                 >
                   <ChevronRightIcon sx={{ color: "white" }} />
@@ -210,6 +215,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ color: "white" }}
+                  
                   >
                     Government Department of Assam{" "}
                   </a>{" "}
@@ -217,11 +223,11 @@ export default function Footer() {
                 <Typography
                   variant="body2"
                   sx={{
-                    marginBottom: 1,
+                   
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 1,
+                    fontSize: "0.700rem",
                   }}
                 >
                   <ChevronRightIcon sx={{ color: "white" }} />
@@ -237,11 +243,11 @@ export default function Footer() {
                 <Typography
                   variant="body2"
                   sx={{
-                    marginBottom: 1,
+                  
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 1,
+                    fontSize: "0.700rem",
                   }}
                 >
                   <ChevronRightIcon sx={{ color: "white" }} />
@@ -257,11 +263,11 @@ export default function Footer() {
                 <Typography
                   variant="body2"
                   sx={{
-                    marginBottom: 1,
+                  
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 1,
+                    fontSize: "0.700rem",
                   }}
                 >
                   <ChevronRightIcon sx={{ color: "white" }} />
@@ -277,11 +283,11 @@ export default function Footer() {
                 <Typography
                   variant="body2"
                   sx={{
-                    marginBottom: 1,
+                  
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 1,
+                    fontSize: "0.700rem",
                   }}
                 >
                   <ChevronRightIcon sx={{ color: "white" }} />
@@ -297,11 +303,11 @@ export default function Footer() {
                 <Typography
                   variant="body2"
                   sx={{
-                    marginBottom: 1,
+                   
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 1,
+                    fontSize: "0.700rem",
                   }}
                 >
                   <ChevronRightIcon sx={{ color: "white" }} />
@@ -317,11 +323,11 @@ export default function Footer() {
                 <Typography
                   variant="body2"
                   sx={{
-                    marginBottom: 1,
+                  
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 1,
+                    fontSize: "0.700rem",
                   }}
                 >
                   <ChevronRightIcon sx={{ color: "white" }} />
@@ -337,11 +343,11 @@ export default function Footer() {
                 <Typography
                   variant="body2"
                   sx={{
-                    marginBottom: 1,
+                   
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 1,
+                    fontSize: "0.700rem",
                   }}
                 >
                   <ChevronRightIcon sx={{ color: "white" }} />
@@ -357,11 +363,11 @@ export default function Footer() {
                 <Typography
                   variant="body2"
                   sx={{
-                    marginBottom: 1,
+                   
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 1,
+                    fontSize: "0.700rem",
                   }}
                 >
                   <ChevronRightIcon sx={{ color: "white" }} />
@@ -377,11 +383,11 @@ export default function Footer() {
                 <Typography
                   variant="body2"
                   sx={{
-                    marginBottom: 1,
+                  
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 1,
+                    fontSize: "0.700rem",
                   }}
                 >
                   <ChevronRightIcon sx={{ color: "white" }} />
@@ -397,11 +403,11 @@ export default function Footer() {
                 <Typography
                   variant="body2"
                   sx={{
-                    marginBottom: 1,
+                  
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    gap: 1,
+                    fontSize: "0.700rem",
                   }}
                 >
                   <ChevronRightIcon sx={{ color: "white" }} />

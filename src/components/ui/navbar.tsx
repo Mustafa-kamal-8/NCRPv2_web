@@ -105,6 +105,7 @@ export default function Navbar() {
         elevation={ 1 }
         position="sticky"
         sx={ {
+         
           backgroundColor: "background.paper",
           zIndex: (theme) => theme.zIndex.drawer + 1,
         } }
@@ -113,6 +114,7 @@ export default function Navbar() {
           <IconButton
             sx={ {
               display: { sm: "none" },
+            
             } }
             size="small"
             color="primary"
@@ -262,7 +264,7 @@ export default function Navbar() {
             },
           } }
         >
-          <Stack pt={ 18 } pb={ 4 } margin={ 1 } height="100vh">
+          <Stack pt={ 22 } pb={ 4 } margin={ 1 } height="100vh">
             { candidateId ? (
               <List>
                 { CANDIDATE_NAVITEMS.map((item) => (

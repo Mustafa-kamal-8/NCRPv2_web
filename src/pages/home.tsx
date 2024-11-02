@@ -215,6 +215,7 @@ export default function Home() {
         component="section"
         sx={ {
           py: 8,
+          backgroundColor: "grey.100",
         } }
       >
         <Typography
@@ -297,6 +298,7 @@ export default function Home() {
             variant="h6"
             color="primary"
             fontWeight={ 400 }
+            marginTop='20px'
           >
             COURSES
           </Typography>
@@ -342,6 +344,8 @@ export default function Home() {
         component="section"
         sx={ {
           paddingY: 8,
+          backgroundColor: "grey.100",
+          marginTop:'20px'
         } }
       >
         { " " }
@@ -435,6 +439,7 @@ export default function Home() {
         component="section"
         sx={ {
           paddingY: 12,
+          backgroundColor: "grey.100",
         } }
       >
         <Typography

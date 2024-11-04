@@ -244,7 +244,7 @@ export default function CandidateProfile() {
     });
   }
 
- 
+
 
   const { control, handleSubmit, formState, setValue, register, watch } =
     useForm({
@@ -268,6 +268,21 @@ export default function CandidateProfile() {
       },
     });
 
+  useEffect(() => {
+    if (candidateData) {
+      setValue("district1", candidateData.placement[0]?.district1 || "");
+      setValue("district2", candidateData.placement[0]?.district2 || "");
+      setValue("district3", candidateData.placement[0]?.district3 || "");
+      setValue("state1", candidateData.placement[0]?.state1 || "");
+      setValue("state2", candidateData.placement[0]?.state2 || "");
+      setValue("state3", candidateData.placement[0]?.state3 || "");
+      setValue("country", candidateData.placement[0]?.OutOfCountry === "NO" ? 0 : 1);
+    }
+  }, [candidateData, setValue]);
+
+
+
+
   const [filteredDistricts1, setFilteredDistricts1] = useState([]);
   const [filteredDistricts2, setFilteredDistricts2] = useState([]);
   const [filteredDistricts3, setFilteredDistricts3] = useState([]);
@@ -275,6 +290,11 @@ export default function CandidateProfile() {
   const state1 = watch("state1");
   const state2 = watch("state2");
   const state3 = watch("state3");
+  const district1 = watch("district1");
+  const district2 = watch("district2");
+  const district3 = watch("district3");
+  const country = watch("country");
+
 
   useEffect(() => {
     if (state1) {
@@ -314,13 +334,13 @@ export default function CandidateProfile() {
       mobile: candidateData?.basic[0].phoneNo,
       referenceNo: candidateData?.basic[0].referenceNumber,
       candidateId: candidateId,
-      districtId1: data.district1 === "" ? null : data.district1,
-      districtId2: data.district2 === "" ? null : data.district2,
-      districtId3: data.district3 === "" ? null : data.district3,
-      stateId1: data.state1 === "" ? null : data.state1,
-      stateId2: data.state2 === "" ? null : data.state2,
-      stateId3: data.state3 === "" ? null : data.state3,
-      country: data.country == null ? 0 : parseInt(data.country, 10),
+      districtId1: data.district1 ? data.district1 : candidateData?.placement[0]?.district1,
+      districtId2: data.district2 ? data.district2 : candidateData?.placement[0]?.district2,
+      districtId3: data.district3 ? data.district3 : candidateData?.placement[0]?.district3,
+      stateId1: data.state1 === "" ? data.state1 : candidateData?.placement[0]?.state1,
+      stateId2: data.state2 === "" ? data.state2 : candidateData?.placement[0]?.state1,
+      stateId3: data.state3 === "" ? data.state3 : candidateData?.placement[0]?.state1,
+      country: data.country ? data.country : candidateData?.placement[0]?.OutOfCountry === "NO" && 0,
     };
 
     mutate(CandidateData);
@@ -344,214 +364,210 @@ export default function CandidateProfile() {
   const [hasScrolledValue, setHasScrolledValue] = useState(false);
   let hasScrolled = false;
 
-  const [isOutOfCountry, setIsOutOfCountry] = useState(false);
+  const [isOutOfCountry, setIsOutOfCountry] = useState(0);
 
   const handleCountryChange = (event) => {
-    const value = event.target.value === "1";
-    setIsOutOfCountry(value);
-    if (value) {
-      reset();
-    }
+    const value = event.target.value;
+
+    setValue("country", value);
   };
 
-
-  
 
   return (
     <>
       <Toaster />
       <AuthLayout title="My Profile" subTitle="" description="">
-        {/* <form onSubmit={handleSubmit(onSubmit)}> */}
-        <form onSubmit={handleOpenDialog}>
+        {/* <form onSubmit={handleSubmit(onSubmit)}> */ }
+        <form onSubmit={ handleOpenDialog }>
 
-        <Container maxWidth="lg" sx={{ bgcolor: 'white', borderRadius: 2, p: 4, boxShadow: 3, marginBottom: '50px' }}>
-          <Typography variant="h5" color="primary" gutterBottom>
-            Basic Details
-          </Typography>
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                First Name: <strong>{candidateData?.basic[0].firstName}</strong>
-              </Typography>
+          <Container maxWidth="lg" sx={ { bgcolor: 'white', borderRadius: 2, p: 4, boxShadow: 3, marginBottom: '50px' } }>
+            <Typography variant="h5" color="primary" gutterBottom>
+              Basic Details
+            </Typography>
+            <Grid container spacing={ 2 }>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  First Name: <strong>{ candidateData?.basic[0].firstName }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Middle Name: <strong>{ candidateData?.basic[0].middleName }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Last Name: <strong>{ candidateData?.basic[0].lastName }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Full Name: <strong>{ candidateData?.basic[0].firstName } { candidateData?.basic[0].middleName } { candidateData?.basic[0].lastName }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Date of Birth: <strong>{ candidateData?.basic[0].DOB }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Gender: <strong>{ candidateData?.basic[0].gender }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Is BPL Card Holder: <strong>{ candidateData?.basic[0].isBPLCardHolder }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Is Antodaya Card Holder: <strong>{ candidateData?.basic[0].isAntodayaCardHolder }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Is Nrega Card Holder: <strong>{ candidateData?.basic[0].isNregaCardHolder }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Is Minority: <strong>{ candidateData?.basic[0].isMinority }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Is BoCw: <strong>{ candidateData?.basic[0].isBoCw }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Is Tea Tribe Minority: <strong>{ candidateData?.basic[0].isTeaTribeMinority }</strong>
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Middle Name: <strong>{candidateData?.basic[0].middleName}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Last Name: <strong>{candidateData?.basic[0].lastName}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Full Name: <strong>{candidateData?.basic[0].firstName} {candidateData?.basic[0].middleName} {candidateData?.basic[0].lastName}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Date of Birth: <strong>{candidateData?.basic[0].DOB}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Gender: <strong>{candidateData?.basic[0].gender}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Is BPL Card Holder: <strong>{candidateData?.basic[0].isBPLCardHolder}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Is Antodaya Card Holder: <strong>{candidateData?.basic[0].isAntodayaCardHolder}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Is Nrega Card Holder: <strong>{candidateData?.basic[0].isNregaCardHolder}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Is Minority: <strong>{candidateData?.basic[0].isMinority}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Is BoCw: <strong>{candidateData?.basic[0].isBoCw}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Is Tea Tribe Minority: <strong>{candidateData?.basic[0].isTeaTribeMinority}</strong>
-              </Typography>
-            </Grid>
-          </Grid>
 
-          <Box sx={{ my: 2, height: 1 }} />
+            <Box sx={ { my: 2, height: 1 } } />
 
-          <Typography variant="h5" color="primary" gutterBottom>
-            Personal Details
-          </Typography>
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Phone Number: <strong>{candidateData?.basic[0].phoneNo}</strong>
-              </Typography>
+            <Typography variant="h5" color="primary" gutterBottom>
+              Personal Details
+            </Typography>
+            <Grid container spacing={ 2 }>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Phone Number: <strong>{ candidateData?.basic[0].phoneNo }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Email: <strong>{ candidateData?.basic[0].vsPrimaryEmail }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Adhaar Number: <strong>{ candidateData?.basic[0].aadharNo }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Religion: <strong>{ candidateData?.basic[0].religion }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Caste: <strong>{ candidateData?.basic[0].caste }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Gender: <strong>{ candidateData?.basic[0].gender }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Qualification: <strong>{ candidateData?.basic[0].qualification }</strong>
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Email: <strong>{candidateData?.basic[0].vsPrimaryEmail}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Adhaar Number: <strong>{candidateData?.basic[0].aadharNo}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Religion: <strong>{candidateData?.basic[0].religion}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Caste: <strong>{candidateData?.basic[0].caste}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Gender: <strong>{candidateData?.basic[0].gender}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Qualification: <strong>{candidateData?.basic[0].qualification}</strong>
-              </Typography>
-            </Grid>
-          </Grid>
-          <Box sx={{ my: 2, height: 1 }} />
-          <Typography variant="h5" color="primary" gutterBottom>
-            Current Address Details
-          </Typography>
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Address: <strong>{candidateData?.basic[0].residentialAddress}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Police Station: <strong>{candidateData?.basic[0].residentialPoliceStation}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                City: <strong>{candidateData?.basic[0].residentialCity}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                PIN Code: <strong>{candidateData?.basic[0].residentialPinCode}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Post Office: <strong>{candidateData?.basic[0].residentialPostOffice}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                District: <strong>{candidateData?.basic[0].residentialDistrict}</strong>
-              </Typography>
-            </Grid>
-        
-          </Grid>
-          <Box sx={{ my: 2, height: 1 }} />
-          <Typography variant="h5" color="primary" gutterBottom>
-            Permanent Address Details
-          </Typography>
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Address: <strong>{candidateData?.basic[0].permanentAddress	}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Police Station: <strong>{candidateData?.basic[0].permanentPoliceStation	}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                City: <strong>{candidateData?.basic[0].permanentCity}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                PIN Code: <strong>{candidateData?.basic[0].permanentPinCode	}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                Post Office: <strong>{candidateData?.basic[0].permanentPostOffice}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1">
-                District: <strong>{candidateData?.basic[0].permanentDistrict	}</strong>
-              </Typography>
-            </Grid>
-        
-          </Grid>
+            <Box sx={ { my: 2, height: 1 } } />
+            <Typography variant="h5" color="primary" gutterBottom>
+              Current Address Details
+            </Typography>
+            <Grid container spacing={ 2 }>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Address: <strong>{ candidateData?.basic[0].residentialAddress }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Police Station: <strong>{ candidateData?.basic[0].residentialPoliceStation }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  City: <strong>{ candidateData?.basic[0].residentialCity }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  PIN Code: <strong>{ candidateData?.basic[0].residentialPinCode }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Post Office: <strong>{ candidateData?.basic[0].residentialPostOffice }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  District: <strong>{ candidateData?.basic[0].residentialDistrict }</strong>
+                </Typography>
+              </Grid>
 
-        </Container>
+            </Grid>
+            <Box sx={ { my: 2, height: 1 } } />
+            <Typography variant="h5" color="primary" gutterBottom>
+              Permanent Address Details
+            </Typography>
+            <Grid container spacing={ 2 }>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Address: <strong>{ candidateData?.basic[0].permanentAddress }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Police Station: <strong>{ candidateData?.basic[0].permanentPoliceStation }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  City: <strong>{ candidateData?.basic[0].permanentCity }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  PIN Code: <strong>{ candidateData?.basic[0].permanentPinCode }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  Post Office: <strong>{ candidateData?.basic[0].permanentPostOffice }</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={ 12 } md={ 4 }>
+                <Typography variant="subtitle1">
+                  District: <strong>{ candidateData?.basic[0].permanentDistrict }</strong>
+                </Typography>
+              </Grid>
+
+            </Grid>
+
+          </Container>
 
 
-      
+
 
           {/* {showTranig && (
             <Box>
@@ -701,38 +717,38 @@ export default function CandidateProfile() {
             </Box>
           )} */}
 
-          <Stack pt={1}></Stack>
-          <Grid container spacing={3} pt={2}>
-            <Grid item xs={12} sm={12} alignContent="center">
-              <Stack pt={2}></Stack>{" "}
-              <Stack alignItems="flex-start" justifyContent="center" pb={1}>
+          <Stack pt={ 1 }></Stack>
+          <Grid container spacing={ 3 } pt={ 2 }>
+            <Grid item xs={ 12 } sm={ 12 } alignContent="center">
+              <Stack pt={ 2 }></Stack>{ " " }
+              <Stack alignItems="flex-start" justifyContent="center" pb={ 1 }>
                 <Typography variant="h6" component="div" color="primary">
                   My Selected Courses
                 </Typography>
               </Stack>
-              {/* <Stack pt={2}></Stack> */}
+              {/* <Stack pt={2}></Stack> */ }
               <Box
                 maxHeight="300px"
                 overflow="auto"
-                borderRadius={2}
-                boxShadow={3}
+                borderRadius={ 2 }
+                boxShadow={ 3 }
                 border="1px solid #B0E0E6"
               >
-                {" "}
-                <Stack pt={2}></Stack>
-                {candidateData?.coursePreference[0] ? (
-                  <Stack spacing={1}>
-                    {sortedCourses?.map((course) => (
-                      
+                { " " }
+                <Stack pt={ 2 }></Stack>
+                { candidateData?.coursePreference[0] ? (
+                  <Stack spacing={ 1 }>
+                    { sortedCourses?.map((course) => (
+
                       <CandidateProfileCourseCard
-                        key={course.id}
-                        course={course}
+                        key={ course.id }
+                        course={ course }
                       />
-                      
-                      
-                    ))}
+
+
+                    )) }
                   </Stack>
-                  
+
                 ) : (
                   <Stack
                     direction="row"
@@ -740,60 +756,60 @@ export default function CandidateProfile() {
                     alignItems="center"
                     justifyContent="center"
                   >
-                    <CloseOutlinedIcon sx={{ fontSize: 20 }} />
+                    <CloseOutlinedIcon sx={ { fontSize: 20 } } />
                     <Typography variant="body2" color="error">
                       No courses Found!
                     </Typography>
                   </Stack>
-                )}
-                <Stack pt={2}></Stack>
+                ) }
+                <Stack pt={ 2 }></Stack>
               </Box>
-              <Stack pt={2}></Stack>
-              {show && (
+              <Stack pt={ 2 }></Stack>
+              { show && (
                 <Box
                   id="hide"
-                  sx={{
+                  sx={ {
                     border: "1px solid #ddd",
                     padding: "16px",
                     borderRadius: "8px",
-                  }}
+                  } }
                 >
-                  <Stack alignItems="flex-start" justifyContent="center" pb={1}>
+                  <Stack alignItems="flex-start" justifyContent="center" pb={ 1 }>
                     <Typography variant="h6" component="div" color="primary">
                       My Placement Preference
                     </Typography>
                   </Stack>
 
-                  {!isOutOfCountry && (
-                    <form onSubmit={handleSubmit((data) => console.log(data))}>
-                      <Stack direction="row" spacing={3} pt={3}>
+                  { !isOutOfCountry && (
+                    <form onSubmit={ handleSubmit((data) => console.log(data)) }>
+                      <Stack direction="row" spacing={ 3 } pt={ 3 }>
                         <FormControl fullWidth margin="normal">
                           <Typography
                             variant="body2"
                             color="text.secondary"
                             fontStyle="italic"
-                            sx={{
+                            sx={ {
                               display: "flex",
                               alignItems: "center",
                               gap: 1,
                               marginTop: 2,
-                            }}
+                            } }
                           >
                             <LocationOnIcon fontSize="small" />
                             Preferred State 1:
                           </Typography>
-                          <Select {...register("state1")} displayEmpty>
+                          <Select { ...register("state1") } value={ state1 } displayEmpty>
                             <MenuItem value="">
                               <em>None</em>
                             </MenuItem>
-                            {filterData?.state?.map((item) => (
+                            { filterData?.state?.map((item) => (
                               <MenuItem
-                                key={item?.stateId}
-                                value={item?.stateId}
+                                key={ item?.stateId }
+                                value={ item?.stateId }
                               >
-                                {item?.stateName}
+                                { item?.stateName }
                               </MenuItem>
-                            ))}
+                            )) }
                           </Select>
                         </FormControl>
 
@@ -802,28 +818,28 @@ export default function CandidateProfile() {
                             variant="body2"
                             color="text.secondary"
                             fontStyle="italic"
-                            sx={{
+                            sx={ {
                               display: "flex",
                               alignItems: "center",
                               gap: 1,
                               marginTop: 2,
-                            }}
+                            } }
                           >
                             <LocationOnIcon fontSize="small" />
                             Preferred State 2:
                           </Typography>
-                          <Select {...register("state2")} displayEmpty>
+                          <Select { ...register("state2") } value={ state2 } displayEmpty>
                             <MenuItem value="">
                               <em>None</em>
                             </MenuItem>
-                            {filterData?.state?.map((item) => (
+                            { filterData?.state?.map((item) => (
                               <MenuItem
-                                key={item?.stateId}
-                                value={item?.stateId}
+                                key={ item?.stateId }
+                                value={ item?.stateId }
                               >
-                                {item?.stateName}
+                                { item?.stateName }
                               </MenuItem>
-                            ))}
+                            )) }
                           </Select>
                         </FormControl>
 
@@ -832,64 +848,64 @@ export default function CandidateProfile() {
                             variant="body2"
                             color="text.secondary"
                             fontStyle="italic"
-                            sx={{
+                            sx={ {
                               display: "flex",
                               alignItems: "center",
                               gap: 1,
                               marginTop: 2,
-                            }}
+                            } }
                           >
                             <LocationOnIcon fontSize="small" />
                             Preferred State 3:
                           </Typography>
-                          <Select {...register("state3")} displayEmpty>
+                          <Select { ...register("state3") } value={ state3 } displayEmpty>
                             <MenuItem value="">
                               <em>None</em>
                             </MenuItem>
-                            {filterData?.state?.map((item) => (
+                            { filterData?.state?.map((item) => (
                               <MenuItem
-                                key={item?.stateId}
-                                value={item?.stateId}
+                                key={ item?.stateId }
+                                value={ item?.stateId }
                               >
-                                {item?.stateName}
+                                { item?.stateName }
                               </MenuItem>
-                            ))}
+                            )) }
                           </Select>
                         </FormControl>
                       </Stack>
 
-                      <Stack direction="row" spacing={3}>
+                      <Stack direction="row" spacing={ 3 }>
                         <FormControl
                           fullWidth
                           margin="none"
-                          sx={{ width: "100%", marginBottom: "10px" }}
+                          sx={ { width: "100%", marginBottom: "10px" } }
                         >
                           <Typography
                             variant="body2"
                             color="text.secondary"
                             fontStyle="italic"
-                            sx={{
+                            sx={ {
                               display: "flex",
                               alignItems: "center",
                               gap: 1,
                               marginTop: 2,
-                            }}
+                            } }
                           >
                             <LocationOnIcon fontSize="small" />
                             Preferred District 1:
                           </Typography>
-                          <Select {...register("district1")} displayEmpty>
+                          <Select { ...register("district1") } value={ district1 } displayEmpty>
                             <MenuItem value="">
                               <em>None</em>
                             </MenuItem>
-                            {filteredDistricts1.map((district) => (
+                            { filteredDistricts1.map((district) => (
                               <MenuItem
-                                key={district.districtID}
-                                value={district.districtID}
+                                key={ district.districtID }
+                                value={ district.districtID }
                               >
-                                {district.districtName}
+                                { district.districtName }
                               </MenuItem>
-                            ))}
+                            )) }
                           </Select>
                         </FormControl>
 
@@ -898,28 +914,28 @@ export default function CandidateProfile() {
                             variant="body2"
                             color="text.secondary"
                             fontStyle="italic"
-                            sx={{
+                            sx={ {
                               display: "flex",
                               alignItems: "center",
                               gap: 1,
                               marginTop: 2,
-                            }}
+                            } }
                           >
                             <LocationOnIcon fontSize="small" />
                             Preferred District 2:
                           </Typography>
-                          <Select {...register("district2")} displayEmpty>
+                          <Select { ...register("district2") } value={ district2 } displayEmpty>
                             <MenuItem value="">
                               <em>None</em>
                             </MenuItem>
-                            {filteredDistricts2.map((district) => (
+                            { filteredDistricts2.map((district) => (
                               <MenuItem
-                                key={district.districtID}
-                                value={district.districtID}
+                                key={ district.districtID }
+                                value={ district.districtID }
                               >
-                                {district.districtName}
+                                { district.districtName }
                               </MenuItem>
-                            ))}
+                            )) }
                           </Select>
                         </FormControl>
 
@@ -928,69 +944,70 @@ export default function CandidateProfile() {
                             variant="body2"
                             color="text.secondary"
                             fontStyle="italic"
-                            sx={{
+                            sx={ {
                               display: "flex",
                               alignItems: "center",
                               gap: 1,
                               marginTop: 2,
-                            }}
+                            } }
                           >
                             <LocationOnIcon fontSize="small" />
                             Preferred District 3:
                           </Typography>
 
-                          <Select {...register("district3")} displayEmpty>
+                          <Select { ...register("district3") } value={ district3 } displayEmpty>
                             <MenuItem value="">
                               <em>None</em>
                             </MenuItem>
-                            {filteredDistricts3.map((district) => (
+                            { filteredDistricts3.map((district) => (
                               <MenuItem
-                                key={district.districtID}
-                                value={district.districtID}
+                                key={ district.districtID }
+                                value={ district.districtID }
                               >
-                                {district.districtName}
+                                { district.districtName }
                               </MenuItem>
-                            ))}
+                            )) }
                           </Select>
                         </FormControl>
                       </Stack>
                     </form>
-                  )}
+                  ) }
 
-                  {/* Place your out of country FormControl outside of the form if it's not form-related */}
+                  {/* Place your out of country FormControl outside of the form if it's not form-related */ }
                   <FormControl component="fieldset" margin="normal">
                     <Typography color="black">Out of Country</Typography>
                     <RadioGroup
-                      {...register("country")}
+                      { ...register("country") }
+                      value={ country }
                       row
-                      onChange={handleCountryChange}
+                      onChange={ handleCountryChange }
                     >
                       <FormControlLabel
                         value="1"
-                        control={<Radio />}
+                        control={ <Radio /> }
                         label="Yes"
                       />
                       <FormControlLabel
                         value="0"
-                        control={<Radio />}
+                        control={ <Radio /> }
                         label="No"
                       />
                     </RadioGroup>
                   </FormControl>
                 </Box>
-              )}
-              <Stack pt={2}></Stack>
+              ) }
+              <Stack pt={ 2 }></Stack>
             </Grid>
           </Grid>
-          {show && (
+          { show && (
             <Box>
-              {candidateData?.basic[0].applied === 1 ||
-              candidateCourses?.basket.length == 0 ? (
+              { candidateData?.basic[0].applied === 1 ||
+                candidateCourses?.basket.length == 0 ? (
                 <Button
                   variant="contained"
                   // disabled={true}
                   fullWidth
-                  onClick={handleOpenDialog}
+                  onClick={ handleOpenDialog }
                 >
                   Apply
                 </Button>
@@ -998,13 +1015,13 @@ export default function CandidateProfile() {
                 <Button
                   variant="contained"
                   fullWidth
-                  onClick={handleOpenDialog}
+                  onClick={ handleOpenDialog }
                 >
                   Apply
                 </Button>
-              )}
+              ) }
             </Box>
-          )}
+          ) }
           <Stack
             justifyContent="center"
             alignContent="center"
@@ -1012,30 +1029,30 @@ export default function CandidateProfile() {
             justifyItems="center"
           >
             <Typography variant="caption" color="darkred">
-              {candidateCourses?.basket.length != 0 ? (
+              { candidateCourses?.basket.length != 0 ? (
                 " "
               ) : (
                 <ErrorOutlineOutlinedIcon
-                  style={{ fontSize: 15, paddingTop: 3 }}
+                  style={ { fontSize: 15, paddingTop: 3 } }
                 />
-              )}
-              {candidateCourses?.basket.length != 0
+              ) }
+              { candidateCourses?.basket.length != 0
                 ? " "
-                : " Please Add a Course to Basket First to Apply"}
+                : " Please Add a Course to Basket First to Apply" }
             </Typography>
           </Stack>
 
-          <Dialog open={isDialogOpen} onClose={handleCloseDialog}>
+          <Dialog open={ isDialogOpen } onClose={ handleCloseDialog }>
             <DialogTitle>Confirm Application</DialogTitle>
             <DialogContent>
               <p>Are you sure you want to Apply?</p>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleCloseDialog}>Cancel</Button>
+              <Button onClick={ handleCloseDialog }>Cancel</Button>
               <Button
                 type="submit"
-                disabled={formState.isSubmitting}
-                onClick={handleSubmit(onSubmit)}
+                disabled={ formState.isSubmitting }
+                onClick={ handleSubmit(onSubmit) }
                 variant="contained"
                 autoFocus
               >
@@ -1046,23 +1063,23 @@ export default function CandidateProfile() {
         </form>
       </AuthLayout>
 
-      {modal && (
+      { modal && (
         <Modal
-          open={open}
-          onClose={handleClose}
+          open={ open }
+          onClose={ handleClose }
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
+          <Box sx={ style }>
             <Typography id="modal-modal-title" variant="h6" component="h2">
               already in a course
             </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <Typography id="modal-modal-description" sx={ { mt: 2 } }>
               You are already in a course
             </Typography>
           </Box>
         </Modal>
-      )}
+      ) }
     </>
   );
 }

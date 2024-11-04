@@ -124,107 +124,107 @@ export default function Course() {
 
   return (
     <>
-      <Container component="section" maxWidth="xl" sx={{ py: 2 }}>
+      <Container component="section" maxWidth="xl" sx={ { py: 2 } }>
         <Typography
           variant="h4"
-          sx={{ mb: 2, py: 3, textAlign: "center" }}
+          sx={ { mb: 2, py: 3, textAlign: "center" } }
           color="primary.main"
         >
           Course Details
         </Typography>
         <Grid
           container
-          py={4}
-          spacing={{
+          py={ 4 }
+          spacing={ {
             xs: 2,
             sm: 4,
             md: 8,
-          }}
+          } }
         >
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={ 12 } sm={ 6 }>
             <Stack justifyContent="center" height="100%" maxWidth="40rem">
               <div>
-                <Typography variant="h4" fontWeight={700} gutterBottom>
-                  {data?.data.courseName}
+                <Typography variant="h4" fontWeight={ 700 } gutterBottom>
+                  { data?.data.courseName }
                 </Typography>
               </div>
 
               <Typography paragraph color="text.secondary">
-                {data?.data.courseDescription}
+                { data?.data.courseDescription }
               </Typography>
 
-              <Stack direction="column" gap={0} mt={1} py={2}>
+              <Stack direction="column" gap={ 0 } mt={ 1 } py={ 2 }>
                 <Typography
                   variant="h6"
                   align="left"
-                  fontWeight={500}
+                  fontWeight={ 500 }
                   gutterBottom
                 >
                   Course Overview
                 </Typography>
 
-                <Typography align="left" py={1}>
-                  1. Course Level -{" "}
-                  <Typography component="span" fontWeight={500}>
-                    {data?.data.courseLevel}
+                <Typography align="left" py={ 1 }>
+                  1. Course Level -{ " " }
+                  <Typography component="span" fontWeight={ 500 }>
+                    { data?.data.courseLevel }
                   </Typography>
                 </Typography>
 
-                <Typography align="left" py={1}>
-                  2. Course Mode -{" "}
-                  <Typography component="span" fontWeight={500}>
-                    {data?.data.courseMode}
+                <Typography align="left" py={ 1 }>
+                  2. Course Mode -{ " " }
+                  <Typography component="span" fontWeight={ 500 }>
+                    { data?.data.courseMode }
                   </Typography>
                 </Typography>
 
-                <Typography align="left" py={1}>
-                  3. Course Duration -{" "}
-                  <Typography component="span" fontWeight={500}>
-                    {data?.data.totalHours} Hours
+                <Typography align="left" py={ 1 }>
+                  3. Course Duration -{ " " }
+                  <Typography component="span" fontWeight={ 500 }>
+                    { data?.data.totalHours } Hours
                   </Typography>
                 </Typography>
 
-                <Typography align="left" py={1}>
-                  4. Minimum Qualification -{" "}
-                  <Typography component="span" fontWeight={500}>
-                    {data?.qualificationMin?.qualificationName}
+                <Typography align="left" py={ 1 }>
+                  4. Minimum Qualification -{ " " }
+                  <Typography component="span" fontWeight={ 500 }>
+                    { data?.qualificationMin?.qualificationName }
                   </Typography>
                 </Typography>
 
-                <Typography align="left" py={1}>
-                  5. District -{" "}
-                  <Typography component="span" fontWeight={500}>
-                    {data?.data.district}
+                <Typography align="left" py={ 1 }>
+                  5. District -{ " " }
+                  <Typography component="span" fontWeight={ 500 }>
+                    { data?.data.district }
                   </Typography>
                 </Typography>
               </Stack>
 
               <AddCourseToBasketFromDetails
-                courseId={courseId!}
-                districtId={districtId!}
-                courseName={courseName!}
-                districtName={districtName!}
-                qualificationSelected={params.qualificationBool}
+                courseId={ courseId! }
+                districtId={ districtId! }
+                courseName={ courseName! }
+                districtName={ districtName! }
+                qualificationSelected={ params.qualificationBool }
               />
 
-              <Box px={63}></Box>
+              <Box px={ 63 }></Box>
             </Stack>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={ 12 } sm={ 6 }>
             <GoogleMapComponent
-              containerStyle={containerStyle}
-              positions={data?.location!}
-              // positions={coordinates}
+              containerStyle={ containerStyle }
+              positions={ data?.location! }
+            // positions={coordinates}
             />
           </Grid>
         </Grid>
 
-        {/* <Box pb={56} /> */}
+        {/* <Box pb={56} /> */ }
       </Container>
 
-      {/* Registration Dialog Form */}
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="lg">
-        <DialogTitle>Registration Form for {data?.data.courseName}</DialogTitle>
+      {/* Registration Dialog Form */ }
+      <Dialog open={ open } onClose={ handleClose } fullWidth maxWidth="lg">
+        <DialogTitle>Registration Form for { data?.data.courseName }</DialogTitle>
         <DialogContent>
           <DialogContentText>
             To enroll in this course, kindly complete the provided form with
@@ -232,12 +232,12 @@ export default function Course() {
           </DialogContentText>
 
           <CourseRegistration
-            onClose={handleClose}
-            id={courseId!}
-            districts={data?.district}
-            qualifications={data?.qualification}
-            genders={data?.gender}
-            minQualification={data?.qualificationMin}
+            onClose={ handleClose }
+            id={ courseId! }
+            districts={ data?.district }
+            qualifications={ data?.qualification }
+            genders={ data?.gender }
+            minQualification={ data?.qualificationMin }
           />
         </DialogContent>
       </Dialog>

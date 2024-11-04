@@ -387,7 +387,6 @@ export default function Courses() {
   //   courseRefetch();
   // }, [lowLimit, pages]);
 
-  console.log("Courses length", coursesBasedOnHighesQualification?.data.length);
 
   return (
     <>

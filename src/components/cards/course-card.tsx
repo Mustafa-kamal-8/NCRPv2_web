@@ -139,7 +139,7 @@ export default function CourseCard({
           <LoadingButton
             color="primary"
             variant="contained"
-            disabled={ !qualificationBool || courseIdsFromCookies.includes(String(course.courseId)) || courseIdsFromCookies.length === 3 }
+            disabled={ (!qualificationBool || courseIdsFromCookies.includes(String(course.courseId)) || courseIdsFromCookies.length === 3) && !candidateId }
             size="small"
             sx={ {
               padding: 1,

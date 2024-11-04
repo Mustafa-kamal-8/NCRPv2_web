@@ -304,10 +304,16 @@ const Register = () => {
           setFormData(initialFormData);
           setActiveStep(0);
           setTimeout(() => {
-            navigate("/auth/candidate-register");
+            navigate("/auth/acknowledge-page", {
+              state: {
+                fullname: response.data.fullname,
+                ref: response.data.ref,
+                courseData: response.data.courseData,
+              },
+            });
           }, 1000);
         } else {
-          toast.error(response.data.message || "All fields are required");
+          toast.error(response.data.message );
         }
       } catch (error) {
         console.error("Error submitting form:", error);

@@ -114,8 +114,13 @@ export default function Courses() {
   const [selectedQualification, setSelectedQualification] =
     useRecoilState(qualificationState);
 
+    useEffect(()=>{
+      localStorage.setItem("qualificationId",selectedQualification?.qualificationID)
+      localStorage.setItem("qualificationName", selectedQualification?.qualificationName )
+    },[selectedQualification])
+
   console.log(
-    "This is the selected Qualification",
+    "This is the selected Qualification----------------------------------->",
     selectedQualification
   );
 
@@ -387,7 +392,7 @@ export default function Courses() {
   //   courseRefetch();
   // }, [lowLimit, pages]);
 
-  console.log("Courses length", coursesBasedOnHighesQualification?.data.length);
+  // console.log("Courses length", coursesBasedOnHighesQualification?.data.length);
 
   return (
     <>

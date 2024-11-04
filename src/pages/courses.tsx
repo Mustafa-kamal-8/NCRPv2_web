@@ -114,8 +114,13 @@ export default function Courses() {
   const [selectedQualification, setSelectedQualification] =
     useRecoilState(qualificationState);
 
+  useEffect(() => {
+    localStorage.setItem("qualificationId", selectedQualification?.qualificationID)
+    localStorage.setItem("qualificationName", selectedQualification?.qualificationName)
+  }, [selectedQualification])
+
   console.log(
-    "This is the selected Qualification",
+    "This is the selected Qualification----------------------------------->",
     selectedQualification
   );
 

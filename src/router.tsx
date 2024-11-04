@@ -22,6 +22,7 @@ import TrainingCenter from "./pages/tc/training-center";
 import Register from "./pages/Register";
 import EditPreferencesFromDatabase from "./components/cards/edit-preferences-from-database";
 import ChangePassword from "./pages/candidate/change-password";
+import Acknowledgepage from "./pages/acknowlegepage";
 
 
 const Courses = lazy(() => import("./pages/courses"));
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+      {
+        index: true,
+        element: <Acknowledgepage />,
+      },
 
       {
         path: "edit-preferences/:courseId/:courseName/:priority/:district1/:district2/:district3/:hostelAccomodations/:employment",
@@ -54,6 +59,10 @@ export const router = createBrowserRouter([
           {
             path: "candidate-register",
             element: <RegisterCandidate />,
+          },
+          {
+            path: "acknowledge-page",
+            element: <Acknowledgepage />,
           },
           {
             path: "candidate-login",
